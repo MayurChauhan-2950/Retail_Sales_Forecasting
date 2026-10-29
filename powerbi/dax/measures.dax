@@ -1,0 +1,420 @@
+// ==============================================================================
+// Retail Sales Forecasting - DAX measure set (84 measures)
+// Paste order: 1) create calculated tables below  2) create an empty table '_Measures' (Enter data)
+// 3) New measure for each block (Name = expression).  Set Format and Display folder in Measure tools
+//    / Model view > Properties. Measures were reviewed for syntax but NOT executed in Power BI Desktop.
+// Table/column names match the Power Query files in ../power_query.
+// ==============================================================================
+
+// ---------------------------------------------------------------------------------------------
+// CALCULATED TABLES (Modeling > New table). Create these BEFORE the measures that use them.
+// ---------------------------------------------------------------------------------------------
+
+// Top N  - slicer values for the Top-N product visual
+Top N = GENERATESERIES(3, 20, 1)
+// (the column is called [Value]; rename not needed. Format as Whole number.)
+
+// RFM  - one row per customer; Recency/Frequency/Monetary and a rule-based segment.
+// Reference date = last order date in the data + 1 day (31 Dec 2018), so results are reproducible.
+RFM =
+VAR RefDate = MAX(fact_sales[order_date]) + 1
+VAR Base =
+    ADDCOLUMNS(
+        VALUES(dim_customer[customer_key]),
+        "Recency", DATEDIFF(CALCULATE(MAX(fact_sales[order_date])), RefDate, DAY),
+        "Frequency", CALCULATE(DISTINCTCOUNT(fact_sales[order_id])),
+        "Monetary", CALCULATE(SUM(fact_sales[sales]))
+    )
+RETURN
+    ADDCOLUMNS(
+        Base,
+        "RFMSegment",
+            SWITCH(
+                TRUE(),
+                [Recency] <= 90 && [Frequency] >= 6, "Champions",
+                [Recency] <= 180 && [Frequency] >= 4, "Loyal",
+                [Recency] <= 90, "Recent",
+                [Recency] > 365, "At risk / Lost",
+                "Needs attention"
+            ),
+        "SegmentSort",
+            SWITCH(
+                TRUE(),
+                [Recency] <= 90 && [Frequency] >= 6, 1,
+                [Recency] <= 180 && [Frequency] >= 4, 2,
+                [Recency] <= 90, 3,
+                [Recency] > 365, 5,
+                4
+            )
+    )
+// After creating RFM: relationship dim_customer[customer_key] 1:1 RFM[customer_key];
+// sort RFM[RFMSegment] by RFM[SegmentSort].
+
+
+// ################ DISPLAY FOLDER: 01 Core KPIs ################
+
+// Total Sales  |  format: $#,##0  |  folder: 01 Core KPIs
+// Sum of line sales.
+Total Sales = SUM(fact_sales[sales])
+
+// Total Profit  |  format: $#,##0  |  folder: 01 Core KPIs
+// Sum of line profit (negative lines included).
+Total Profit = SUM(fact_sales[profit])
+
+// Profit Margin %  |  format: 0.0%  |  folder: 01 Core KPIs
+// Profit divided by sales; ratio of sums, not average of ratios.
+Profit Margin % = DIVIDE([Total Profit], [Total Sales])
+
+// Orders  |  format: #,##0  |  folder: 01 Core KPIs
+// Distinct orders (an order has several lines).
+Orders = DISTINCTCOUNT(fact_sales[order_id])
+
+// Customers  |  format: #,##0  |  folder: 01 Core KPIs
+// Distinct customers who bought.
+Customers = DISTINCTCOUNT(fact_sales[customer_key])
+
+// Avg Order Value  |  format: $#,##0.00  |  folder: 01 Core KPIs
+// Sales per order.
+Avg Order Value = DIVIDE([Total Sales], [Orders])
+
+// Quantity  |  format: #,##0  |  folder: 01 Core KPIs
+// Units sold.
+Quantity = SUM(fact_sales[quantity])
+
+// Order Lines  |  format: #,##0  |  folder: 01 Core KPIs
+// Rows of the fact table (one per product on an order).
+Order Lines = COUNTROWS(fact_sales)
+
+// Avg Discount %  |  format: 0.0%  |  folder: 01 Core KPIs
+// Simple average of the line discount rate.
+Avg Discount % = AVERAGE(fact_sales[discount])
+
+// Sales per Customer  |  format: $#,##0.00  |  folder: 01 Core KPIs
+// Average revenue per customer.
+Sales per Customer = DIVIDE([Total Sales], [Customers])
+
+// Avg Days to Ship  |  format: 0.0  |  folder: 01 Core KPIs
+// Mean of ship date minus order date (column built in Power Query).
+Avg Days to Ship = AVERAGE(fact_sales[days_to_ship])
+
+
+// ################ DISPLAY FOLDER: 02 Time Intelligence ################
+
+// Sales LY  |  format: $#,##0  |  folder: 02 Time Intelligence
+// Sales in the same period one year earlier (blank when there is no current sales, so 2019 forecast months stay clean).
+Sales LY = IF(ISBLANK([Total Sales]), BLANK(), CALCULATE([Total Sales], SAMEPERIODLASTYEAR(dim_date[Date])))
+
+// Profit LY  |  format: $#,##0  |  folder: 02 Time Intelligence
+// Profit one year earlier.
+Profit LY = IF(ISBLANK([Total Profit]), BLANK(), CALCULATE([Total Profit], SAMEPERIODLASTYEAR(dim_date[Date])))
+
+// Sales YoY Change  |  format: $#,##0;-$#,##0  |  folder: 02 Time Intelligence
+// Absolute change versus last year.
+Sales YoY Change = IF(ISBLANK([Sales LY]), BLANK(), [Total Sales] - [Sales LY])
+
+// YoY %  |  format: +0.0%;-0.0%;0.0%  |  folder: 02 Time Intelligence
+// Percentage growth versus the same period last year.
+YoY % = IF(ISBLANK([Sales LY]), BLANK(), DIVIDE([Total Sales] - [Sales LY], [Sales LY]))
+
+// Profit YoY %  |  format: +0.0%;-0.0%;0.0%  |  folder: 02 Time Intelligence
+// Profit growth versus last year.
+Profit YoY % = IF(ISBLANK([Profit LY]), BLANK(), DIVIDE([Total Profit] - [Profit LY], [Profit LY]))
+
+// Sales PM  |  format: $#,##0  |  folder: 02 Time Intelligence
+// Sales in the previous month.
+Sales PM = CALCULATE([Total Sales], DATEADD(dim_date[Date], -1, MONTH))
+
+// MoM %  |  format: +0.0%;-0.0%;0.0%  |  folder: 02 Time Intelligence
+// Month-over-month growth.
+MoM % = IF(ISBLANK([Sales PM]), BLANK(), DIVIDE([Total Sales] - [Sales PM], [Sales PM]))
+
+// Sales YTD  |  format: $#,##0  |  folder: 02 Time Intelligence
+// Year-to-date sales (resets each 1 January).
+Sales YTD = TOTALYTD([Total Sales], dim_date[Date])
+
+// Profit YTD  |  format: $#,##0  |  folder: 02 Time Intelligence
+// Year-to-date profit.
+Profit YTD = TOTALYTD([Total Profit], dim_date[Date])
+
+// Rolling 3M Sales  |  format: $#,##0  |  folder: 02 Time Intelligence
+// Sum of the latest 3 months ending at the last date in context.
+Rolling 3M Sales = IF(ISBLANK([Total Sales]), BLANK(), CALCULATE([Total Sales], DATESINPERIOD(dim_date[Date], MAX(dim_date[Date]), -3, MONTH)))
+
+// Rolling 3M Avg Sales  |  format: $#,##0  |  folder: 02 Time Intelligence
+// 3-month moving average (assumes 3 complete months).
+Rolling 3M Avg Sales = DIVIDE([Rolling 3M Sales], 3)
+
+
+// ################ DISPLAY FOLDER: 03 Ranking and Share ################
+
+// Sales Share %  |  format: 0.0%  |  folder: 03 Ranking and Share
+// Row share of everything currently selected (respects slicers).
+Sales Share % = DIVIDE([Total Sales], CALCULATE([Total Sales], ALLSELECTED()))
+
+// Sales Share % of Category  |  format: 0.0%  |  folder: 03 Ranking and Share
+// Sub-category share inside its visible category group.
+Sales Share % of Category = DIVIDE([Total Sales], CALCULATE([Total Sales], ALLSELECTED(dim_product[SubCategory])))
+
+// Profit Rank (SubCategory)  |  format: 0  |  folder: 03 Ranking and Share
+// Rank 1 = most profitable sub-category in the current selection.
+Profit Rank (SubCategory) = IF(ISBLANK([Total Profit]), BLANK(), RANKX(ALLSELECTED(dim_product[SubCategory]), [Total Profit], , DESC, DENSE))
+
+// Sales Rank (Product)  |  format: 0  |  folder: 03 Ranking and Share
+// Rank of a product by sales in the current selection.
+Sales Rank (Product) = IF(ISBLANK([Total Sales]), BLANK(), RANKX(ALLSELECTED(dim_product[ProductName]), [Total Sales], , DESC, SKIP))
+
+// Top N Value  |  format: 0  |  folder: 03 Ranking and Share
+// Reads the Top-N slicer (calculated table 'Top N'); defaults to 10.
+Top N Value = SELECTEDVALUE('Top N'[Value], 10)
+
+// Top N Flag  |  format: 0  |  folder: 03 Ranking and Share
+// 1 if product is in the Top N; put on the visual filter pane as 'is 1'.
+Top N Flag = IF(ISBLANK([Sales Rank (Product)]), 0, IF([Sales Rank (Product)] <= [Top N Value], 1, 0))
+
+
+// ################ DISPLAY FOLDER: 04 Discount and Profit ################
+
+// Sales No Discount  |  format: $#,##0  |  folder: 04 Discount and Profit
+// Sales on lines with 0% discount.
+Sales No Discount = CALCULATE([Total Sales], fact_sales[discount_band_sort] = 0)
+
+// Sales Discounted  |  format: $#,##0  |  folder: 04 Discount and Profit
+// Sales on lines with any discount.
+Sales Discounted = CALCULATE([Total Sales], fact_sales[discount_band_sort] > 0)
+
+// Discounted Sales Share %  |  format: 0.0%  |  folder: 04 Discount and Profit
+// Share of sales sold with a discount.
+Discounted Sales Share % = DIVIDE([Sales Discounted], [Total Sales])
+
+// Profit Low Discount  |  format: $#,##0  |  folder: 04 Discount and Profit
+// Profit where discount is over 0% up to 20%.
+Profit Low Discount = CALCULATE([Total Profit], fact_sales[discount_band_sort] = 1)
+
+// Profit Medium Discount  |  format: $#,##0  |  folder: 04 Discount and Profit
+// Profit where discount is over 20% up to 40%.
+Profit Medium Discount = CALCULATE([Total Profit], fact_sales[discount_band_sort] = 2)
+
+// Profit High Discount  |  format: $#,##0  |  folder: 04 Discount and Profit
+// Profit where discount is over 40% (loss-making).
+Profit High Discount = CALCULATE([Total Profit], fact_sales[discount_band_sort] = 3)
+
+// Loss Lines  |  format: #,##0  |  folder: 04 Discount and Profit
+// Count of order lines with negative profit.
+Loss Lines = SUM(fact_sales[is_loss_line])
+
+// Loss Lines %  |  format: 0.0%  |  folder: 04 Discount and Profit
+// Share of lines that lose money.
+Loss Lines % = DIVIDE([Loss Lines], [Order Lines])
+
+// Loss Amount  |  format: $#,##0;-$#,##0  |  folder: 04 Discount and Profit
+// Sum of all negative profit.
+Loss Amount = CALCULATE([Total Profit], fact_sales[profit] < 0)
+
+// Weighted Avg Discount %  |  format: 0.0%  |  folder: 04 Discount and Profit
+// Discount rate weighted by sales value.
+Weighted Avg Discount % = DIVIDE(SUMX(fact_sales, fact_sales[discount] * fact_sales[sales]), [Total Sales])
+
+
+// ################ DISPLAY FOLDER: 05 Forecast Arena ################
+
+// Actual Sales (Series)  |  format: $#,##0  |  folder: 05 Forecast Arena
+// Monthly actual sales from the forecast file (same data as fact_sales, rounded per month).
+Actual Sales (Series) = SUM(monthly_actual[actual_sales])
+
+// Actual vs Fact Difference  |  format: #,##0.00  |  folder: 05 Forecast Arena
+// Reconciliation: should be ~0 (cents of rounding).
+Actual vs Fact Difference = [Actual Sales (Series)] - [Total Sales]
+
+// Best Model (RMSE)  |  format: @  |  folder: 05 Forecast Arena
+// Name of the model with the lowest 2018 hold-out RMSE (ignores slicers).
+Best Model (RMSE) =
+    VAR Best = TOPN(1, ALL(model_accuracy), model_accuracy[RMSE], ASC)
+    RETURN MAXX(Best, model_accuracy[model])
+
+// Best Model (MAPE)  |  format: @  |  folder: 05 Forecast Arena
+// Same, ranked by MAPE.
+Best Model (MAPE) =
+    VAR Best = TOPN(1, ALL(model_accuracy), model_accuracy[MAPE_pct], ASC)
+    RETURN MAXX(Best, model_accuracy[model])
+
+// Selected Model  |  format: @  |  folder: 05 Forecast Arena
+// Model chosen in the slicer; falls back to the best model if none or several are selected.
+Selected Model = SELECTEDVALUE(dim_model[model], [Best Model (RMSE)])
+
+// Forecast (All Models)  |  format: $#,##0  |  folder: 05 Forecast Arena
+// Raw forecast; use with model in Legend to draw one line per model.
+Forecast (All Models) = SUM(fact_forecast[forecast])
+
+// Forecast (Selected Model)  |  format: $#,##0  |  folder: 05 Forecast Arena
+// Forecast of the single selected model across hold-out and future months.
+Forecast (Selected Model) = CALCULATE(SUM(fact_forecast[forecast]), fact_forecast[model] = [Selected Model], REMOVEFILTERS(dim_model))
+
+// Holdout Actual  |  format: $#,##0  |  folder: 05 Forecast Arena
+// Actual sales in the 12 hold-out months.
+Holdout Actual = CALCULATE(SUM(fact_forecast[actual]), fact_forecast[kind] = "Holdout", fact_forecast[model] = [Selected Model], REMOVEFILTERS(dim_model))
+
+// Holdout Forecast  |  format: $#,##0  |  folder: 05 Forecast Arena
+// Selected model's prediction for the hold-out months.
+Holdout Forecast = CALCULATE(SUM(fact_forecast[forecast]), fact_forecast[kind] = "Holdout", fact_forecast[model] = [Selected Model], REMOVEFILTERS(dim_model))
+
+// Forecast Error  |  format: +#,##0;-#,##0;0  |  folder: 05 Forecast Arena
+// Forecast minus actual (positive = over-forecast).
+Forecast Error =
+    VAR a = [Holdout Actual]
+    VAR fc = [Holdout Forecast]
+    RETURN IF(NOT ISBLANK(a) && NOT ISBLANK(fc), fc - a)
+
+// Abs Forecast Error  |  format: #,##0  |  folder: 05 Forecast Arena
+// Absolute error.
+Abs Forecast Error = ABS([Forecast Error])
+
+// APE %  |  format: 0.0%  |  folder: 05 Forecast Arena
+// Absolute percentage error for one month.
+APE % = DIVIDE([Abs Forecast Error], [Holdout Actual])
+
+// MAPE by Model (recomputed)  |  format: 0.0%  |  folder: 05 Forecast Arena
+// MAPE recomputed from the monthly hold-out rows; put dim_model[model] on rows.
+MAPE by Model (recomputed) =
+    VAR t = FILTER(fact_forecast, fact_forecast[kind] = "Holdout" && NOT ISBLANK(fact_forecast[actual]))
+    RETURN AVERAGEX(t, DIVIDE(fact_forecast[abs_error], fact_forecast[actual]))
+
+// MAE  |  format: #,##0  |  folder: 05 Forecast Arena
+// Stored hold-out MAE per model (from model_accuracy.csv).
+MAE = AVERAGE(model_accuracy[MAE])
+
+// RMSE  |  format: #,##0  |  folder: 05 Forecast Arena
+// Stored hold-out RMSE per model.
+RMSE = AVERAGE(model_accuracy[RMSE])
+
+// MAPE % (reported)  |  format: 0.0%  |  folder: 05 Forecast Arena
+// Stored hold-out MAPE per model as a percentage.
+MAPE % (reported) = DIVIDE(AVERAGE(model_accuracy[MAPE_pct]), 100)
+
+// Model Rank (RMSE)  |  format: 0  |  folder: 05 Forecast Arena
+// 1 = lowest RMSE.
+Model Rank (RMSE) = RANKX(ALL(model_accuracy[model]), [RMSE], , ASC, DENSE)
+
+// Is Best Model  |  format: 0  |  folder: 05 Forecast Arena
+// 1 on the best model's row.
+Is Best Model = IF(SELECTEDVALUE(model_accuracy[model]) = [Best Model (RMSE)], 1, 0)
+
+// Forecast Lower 95  |  format: $#,##0  |  folder: 05 Forecast Arena
+// Lower end of the 95% interval (future months only).
+Forecast Lower 95 = CALCULATE(SUM(fact_forecast[lower_95]), fact_forecast[model] = [Selected Model], REMOVEFILTERS(dim_model))
+
+// Forecast Upper 95  |  format: $#,##0  |  folder: 05 Forecast Arena
+// Upper end of the 95% interval.
+Forecast Upper 95 = CALCULATE(SUM(fact_forecast[upper_95]), fact_forecast[model] = [Selected Model], REMOVEFILTERS(dim_model))
+
+// Forecast Interval Width  |  format: $#,##0  |  folder: 05 Forecast Arena
+// Upper minus lower; use as the visible part of a stacked-area band.
+Forecast Interval Width = IF(ISBLANK([Forecast Upper 95]), BLANK(), [Forecast Upper 95] - [Forecast Lower 95])
+
+// Forecast Total 2019  |  format: $#,##0  |  folder: 05 Forecast Arena
+// Sum of the 12 projected months for the selected model.
+Forecast Total 2019 = CALCULATE(SUM(fact_forecast[forecast]), fact_forecast[kind] = "Future", fact_forecast[model] = [Selected Model], REMOVEFILTERS(dim_model), REMOVEFILTERS(dim_date))
+
+// Forecast Growth vs 2018  |  format: +0.0%;-0.0%  |  folder: 05 Forecast Arena
+// Projected 2019 versus actual 2018.
+Forecast Growth vs 2018 = DIVIDE([Forecast Total 2019], CALCULATE(SUM(monthly_actual[actual_sales]), REMOVEFILTERS(dim_date), dim_date[Year] = 2018)) - 1
+
+// Has Future Forecast  |  format: 0  |  folder: 05 Forecast Arena
+// 1 if a 2019 projection is stored for the selected model.
+Has Future Forecast = IF(CALCULATE(COUNTROWS(fact_forecast), fact_forecast[kind] = "Future", fact_forecast[model] = [Selected Model], REMOVEFILTERS(dim_model), REMOVEFILTERS(dim_date)) > 0, 1, 0)
+
+
+// ################ DISPLAY FOLDER: 06 KPI Colours ################
+
+// YoY Colour  |  format: @  |  folder: 06 KPI Colours
+// Green when growing, red when shrinking.
+YoY Colour = IF([YoY %] >= 0, "#10B981", "#EF4444")
+
+// YoY Arrow  |  format: @  |  folder: 06 KPI Colours
+// Up/down triangle text.
+YoY Arrow = IF([YoY %] >= 0, UNICHAR(9650), UNICHAR(9660))
+
+// Margin Colour  |  format: @  |  folder: 06 KPI Colours
+// Margin traffic light: 15%+ green, 10-15% amber, below red.
+Margin Colour = SWITCH(TRUE(), [Profit Margin %] >= 0.15, "#10B981", [Profit Margin %] >= 0.1, "#F59E0B", "#EF4444")
+
+// Profit Colour  |  format: @  |  folder: 06 KPI Colours
+// Blue for profit, red for loss.
+Profit Colour = IF([Total Profit] >= 0, "#2563EB", "#EF4444")
+
+// MAPE Colour  |  format: @  |  folder: 06 KPI Colours
+// MAPE traffic light: up to 20% green, up to 35% amber, else red.
+MAPE Colour = SWITCH(TRUE(), [MAPE % (reported)] <= 0.2, "#10B981", [MAPE % (reported)] <= 0.35, "#F59E0B", "#EF4444")
+
+// Best Model Row Colour  |  format: @  |  folder: 06 KPI Colours
+// Light blue background on the best model's row.
+Best Model Row Colour = IF([Is Best Model] = 1, "#DBEAFE", "#FFFFFF")
+
+// Error Colour  |  format: @  |  folder: 06 KPI Colours
+// Over-forecast amber, under-forecast blue.
+Error Colour = IF([Forecast Error] > 0, "#F59E0B", "#2563EB")
+
+
+// ################ DISPLAY FOLDER: 07 Titles and Labels ################
+
+// Period Label  |  format: @  |  folder: 07 Titles and Labels
+// First and last month that has sales under the current filters.
+Period Label = IF(ISBLANK([Total Sales]), "no data", FORMAT(MIN(fact_sales[order_date]), "mmm yyyy") & " - " & FORMAT(MAX(fact_sales[order_date]), "mmm yyyy"))
+
+// Category Label  |  format: @  |  folder: 07 Titles and Labels
+// Selected category or 'All categories'.
+Category Label = SELECTEDVALUE(dim_product[Category], "All categories")
+
+// Region Label  |  format: @  |  folder: 07 Titles and Labels
+// Selected region or 'All regions'.
+Region Label = SELECTEDVALUE(dim_geography[Region], "All regions")
+
+// Title - Sales Trend  |  format: @  |  folder: 07 Titles and Labels
+// Trend chart title that follows the date filter.
+Title - Sales Trend = "Monthly sales and profit | " & [Period Label]
+
+// Title - Category  |  format: @  |  folder: 07 Titles and Labels
+// Breakdown title that follows the region slicer.
+Title - Category = "Sales and margin by category | " & [Region Label]
+
+// Title - Region  |  format: @  |  folder: 07 Titles and Labels
+// Region chart title that follows the category slicer.
+Title - Region = "Sales by region | " & [Category Label]
+
+// Title - Discount  |  format: @  |  folder: 07 Titles and Labels
+// Discount chart title.
+Title - Discount = "Profit margin by discount band | " & [Category Label] & " | " & [Region Label]
+
+// Title - Forecast  |  format: @  |  folder: 07 Titles and Labels
+// Forecast chart title with a safe note when no future values exist.
+Title - Forecast = "Actual vs forecast | model: " & [Selected Model] & IF([Has Future Forecast] = 1, "", " | no 2019 projection stored for this model")
+
+// Best Model Callout  |  format: @  |  folder: 07 Titles and Labels
+// One-sentence callout text.
+Best Model Callout = "Best model on the 2018 hold-out: " & [Best Model (RMSE)] & " (RMSE " & FORMAT(LOOKUPVALUE(model_accuracy[RMSE], model_accuracy[model], [Best Model (RMSE)]), "#,##0") & ", MAPE " & FORMAT(LOOKUPVALUE(model_accuracy[MAPE_pct], model_accuracy[model], [Best Model (RMSE)]), "0.0") & "%)"
+
+// Title Safe - Sales  |  format: @  |  folder: 07 Titles and Labels
+// Never shows a blank title: warns when filters remove all data.
+Title Safe - Sales = IF(ISBLANK([Total Sales]), "No sales for the current selection - clear a filter", "Total sales " & FORMAT([Total Sales], "$#,##0") & " | " & [Period Label])
+
+// Data Source Note  |  format: @  |  folder: 07 Titles and Labels
+// Honest sample-vs-real footnote for every page.
+Data Source Note = "Source: public 'Sample - Superstore' dataset, " & FORMAT(COUNTROWS(fact_sales), "#,##0") & " order lines. Illustrative retail case, not a live company. Forecast values are model estimates, not actuals."
+
+
+// ################ DISPLAY FOLDER: 08 Customer Segments (RFM) ################
+
+// RFM Customers  |  format: #,##0  |  folder: 08 Customer Segments (RFM)
+// Customers in the current RFM segment selection.
+RFM Customers = DISTINCTCOUNT(RFM[customer_key])
+
+// Avg Recency (days)  |  format: 0  |  folder: 08 Customer Segments (RFM)
+// Mean days since last order (reference date = last order date + 1).
+Avg Recency (days) = AVERAGE(RFM[Recency])
+
+// Avg Frequency (orders)  |  format: 0.0  |  folder: 08 Customer Segments (RFM)
+// Mean distinct orders per customer.
+Avg Frequency (orders) = AVERAGE(RFM[Frequency])
+
+// RFM Monetary  |  format: $#,##0  |  folder: 08 Customer Segments (RFM)
+// Total sales of the customers in selection.
+RFM Monetary = SUM(RFM[Monetary])

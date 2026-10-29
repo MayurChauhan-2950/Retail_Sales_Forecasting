@@ -1,0 +1,181 @@
+level,series,month,actual,forecast,lower_80,upper_80,lower_95,upper_95,model
+Category,Furniture,2015-01-01,6242.52,,,,,,
+Category,Furniture,2015-02-01,1839.66,,,,,,
+Category,Furniture,2015-03-01,14573.96,,,,,,
+Category,Furniture,2015-04-01,7944.84,,,,,,
+Category,Furniture,2015-05-01,6912.79,,,,,,
+Category,Furniture,2015-06-01,13206.13,,,,,,
+Category,Furniture,2015-07-01,10821.05,,,,,,
+Category,Furniture,2015-08-01,7320.35,,,,,,
+Category,Furniture,2015-09-01,23816.48,,,,,,
+Category,Furniture,2015-10-01,12304.25,,,,,,
+Category,Furniture,2015-11-01,21564.87,,,,,,
+Category,Furniture,2015-12-01,30645.97,,,,,,
+Category,Furniture,2016-01-01,11739.94,,,,,,
+Category,Furniture,2016-02-01,3134.37,,,,,,
+Category,Furniture,2016-03-01,12499.78,,,,,,
+Category,Furniture,2016-04-01,10475.7,,,,,,
+Category,Furniture,2016-05-01,9374.95,,,,,,
+Category,Furniture,2016-06-01,7714.18,,,,,,
+Category,Furniture,2016-07-01,13674.42,,,,,,
+Category,Furniture,2016-08-01,9638.59,,,,,,
+Category,Furniture,2016-09-01,26273.02,,,,,,
+Category,Furniture,2016-10-01,12026.62,,,,,,
+Category,Furniture,2016-11-01,30880.83,,,,,,
+Category,Furniture,2016-12-01,23085.82,,,,,,
+Category,Furniture,2017-01-01,7622.74,,,,,,
+Category,Furniture,2017-02-01,3925.55,,,,,,
+Category,Furniture,2017-03-01,12801.09,,,,,,
+Category,Furniture,2017-04-01,13212.09,,,,,,
+Category,Furniture,2017-05-01,15119.84,,,,,,
+Category,Furniture,2017-06-01,13070.57,,,,,,
+Category,Furniture,2017-07-01,13068.52,,,,,,
+Category,Furniture,2017-08-01,12483.23,,,,,,
+Category,Furniture,2017-09-01,27262.88,,,,,,
+Category,Furniture,2017-10-01,11872.58,,,,,,
+Category,Furniture,2017-11-01,31783.63,,,,,,
+Category,Furniture,2017-12-01,36678.71,,,,,,
+Category,Furniture,2018-01-01,5964.03,,,,,,
+Category,Furniture,2018-02-01,6866.34,,,,,,
+Category,Furniture,2018-03-01,10893.44,,,,,,
+Category,Furniture,2018-04-01,9065.96,,,,,,
+Category,Furniture,2018-05-01,16957.56,,,,,,
+Category,Furniture,2018-06-01,19008.59,,,,,,
+Category,Furniture,2018-07-01,11813.02,,,,,,
+Category,Furniture,2018-08-01,15441.87,,,,,,
+Category,Furniture,2018-09-01,29028.21,,,,,,
+Category,Furniture,2018-10-01,21884.07,,,,,,
+Category,Furniture,2018-11-01,37056.72,,,,,,
+Category,Furniture,2018-12-01,31407.47,,,,,,
+Category,Furniture,2019-01-01,,5964.03,1832.37,11805.48,213.56,16423.2,Seasonal naive
+Category,Furniture,2019-02-01,,6866.34,2734.67,12707.79,1115.87,17325.5,Seasonal naive
+Category,Furniture,2019-03-01,,10893.44,6761.78,16734.89,5142.97,21352.61,Seasonal naive
+Category,Furniture,2019-04-01,,9065.96,4934.29,14907.41,3315.49,19525.12,Seasonal naive
+Category,Furniture,2019-05-01,,16957.56,12825.89,22799.01,11207.09,27416.72,Seasonal naive
+Category,Furniture,2019-06-01,,19008.59,14876.92,24850.04,13258.12,29467.75,Seasonal naive
+Category,Furniture,2019-07-01,,11813.02,7681.36,17654.47,6062.55,22272.19,Seasonal naive
+Category,Furniture,2019-08-01,,15441.87,11310.21,21283.32,9691.4,25901.04,Seasonal naive
+Category,Furniture,2019-09-01,,29028.21,24896.54,34869.66,23277.73,39487.37,Seasonal naive
+Category,Furniture,2019-10-01,,21884.07,17752.4,27725.52,16133.6,32343.23,Seasonal naive
+Category,Furniture,2019-11-01,,37056.72,32925.05,42898.16,31306.24,47515.88,Seasonal naive
+Category,Furniture,2019-12-01,,31407.47,27275.8,37248.92,25657.0,41866.63,Seasonal naive
+Category,Office Supplies,2015-01-01,4851.08,,,,,,
+Category,Office Supplies,2015-02-01,1071.72,,,,,,
+Category,Office Supplies,2015-03-01,8605.88,,,,,,
+Category,Office Supplies,2015-04-01,11155.07,,,,,,
+Category,Office Supplies,2015-05-01,7135.62,,,,,,
+Category,Office Supplies,2015-06-01,12953.04,,,,,,
+Category,Office Supplies,2015-07-01,15121.21,,,,,,
+Category,Office Supplies,2015-08-01,11379.46,,,,,,
+Category,Office Supplies,2015-09-01,27423.3,,,,,,
+Category,Office Supplies,2015-10-01,7211.13,,,,,,
+Category,Office Supplies,2015-11-01,26862.44,,,,,,
+Category,Office Supplies,2015-12-01,18006.46,,,,,,
+Category,Office Supplies,2016-01-01,1808.78,,,,,,
+Category,Office Supplies,2016-02-01,5368.07,,,,,,
+Category,Office Supplies,2016-03-01,15882.55,,,,,,
+Category,Office Supplies,2016-04-01,12558.56,,,,,,
+Category,Office Supplies,2016-05-01,9113.74,,,,,,
+Category,Office Supplies,2016-06-01,10647.75,,,,,,
+Category,Office Supplies,2016-07-01,4719.94,,,,,,
+Category,Office Supplies,2016-08-01,11735.11,,,,,,
+Category,Office Supplies,2016-09-01,19305.77,,,,,,
+Category,Office Supplies,2016-10-01,8673.41,,,,,,
+Category,Office Supplies,2016-11-01,21218.13,,,,,,
+Category,Office Supplies,2016-12-01,16201.67,,,,,,
+Category,Office Supplies,2017-01-01,5299.68,,,,,,
+Category,Office Supplies,2017-02-01,6794.35,,,,,,
+Category,Office Supplies,2017-03-01,17346.93,,,,,,
+Category,Office Supplies,2017-04-01,10647.45,,,,,,
+Category,Office Supplies,2017-05-01,13035.2,,,,,,
+Category,Office Supplies,2017-06-01,10901.81,,,,,,
+Category,Office Supplies,2017-07-01,12924.44,,,,,,
+Category,Office Supplies,2017-08-01,8959.74,,,,,,
+Category,Office Supplies,2017-09-01,23263.74,,,,,,
+Category,Office Supplies,2017-10-01,16281.79,,,,,,
+Category,Office Supplies,2017-11-01,20487.28,,,,,,
+Category,Office Supplies,2017-12-01,37997.57,,,,,,
+Category,Office Supplies,2018-01-01,21274.29,,,,,,
+Category,Office Supplies,2018-02-01,7407.77,,,,,,
+Category,Office Supplies,2018-03-01,14550.29,,,,,,
+Category,Office Supplies,2018-04-01,15072.19,,,,,,
+Category,Office Supplies,2018-05-01,13736.96,,,,,,
+Category,Office Supplies,2018-06-01,16912.04,,,,,,
+Category,Office Supplies,2018-07-01,10241.47,,,,,,
+Category,Office Supplies,2018-08-01,30059.85,,,,,,
+Category,Office Supplies,2018-09-01,31895.84,,,,,,
+Category,Office Supplies,2018-10-01,23037.19,,,,,,
+Category,Office Supplies,2018-11-01,31472.34,,,,,,
+Category,Office Supplies,2018-12-01,30436.94,,,,,,
+Category,Office Supplies,2019-01-01,,17225.82,12102.93,22104.65,10505.17,31366.58,Holt-Winters additive (damped)
+Category,Office Supplies,2019-02-01,,14162.41,8690.21,20120.81,7140.77,28319.46,Holt-Winters additive (damped)
+Category,Office Supplies,2019-03-01,,23222.35,17070.6,30441.15,14933.22,37077.2,Holt-Winters additive (damped)
+Category,Office Supplies,2019-04-01,,20597.4,14531.54,28681.02,11407.6,34576.31,Holt-Winters additive (damped)
+Category,Office Supplies,2019-05-01,,19266.24,12399.2,28512.72,8995.03,34061.54,Holt-Winters additive (damped)
+Category,Office Supplies,2019-06-01,,20557.17,13247.92,31120.96,9056.13,37364.14,Holt-Winters additive (damped)
+Category,Office Supplies,2019-07-01,,19688.89,11480.77,30959.19,7114.82,38386.62,Holt-Winters additive (damped)
+Category,Office Supplies,2019-08-01,,21598.26,12533.25,34461.85,7747.43,41316.92,Holt-Winters additive (damped)
+Category,Office Supplies,2019-09-01,,32792.2,23184.27,46984.54,18049.95,53036.76,Holt-Winters additive (damped)
+Category,Office Supplies,2019-10-01,,20454.29,10029.13,35309.01,3944.81,42866.34,Holt-Winters additive (damped)
+Category,Office Supplies,2019-11-01,,31959.53,21001.32,47714.19,15420.12,55681.84,Holt-Winters additive (damped)
+Category,Office Supplies,2019-12-01,,32706.63,21064.39,49342.24,14721.34,58195.27,Holt-Winters additive (damped)
+Category,Technology,2015-01-01,3143.29,,,,,,
+Category,Technology,2015-02-01,1608.51,,,,,,
+Category,Technology,2015-03-01,32511.17,,,,,,
+Category,Technology,2015-04-01,9195.43,,,,,,
+Category,Technology,2015-05-01,9599.88,,,,,,
+Category,Technology,2015-06-01,8435.96,,,,,,
+Category,Technology,2015-07-01,8004.13,,,,,,
+Category,Technology,2015-08-01,9209.66,,,,,,
+Category,Technology,2015-09-01,30537.57,,,,,,
+Category,Technology,2015-10-01,11938.02,,,,,,
+Category,Technology,2015-11-01,30201.41,,,,,,
+Category,Technology,2015-12-01,20893.19,,,,,,
+Category,Technology,2016-01-01,4625.35,,,,,,
+Category,Technology,2016-02-01,3448.97,,,,,,
+Category,Technology,2016-03-01,10343.92,,,,,,
+Category,Technology,2016-04-01,11160.95,,,,,,
+Category,Technology,2016-05-01,11643.0,,,,,,
+Category,Technology,2016-06-01,6435.37,,,,,,
+Category,Technology,2016-07-01,10370.97,,,,,,
+Category,Technology,2016-08-01,15524.63,,,,,,
+Category,Technology,2016-09-01,19017.13,,,,,,
+Category,Technology,2016-10-01,10704.89,,,,,,
+Category,Technology,2016-11-01,23873.6,,,,,,
+Category,Technology,2016-12-01,35632.03,,,,,,
+Category,Technology,2017-01-01,5620.07,,,,,,
+Category,Technology,2017-02-01,12258.91,,,,,,
+Category,Technology,2017-03-01,21567.85,,,,,,
+Category,Technology,2017-04-01,14890.5,,,,,,
+Category,Technology,2017-05-01,28832.69,,,,,,
+Category,Technology,2017-06-01,16372.15,,,,,,
+Category,Technology,2017-07-01,13269.0,,,,,,
+Category,Technology,2017-08-01,9672.4,,,,,,
+Category,Technology,2017-09-01,22883.41,,,,,,
+Category,Technology,2017-10-01,31533.37,,,,,,
+Category,Technology,2017-11-01,27141.06,,,,,,
+Category,Technology,2017-12-01,22322.76,,,,,,
+Category,Technology,2018-01-01,16733.05,,,,,,
+Category,Technology,2018-02-01,6027.02,,,,,,
+Category,Technology,2018-03-01,33428.62,,,,,,
+Category,Technology,2018-04-01,12383.39,,,,,,
+Category,Technology,2018-05-01,13566.59,,,,,,
+Category,Technology,2018-06-01,17061.1,,,,,,
+Category,Technology,2018-07-01,23209.93,,,,,,
+Category,Technology,2018-08-01,17619.16,,,,,,
+Category,Technology,2018-09-01,26942.6,,,,,,
+Category,Technology,2018-10-01,32855.66,,,,,,
+Category,Technology,2018-11-01,49918.77,,,,,,
+Category,Technology,2018-12-01,21984.91,,,,,,
+Category,Technology,2019-01-01,,18537.89,5458.8,31616.98,0.0,38540.64,"SARIMA(1,1,1)(0,1,1,12)"
+Category,Technology,2019-02-01,,17167.55,3748.37,30586.73,0.0,37690.42,"SARIMA(1,1,1)(0,1,1,12)"
+Category,Technology,2019-03-01,,34252.96,20745.58,47760.33,13595.21,54910.7,"SARIMA(1,1,1)(0,1,1,12)"
+Category,Technology,2019-04-01,,22497.64,8925.01,36070.26,1740.1,43255.17,"SARIMA(1,1,1)(0,1,1,12)"
+Category,Technology,2019-05-01,,26371.97,12737.06,40006.87,5519.18,47224.76,"SARIMA(1,1,1)(0,1,1,12)"
+Category,Technology,2019-06-01,,23552.56,9855.78,37249.34,2605.14,44499.98,"SARIMA(1,1,1)(0,1,1,12)"
+Category,Technology,2019-07-01,,25546.61,11788.0,39305.22,4504.63,46588.59,"SARIMA(1,1,1)(0,1,1,12)"
+Category,Technology,2019-08-01,,23807.08,9986.61,37627.55,2670.5,44943.67,"SARIMA(1,1,1)(0,1,1,12)"
+Category,Technology,2019-09-01,,33584.83,19702.38,47467.27,12353.46,54816.19,"SARIMA(1,1,1)(0,1,1,12)"
+Category,Technology,2019-10-01,,33789.14,19844.16,47734.12,12462.13,55116.15,"SARIMA(1,1,1)(0,1,1,12)"
+Category,Technology,2019-11-01,,43242.27,29231.58,57252.97,21814.76,64669.78,"SARIMA(1,1,1)(0,1,1,12)"
+Category,Technology,2019-12-01,,33043.93,18968.01,47119.84,11516.67,54571.18,"SARIMA(1,1,1)(0,1,1,12)"

@@ -1,0 +1,5 @@
+cluster,customers,avg_recency_days,avg_orders,avg_sales,total_sales,total_profit,pct_customers,pct_sales,segment_name
+3,244,98.22,8.71,4849.91,1183377.68,157209.57,30.77,51.51,Cooling high-value
+1,198,19.56,6.79,2713.63,537298.36,71366.43,24.97,23.39,Active mid-value
+2,260,228.68,4.99,2053.07,533797.48,55955.91,32.79,23.24,Lapsed mid-value
+0,91,328.46,2.65,469.53,42727.35,1865.11,11.48,1.86,Lapsed low-value

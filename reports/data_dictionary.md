@@ -1,0 +1,88 @@
+# Data Dictionary (script 11)
+
+Types are the pandas dtypes after loading the files. Curated tables are in `data/curated/`.
+
+## Cleaned table and star schema columns
+| table | column | type | meaning | nullable | distinct | example |
+|---|---|---|---|---|---|---|
+| superstore_clean | Row ID | int64 | Source row number of the order line (unique key) | no | 9994 | 7981 |
+| superstore_clean | Order ID | str | Order number, one order has several lines | no | 5009 | CA-2015-103800 |
+| superstore_clean | Order Date | datetime64[us] | Date the order was placed | no | 1236 | 2015-01-03 00:00:00 |
+| superstore_clean | Ship Date | datetime64[us] | Date the order was shipped | no | 1334 | 2015-01-07 00:00:00 |
+| superstore_clean | Ship Mode | str | Shipping service level | no | 4 | Standard Class |
+| superstore_clean | Customer ID | str | Customer code | no | 793 | DP-13000 |
+| superstore_clean | Customer Name | str | Customer full name | no | 793 | Darren Powers |
+| superstore_clean | Segment | str | Customer segment: Consumer, Corporate, Home Office | no | 3 | Consumer |
+| superstore_clean | Country | str | Country (always United States) | no | 1 | United States |
+| superstore_clean | City | str | Delivery city | no | 531 | Houston |
+| superstore_clean | State | str | Delivery US state | no | 49 | Texas |
+| superstore_clean | Postal Code | str | ZIP code kept as text; 'Unknown' where missing | no | 631 | 77095 |
+| superstore_clean | Region | str | Sales region: East, West, Central, South | no | 4 | Central |
+| superstore_clean | Product ID | str | Product code | no | 1862 | OFF-PA-10000174 |
+| superstore_clean | Category | str | Top-level product category | no | 3 | Office Supplies |
+| superstore_clean | Sub-Category | str | Product sub-category (17) | no | 17 | Paper |
+| superstore_clean | Product Name | str | Product description | no | 1850 | Message Book, Wirebound, Four  |
+| superstore_clean | Sales | float64 | Line revenue in USD after discount | no | 5825 | 16.448 |
+| superstore_clean | Quantity | int64 | Units on the line | no | 14 | 2 |
+| superstore_clean | Discount | float64 | Discount fraction 0-0.8 | no | 12 | 0.2 |
+| superstore_clean | Profit | float64 | Line profit in USD (negative = loss) | no | 7287 | 5.5512 |
+| superstore_clean | Order Year | int64 | Derived: year of Order Date | no | 4 | 2015 |
+| superstore_clean | Order Month | int64 | Derived: month number of Order Date | no | 12 | 1 |
+| superstore_clean | Order YearMonth | str | Derived: YYYY-MM of Order Date | no | 48 | 2015-01 |
+| superstore_clean | Ship Days | int64 | Derived: Ship Date minus Order Date in days | no | 8 | 4 |
+| superstore_clean | Profit Margin | float64 | Derived: Profit / Sales | no | 288 | 0.3375 |
+| superstore_clean | Unit Price | float64 | Derived: Sales / Quantity | no | 2665 | 8.224 |
+| fact_sales | row_id | int64 | Degenerate key from source | no | 9994 | 1 |
+| fact_sales | order_id | str | Degenerate dimension: order number | no | 5009 | CA-2017-152156 |
+| fact_sales | order_date_key | int64 | FK to dim_date for order date | no | 1236 | 20171108 |
+| fact_sales | ship_date_key | int64 | FK to dim_date for ship date | no | 1334 | 20171111 |
+| fact_sales | customer_key | int64 | Surrogate key of customer | no | 793 | 144 |
+| fact_sales | product_key | int64 | Surrogate key of product | no | 1862 | 13 |
+| fact_sales | geography_key | int64 | Surrogate key of geography | no | 632 | 385 |
+| fact_sales | ship_mode | str | Ship mode (kept on fact) | no | 4 | Second Class |
+| fact_sales | sales | float64 | Measure: revenue USD (additive) | no | 5825 | 261.96 |
+| fact_sales | quantity | int64 | Measure: units (additive) | no | 14 | 2 |
+| fact_sales | discount | float64 | Attribute: discount fraction (non-additive, average it) | no | 12 | 0.0 |
+| fact_sales | profit | float64 | Measure: profit USD (additive) | no | 7287 | 41.9136 |
+| dim_customer | customer_key | int64 | Surrogate key of customer | no | 793 | 1 |
+| dim_customer | Customer ID | str | Customer code | no | 793 | AA-10315 |
+| dim_customer | Customer Name | str | Customer full name | no | 793 | Alex Avila |
+| dim_customer | Segment | str | Customer segment: Consumer, Corporate, Home Office | no | 3 | Consumer |
+| dim_product | product_key | int64 | Surrogate key of product | no | 1862 | 1 |
+| dim_product | Product ID | str | Product code | no | 1862 | FUR-BO-10000112 |
+| dim_product | Product Name | str | Product description | no | 1818 | Bush Birmingham Collection Boo |
+| dim_product | Category | str | Top-level product category | no | 3 | Furniture |
+| dim_product | Sub-Category | str | Product sub-category (17) | no | 17 | Bookcases |
+| dim_geography | geography_key | int64 | Surrogate key of geography | no | 632 | 1 |
+| dim_geography | Country | str | Country (always United States) | no | 1 | United States |
+| dim_geography | Region | str | Sales region: East, West, Central, South | no | 4 | Central |
+| dim_geography | State | str | Delivery US state | no | 49 | Illinois |
+| dim_geography | City | str | Delivery city | no | 531 | Arlington Heights |
+| dim_geography | Postal Code | str | ZIP code kept as text; 'Unknown' where missing | no | 631 | 60004 |
+| dim_date | date_key | int64 | Date as YYYYMMDD integer key | no | 1826 | 20150101 |
+| dim_date | date | str |  | no | 1826 | 2015-01-01 |
+| dim_date | year | int64 |  | no | 5 | 2015 |
+| dim_date | quarter | int64 |  | no | 4 | 1 |
+| dim_date | month | int64 |  | no | 12 | 1 |
+| dim_date | month_name | str |  | no | 12 | January |
+| dim_date | year_month | str |  | no | 60 | 2015-01 |
+| dim_date | week_of_year | int64 |  | no | 53 | 1 |
+| dim_date | day | int64 |  | no | 31 | 1 |
+| dim_date | day_of_week | str |  | no | 7 | Thursday |
+| dim_date | is_weekend | int64 |  | no | 2 | 0 |
+
+## Numeric and date ranges of the cleaned table
+| column | range_or_note |
+|---|---|
+| Row ID | 1 to 9,994 |
+| Order Date | 2015-01-03 to 2018-12-30 |
+| Ship Date | 2015-01-07 to 2019-01-05 |
+| Sales | 0.444 to 2.264e+04 |
+| Quantity | 1 to 14 |
+| Discount | 0 to 0.8 |
+| Profit | -6,600 to 8,400 |
+| Order Year | 2,015 to 2,018 |
+| Order Month | 1 to 12 |
+| Ship Days | 0 to 7 |
+| Profit Margin | -2.75 to 0.5 |
+| Unit Price | 0.336 to 3,773 |

@@ -1,0 +1,11 @@
+level,series,best_model,interval_method,CV_MAE,CV_MASE,CV_MAPE,holdout2018_MAE,holdout2018_RMSE,holdout2018_MAPE,holdout2018_sMAPE,holdout2018_MASE,mean_monthly_sales,forecast_2019_total,actual_2018_total
+Category,Furniture,Seasonal naive,empirical quantiles of 12-month differences,3343.7638,0.9874,21.9243,3747.0253,4473.384,24.0493,25.6994,1.0931,15458.3291,215387.2692,215387.2692
+Category,Office Supplies,Holt-Winters additive (damped),"residual-bootstrap simulation (2,000 paths)",5181.742,1.3236,28.6615,5405.4607,7401.5325,24.1104,29.433,1.2282,14980.1465,274231.199,246097.175
+Category,Technology,"SARIMA(1,1,1)(0,1,1,12)",model-based (Gaussian) interval,7595.1911,1.1137,54.1761,7268.3122,8588.4767,46.7692,33.7814,0.9917,17419.8757,335394.4186,271730.811
+Region,Central,Seasonal naive,empirical quantiles of 12-month differences,4836.4036,0.9218,42.0689,4482.9329,6766.954,41.4474,41.4118,0.8098,10442.4977,147098.1282,147098.1282
+Region,East,Holt-Winters additive (damped),"residual-bootstrap simulation (2,000 paths)",6054.5253,1.3946,43.3861,6193.8818,8593.9377,39.6773,37.1527,1.2437,14141.2758,224229.8148,213082.904
+Region,South,Holt-Winters additive (damped),"residual-bootstrap simulation (2,000 paths)",4462.2134,0.9111,61.1971,4908.292,7084.5327,59.7109,52.0023,1.0064,8160.873,148005.8454,122905.8575
+Region,West,Holt-Winters additive (damped),"residual-bootstrap simulation (2,000 paths)",4129.5674,0.9425,24.1718,3355.6224,4240.1064,15.388,17.1077,0.7438,15113.7047,256989.0324,250128.3655
+Segment,Consumer,Holt-Winters multiplicative,"residual-bootstrap simulation (2,000 paths)",6770.2667,0.8495,32.0106,7401.4976,9150.9272,32.5613,35.2566,0.9502,24195.8614,301549.684,331904.6999
+Segment,Corporate,Holt-Winters additive (damped),"residual-bootstrap simulation (2,000 paths)",5558.0319,1.1517,30.4633,8342.4735,10087.7353,49.7219,37.2401,1.4579,14711.3826,304429.1477,241847.8244
+Segment,Home Office,Seasonal naive,empirical quantiles of 12-month differences,4667.0166,1.0075,45.0344,5416.9833,6505.8986,41.3989,50.4231,1.1524,8951.1073,159462.7309,159462.7309

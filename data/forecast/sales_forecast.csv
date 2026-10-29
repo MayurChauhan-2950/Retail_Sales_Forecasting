@@ -1,0 +1,13 @@
+month,forecast,lower_95,upper_95,model
+2019-01-01,49386.76,31778.18,66995.34,Holt-Winters (additive)
+2019-02-01,41475.74,23867.16,59084.31,Holt-Winters (additive)
+2019-03-01,74998.04,57389.47,92606.62,Holt-Winters (additive)
+2019-04-01,61269.33,43660.76,78877.91,Holt-Winters (additive)
+2019-05-01,67933.81,50325.24,85542.39,Holt-Winters (additive)
+2019-06-01,65178.3,47569.72,82786.88,Holt-Winters (additive)
+2019-07-01,66495.77,48887.19,84104.35,Holt-Winters (additive)
+2019-08-01,66534.51,48925.93,84143.09,Holt-Winters (additive)
+2019-09-01,107466.28,89857.7,125074.86,Holt-Winters (additive)
+2019-10-01,77578.54,59969.97,95187.12,Holt-Winters (additive)
+2019-11-01,115687.27,98078.69,133295.85,Holt-Winters (additive)
+2019-12-01,116030.81,98422.23,133639.39,Holt-Winters (additive)

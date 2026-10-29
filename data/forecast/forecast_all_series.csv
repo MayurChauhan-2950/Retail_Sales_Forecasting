@@ -1,0 +1,661 @@
+level,series,month,actual,forecast,lower_80,upper_80,lower_95,upper_95,model
+Total,All sales,2015-01-01,14236.9,,,,,,
+Total,All sales,2015-02-01,4519.89,,,,,,
+Total,All sales,2015-03-01,55691.01,,,,,,
+Total,All sales,2015-04-01,28295.34,,,,,,
+Total,All sales,2015-05-01,23648.29,,,,,,
+Total,All sales,2015-06-01,34595.13,,,,,,
+Total,All sales,2015-07-01,33946.39,,,,,,
+Total,All sales,2015-08-01,27909.47,,,,,,
+Total,All sales,2015-09-01,81777.35,,,,,,
+Total,All sales,2015-10-01,31453.39,,,,,,
+Total,All sales,2015-11-01,78628.72,,,,,,
+Total,All sales,2015-12-01,69545.62,,,,,,
+Total,All sales,2016-01-01,18174.08,,,,,,
+Total,All sales,2016-02-01,11951.41,,,,,,
+Total,All sales,2016-03-01,38726.25,,,,,,
+Total,All sales,2016-04-01,34195.21,,,,,,
+Total,All sales,2016-05-01,30131.69,,,,,,
+Total,All sales,2016-06-01,24797.29,,,,,,
+Total,All sales,2016-07-01,28765.32,,,,,,
+Total,All sales,2016-08-01,36898.33,,,,,,
+Total,All sales,2016-09-01,64595.92,,,,,,
+Total,All sales,2016-10-01,31404.92,,,,,,
+Total,All sales,2016-11-01,75972.56,,,,,,
+Total,All sales,2016-12-01,74919.52,,,,,,
+Total,All sales,2017-01-01,18542.49,,,,,,
+Total,All sales,2017-02-01,22978.82,,,,,,
+Total,All sales,2017-03-01,51715.88,,,,,,
+Total,All sales,2017-04-01,38750.04,,,,,,
+Total,All sales,2017-05-01,56987.73,,,,,,
+Total,All sales,2017-06-01,40344.53,,,,,,
+Total,All sales,2017-07-01,39261.96,,,,,,
+Total,All sales,2017-08-01,31115.37,,,,,,
+Total,All sales,2017-09-01,73410.02,,,,,,
+Total,All sales,2017-10-01,59687.74,,,,,,
+Total,All sales,2017-11-01,79411.97,,,,,,
+Total,All sales,2017-12-01,96999.04,,,,,,
+Total,All sales,2018-01-01,43971.37,,,,,,
+Total,All sales,2018-02-01,20301.13,,,,,,
+Total,All sales,2018-03-01,58872.35,,,,,,
+Total,All sales,2018-04-01,36521.54,,,,,,
+Total,All sales,2018-05-01,44261.11,,,,,,
+Total,All sales,2018-06-01,52981.73,,,,,,
+Total,All sales,2018-07-01,45264.42,,,,,,
+Total,All sales,2018-08-01,63120.89,,,,,,
+Total,All sales,2018-09-01,87866.65,,,,,,
+Total,All sales,2018-10-01,77776.92,,,,,,
+Total,All sales,2018-11-01,118447.82,,,,,,
+Total,All sales,2018-12-01,83829.32,,,,,,
+Total,All sales,2019-01-01,,49386.76,41201.82,62582.76,36337.53,67151.0,Holt-Winters additive (damped)
+Total,All sales,2019-02-01,,41475.74,31746.29,55547.51,25491.98,59915.84,Holt-Winters additive (damped)
+Total,All sales,2019-03-01,,74998.04,63732.67,89886.31,57559.2,95657.88,Holt-Winters additive (damped)
+Total,All sales,2019-04-01,,61269.33,48539.21,77002.77,41166.37,84965.2,Holt-Winters additive (damped)
+Total,All sales,2019-05-01,,67933.81,53148.28,86102.83,44802.17,94742.9,Holt-Winters additive (damped)
+Total,All sales,2019-06-01,,65178.3,47281.39,86857.2,38448.47,97336.76,Holt-Winters additive (damped)
+Total,All sales,2019-07-01,,66495.77,45449.58,91407.23,35133.07,104583.27,Holt-Winters additive (damped)
+Total,All sales,2019-08-01,,66534.51,43085.22,95788.45,30445.2,109388.07,Holt-Winters additive (damped)
+Total,All sales,2019-09-01,,107466.28,80702.2,141591.97,65541.34,158153.44,Holt-Winters additive (damped)
+Total,All sales,2019-10-01,,77578.54,46859.82,116714.54,30832.88,133992.43,Holt-Winters additive (damped)
+Total,All sales,2019-11-01,,115687.27,81166.88,161128.63,62640.0,178961.04,Holt-Winters additive (damped)
+Total,All sales,2019-12-01,,116030.81,77777.91,165381.11,56622.02,189079.95,Holt-Winters additive (damped)
+Category,Furniture,2015-01-01,6242.52,,,,,,
+Category,Furniture,2015-02-01,1839.66,,,,,,
+Category,Furniture,2015-03-01,14573.96,,,,,,
+Category,Furniture,2015-04-01,7944.84,,,,,,
+Category,Furniture,2015-05-01,6912.79,,,,,,
+Category,Furniture,2015-06-01,13206.13,,,,,,
+Category,Furniture,2015-07-01,10821.05,,,,,,
+Category,Furniture,2015-08-01,7320.35,,,,,,
+Category,Furniture,2015-09-01,23816.48,,,,,,
+Category,Furniture,2015-10-01,12304.25,,,,,,
+Category,Furniture,2015-11-01,21564.87,,,,,,
+Category,Furniture,2015-12-01,30645.97,,,,,,
+Category,Furniture,2016-01-01,11739.94,,,,,,
+Category,Furniture,2016-02-01,3134.37,,,,,,
+Category,Furniture,2016-03-01,12499.78,,,,,,
+Category,Furniture,2016-04-01,10475.7,,,,,,
+Category,Furniture,2016-05-01,9374.95,,,,,,
+Category,Furniture,2016-06-01,7714.18,,,,,,
+Category,Furniture,2016-07-01,13674.42,,,,,,
+Category,Furniture,2016-08-01,9638.59,,,,,,
+Category,Furniture,2016-09-01,26273.02,,,,,,
+Category,Furniture,2016-10-01,12026.62,,,,,,
+Category,Furniture,2016-11-01,30880.83,,,,,,
+Category,Furniture,2016-12-01,23085.82,,,,,,
+Category,Furniture,2017-01-01,7622.74,,,,,,
+Category,Furniture,2017-02-01,3925.55,,,,,,
+Category,Furniture,2017-03-01,12801.09,,,,,,
+Category,Furniture,2017-04-01,13212.09,,,,,,
+Category,Furniture,2017-05-01,15119.84,,,,,,
+Category,Furniture,2017-06-01,13070.57,,,,,,
+Category,Furniture,2017-07-01,13068.52,,,,,,
+Category,Furniture,2017-08-01,12483.23,,,,,,
+Category,Furniture,2017-09-01,27262.88,,,,,,
+Category,Furniture,2017-10-01,11872.58,,,,,,
+Category,Furniture,2017-11-01,31783.63,,,,,,
+Category,Furniture,2017-12-01,36678.71,,,,,,
+Category,Furniture,2018-01-01,5964.03,,,,,,
+Category,Furniture,2018-02-01,6866.34,,,,,,
+Category,Furniture,2018-03-01,10893.44,,,,,,
+Category,Furniture,2018-04-01,9065.96,,,,,,
+Category,Furniture,2018-05-01,16957.56,,,,,,
+Category,Furniture,2018-06-01,19008.59,,,,,,
+Category,Furniture,2018-07-01,11813.02,,,,,,
+Category,Furniture,2018-08-01,15441.87,,,,,,
+Category,Furniture,2018-09-01,29028.21,,,,,,
+Category,Furniture,2018-10-01,21884.07,,,,,,
+Category,Furniture,2018-11-01,37056.72,,,,,,
+Category,Furniture,2018-12-01,31407.47,,,,,,
+Category,Furniture,2019-01-01,,5964.03,1832.37,11805.48,213.56,16423.2,Seasonal naive
+Category,Furniture,2019-02-01,,6866.34,2734.67,12707.79,1115.87,17325.5,Seasonal naive
+Category,Furniture,2019-03-01,,10893.44,6761.78,16734.89,5142.97,21352.61,Seasonal naive
+Category,Furniture,2019-04-01,,9065.96,4934.29,14907.41,3315.49,19525.12,Seasonal naive
+Category,Furniture,2019-05-01,,16957.56,12825.89,22799.01,11207.09,27416.72,Seasonal naive
+Category,Furniture,2019-06-01,,19008.59,14876.92,24850.04,13258.12,29467.75,Seasonal naive
+Category,Furniture,2019-07-01,,11813.02,7681.36,17654.47,6062.55,22272.19,Seasonal naive
+Category,Furniture,2019-08-01,,15441.87,11310.21,21283.32,9691.4,25901.04,Seasonal naive
+Category,Furniture,2019-09-01,,29028.21,24896.54,34869.66,23277.73,39487.37,Seasonal naive
+Category,Furniture,2019-10-01,,21884.07,17752.4,27725.52,16133.6,32343.23,Seasonal naive
+Category,Furniture,2019-11-01,,37056.72,32925.05,42898.16,31306.24,47515.88,Seasonal naive
+Category,Furniture,2019-12-01,,31407.47,27275.8,37248.92,25657.0,41866.63,Seasonal naive
+Category,Office Supplies,2015-01-01,4851.08,,,,,,
+Category,Office Supplies,2015-02-01,1071.72,,,,,,
+Category,Office Supplies,2015-03-01,8605.88,,,,,,
+Category,Office Supplies,2015-04-01,11155.07,,,,,,
+Category,Office Supplies,2015-05-01,7135.62,,,,,,
+Category,Office Supplies,2015-06-01,12953.04,,,,,,
+Category,Office Supplies,2015-07-01,15121.21,,,,,,
+Category,Office Supplies,2015-08-01,11379.46,,,,,,
+Category,Office Supplies,2015-09-01,27423.3,,,,,,
+Category,Office Supplies,2015-10-01,7211.13,,,,,,
+Category,Office Supplies,2015-11-01,26862.44,,,,,,
+Category,Office Supplies,2015-12-01,18006.46,,,,,,
+Category,Office Supplies,2016-01-01,1808.78,,,,,,
+Category,Office Supplies,2016-02-01,5368.07,,,,,,
+Category,Office Supplies,2016-03-01,15882.55,,,,,,
+Category,Office Supplies,2016-04-01,12558.56,,,,,,
+Category,Office Supplies,2016-05-01,9113.74,,,,,,
+Category,Office Supplies,2016-06-01,10647.75,,,,,,
+Category,Office Supplies,2016-07-01,4719.94,,,,,,
+Category,Office Supplies,2016-08-01,11735.11,,,,,,
+Category,Office Supplies,2016-09-01,19305.77,,,,,,
+Category,Office Supplies,2016-10-01,8673.41,,,,,,
+Category,Office Supplies,2016-11-01,21218.13,,,,,,
+Category,Office Supplies,2016-12-01,16201.67,,,,,,
+Category,Office Supplies,2017-01-01,5299.68,,,,,,
+Category,Office Supplies,2017-02-01,6794.35,,,,,,
+Category,Office Supplies,2017-03-01,17346.93,,,,,,
+Category,Office Supplies,2017-04-01,10647.45,,,,,,
+Category,Office Supplies,2017-05-01,13035.2,,,,,,
+Category,Office Supplies,2017-06-01,10901.81,,,,,,
+Category,Office Supplies,2017-07-01,12924.44,,,,,,
+Category,Office Supplies,2017-08-01,8959.74,,,,,,
+Category,Office Supplies,2017-09-01,23263.74,,,,,,
+Category,Office Supplies,2017-10-01,16281.79,,,,,,
+Category,Office Supplies,2017-11-01,20487.28,,,,,,
+Category,Office Supplies,2017-12-01,37997.57,,,,,,
+Category,Office Supplies,2018-01-01,21274.29,,,,,,
+Category,Office Supplies,2018-02-01,7407.77,,,,,,
+Category,Office Supplies,2018-03-01,14550.29,,,,,,
+Category,Office Supplies,2018-04-01,15072.19,,,,,,
+Category,Office Supplies,2018-05-01,13736.96,,,,,,
+Category,Office Supplies,2018-06-01,16912.04,,,,,,
+Category,Office Supplies,2018-07-01,10241.47,,,,,,
+Category,Office Supplies,2018-08-01,30059.85,,,,,,
+Category,Office Supplies,2018-09-01,31895.84,,,,,,
+Category,Office Supplies,2018-10-01,23037.19,,,,,,
+Category,Office Supplies,2018-11-01,31472.34,,,,,,
+Category,Office Supplies,2018-12-01,30436.94,,,,,,
+Category,Office Supplies,2019-01-01,,17225.82,12102.93,22104.65,10505.17,31366.58,Holt-Winters additive (damped)
+Category,Office Supplies,2019-02-01,,14162.41,8690.21,20120.81,7140.77,28319.46,Holt-Winters additive (damped)
+Category,Office Supplies,2019-03-01,,23222.35,17070.6,30441.15,14933.22,37077.2,Holt-Winters additive (damped)
+Category,Office Supplies,2019-04-01,,20597.4,14531.54,28681.02,11407.6,34576.31,Holt-Winters additive (damped)
+Category,Office Supplies,2019-05-01,,19266.24,12399.2,28512.72,8995.03,34061.54,Holt-Winters additive (damped)
+Category,Office Supplies,2019-06-01,,20557.17,13247.92,31120.96,9056.13,37364.14,Holt-Winters additive (damped)
+Category,Office Supplies,2019-07-01,,19688.89,11480.77,30959.19,7114.82,38386.62,Holt-Winters additive (damped)
+Category,Office Supplies,2019-08-01,,21598.26,12533.25,34461.85,7747.43,41316.92,Holt-Winters additive (damped)
+Category,Office Supplies,2019-09-01,,32792.2,23184.27,46984.54,18049.95,53036.76,Holt-Winters additive (damped)
+Category,Office Supplies,2019-10-01,,20454.29,10029.13,35309.01,3944.81,42866.34,Holt-Winters additive (damped)
+Category,Office Supplies,2019-11-01,,31959.53,21001.32,47714.19,15420.12,55681.84,Holt-Winters additive (damped)
+Category,Office Supplies,2019-12-01,,32706.63,21064.39,49342.24,14721.34,58195.27,Holt-Winters additive (damped)
+Category,Technology,2015-01-01,3143.29,,,,,,
+Category,Technology,2015-02-01,1608.51,,,,,,
+Category,Technology,2015-03-01,32511.17,,,,,,
+Category,Technology,2015-04-01,9195.43,,,,,,
+Category,Technology,2015-05-01,9599.88,,,,,,
+Category,Technology,2015-06-01,8435.96,,,,,,
+Category,Technology,2015-07-01,8004.13,,,,,,
+Category,Technology,2015-08-01,9209.66,,,,,,
+Category,Technology,2015-09-01,30537.57,,,,,,
+Category,Technology,2015-10-01,11938.02,,,,,,
+Category,Technology,2015-11-01,30201.41,,,,,,
+Category,Technology,2015-12-01,20893.19,,,,,,
+Category,Technology,2016-01-01,4625.35,,,,,,
+Category,Technology,2016-02-01,3448.97,,,,,,
+Category,Technology,2016-03-01,10343.92,,,,,,
+Category,Technology,2016-04-01,11160.95,,,,,,
+Category,Technology,2016-05-01,11643.0,,,,,,
+Category,Technology,2016-06-01,6435.37,,,,,,
+Category,Technology,2016-07-01,10370.97,,,,,,
+Category,Technology,2016-08-01,15524.63,,,,,,
+Category,Technology,2016-09-01,19017.13,,,,,,
+Category,Technology,2016-10-01,10704.89,,,,,,
+Category,Technology,2016-11-01,23873.6,,,,,,
+Category,Technology,2016-12-01,35632.03,,,,,,
+Category,Technology,2017-01-01,5620.07,,,,,,
+Category,Technology,2017-02-01,12258.91,,,,,,
+Category,Technology,2017-03-01,21567.85,,,,,,
+Category,Technology,2017-04-01,14890.5,,,,,,
+Category,Technology,2017-05-01,28832.69,,,,,,
+Category,Technology,2017-06-01,16372.15,,,,,,
+Category,Technology,2017-07-01,13269.0,,,,,,
+Category,Technology,2017-08-01,9672.4,,,,,,
+Category,Technology,2017-09-01,22883.41,,,,,,
+Category,Technology,2017-10-01,31533.37,,,,,,
+Category,Technology,2017-11-01,27141.06,,,,,,
+Category,Technology,2017-12-01,22322.76,,,,,,
+Category,Technology,2018-01-01,16733.05,,,,,,
+Category,Technology,2018-02-01,6027.02,,,,,,
+Category,Technology,2018-03-01,33428.62,,,,,,
+Category,Technology,2018-04-01,12383.39,,,,,,
+Category,Technology,2018-05-01,13566.59,,,,,,
+Category,Technology,2018-06-01,17061.1,,,,,,
+Category,Technology,2018-07-01,23209.93,,,,,,
+Category,Technology,2018-08-01,17619.16,,,,,,
+Category,Technology,2018-09-01,26942.6,,,,,,
+Category,Technology,2018-10-01,32855.66,,,,,,
+Category,Technology,2018-11-01,49918.77,,,,,,
+Category,Technology,2018-12-01,21984.91,,,,,,
+Category,Technology,2019-01-01,,18537.89,5458.8,31616.98,0.0,38540.64,"SARIMA(1,1,1)(0,1,1,12)"
+Category,Technology,2019-02-01,,17167.55,3748.37,30586.73,0.0,37690.42,"SARIMA(1,1,1)(0,1,1,12)"
+Category,Technology,2019-03-01,,34252.96,20745.58,47760.33,13595.21,54910.7,"SARIMA(1,1,1)(0,1,1,12)"
+Category,Technology,2019-04-01,,22497.64,8925.01,36070.26,1740.1,43255.17,"SARIMA(1,1,1)(0,1,1,12)"
+Category,Technology,2019-05-01,,26371.97,12737.06,40006.87,5519.18,47224.76,"SARIMA(1,1,1)(0,1,1,12)"
+Category,Technology,2019-06-01,,23552.56,9855.78,37249.34,2605.14,44499.98,"SARIMA(1,1,1)(0,1,1,12)"
+Category,Technology,2019-07-01,,25546.61,11788.0,39305.22,4504.63,46588.59,"SARIMA(1,1,1)(0,1,1,12)"
+Category,Technology,2019-08-01,,23807.08,9986.61,37627.55,2670.5,44943.67,"SARIMA(1,1,1)(0,1,1,12)"
+Category,Technology,2019-09-01,,33584.83,19702.38,47467.27,12353.46,54816.19,"SARIMA(1,1,1)(0,1,1,12)"
+Category,Technology,2019-10-01,,33789.14,19844.16,47734.12,12462.13,55116.15,"SARIMA(1,1,1)(0,1,1,12)"
+Category,Technology,2019-11-01,,43242.27,29231.58,57252.97,21814.76,64669.78,"SARIMA(1,1,1)(0,1,1,12)"
+Category,Technology,2019-12-01,,33043.93,18968.01,47119.84,11516.67,54571.18,"SARIMA(1,1,1)(0,1,1,12)"
+Region,Central,2015-01-01,1539.91,,,,,,
+Region,Central,2015-02-01,1233.17,,,,,,
+Region,Central,2015-03-01,5827.6,,,,,,
+Region,Central,2015-04-01,3712.34,,,,,,
+Region,Central,2015-05-01,4048.51,,,,,,
+Region,Central,2015-06-01,9646.3,,,,,,
+Region,Central,2015-07-01,6740.57,,,,,,
+Region,Central,2015-08-01,3022.18,,,,,,
+Region,Central,2015-09-01,34408.69,,,,,,
+Region,Central,2015-10-01,8965.76,,,,,,
+Region,Central,2015-11-01,14057.57,,,,,,
+Region,Central,2015-12-01,10635.57,,,,,,
+Region,Central,2016-01-01,2510.51,,,,,,
+Region,Central,2016-02-01,2527.59,,,,,,
+Region,Central,2016-03-01,6730.27,,,,,,
+Region,Central,2016-04-01,11642.06,,,,,,
+Region,Central,2016-05-01,8623.9,,,,,,
+Region,Central,2016-06-01,3713.19,,,,,,
+Region,Central,2016-07-01,7605.57,,,,,,
+Region,Central,2016-08-01,9301.45,,,,,,
+Region,Central,2016-09-01,7578.52,,,,,,
+Region,Central,2016-10-01,7000.49,,,,,,
+Region,Central,2016-11-01,18903.09,,,,,,
+Region,Central,2016-12-01,16737.6,,,,,,
+Region,Central,2017-01-01,5942.16,,,,,,
+Region,Central,2017-02-01,1115.73,,,,,,
+Region,Central,2017-03-01,13153.81,,,,,,
+Region,Central,2017-04-01,7462.35,,,,,,
+Region,Central,2017-05-01,11743.96,,,,,,
+Region,Central,2017-06-01,6553.15,,,,,,
+Region,Central,2017-07-01,8894.46,,,,,,
+Region,Central,2017-08-01,6982.55,,,,,,
+Region,Central,2017-09-01,17503.21,,,,,,
+Region,Central,2017-10-01,25832.35,,,,,,
+Region,Central,2017-11-01,16910.32,,,,,,
+Region,Central,2017-12-01,25335.32,,,,,,
+Region,Central,2018-01-01,21690.66,,,,,,
+Region,Central,2018-02-01,3334.82,,,,,,
+Region,Central,2018-03-01,15504.58,,,,,,
+Region,Central,2018-04-01,3383.12,,,,,,
+Region,Central,2018-05-01,11588.85,,,,,,
+Region,Central,2018-06-01,12966.76,,,,,,
+Region,Central,2018-07-01,8872.96,,,,,,
+Region,Central,2018-08-01,6252.99,,,,,,
+Region,Central,2018-09-01,17343.0,,,,,,
+Region,Central,2018-10-01,12122.34,,,,,,
+Region,Central,2018-11-01,15154.98,,,,,,
+Region,Central,2018-12-01,18883.07,,,,,,
+Region,Central,2019-01-01,,21690.66,16634.25,29954.37,6340.62,37824.58,Seasonal naive
+Region,Central,2019-02-01,,3334.82,0.0,11598.54,0.0,19468.74,Seasonal naive
+Region,Central,2019-03-01,,15504.58,10448.17,23768.3,154.54,31638.5,Seasonal naive
+Region,Central,2019-04-01,,3383.12,0.0,11646.84,0.0,19517.04,Seasonal naive
+Region,Central,2019-05-01,,11588.85,6532.45,19852.57,0.0,27722.77,Seasonal naive
+Region,Central,2019-06-01,,12966.76,7910.35,21230.48,0.0,29100.68,Seasonal naive
+Region,Central,2019-07-01,,8872.96,3816.55,17136.67,0.0,25006.88,Seasonal naive
+Region,Central,2019-08-01,,6252.99,1196.59,14516.71,0.0,22386.91,Seasonal naive
+Region,Central,2019-09-01,,17343.0,12286.59,25606.71,1992.96,33476.92,Seasonal naive
+Region,Central,2019-10-01,,12122.34,7065.93,20386.05,0.0,28256.26,Seasonal naive
+Region,Central,2019-11-01,,15154.98,10098.57,23418.7,0.0,31288.9,Seasonal naive
+Region,Central,2019-12-01,,18883.07,13826.66,27146.79,3533.04,35016.99,Seasonal naive
+Region,East,2015-01-01,436.17,,,,,,
+Region,East,2015-02-01,199.78,,,,,,
+Region,East,2015-03-01,5943.39,,,,,,
+Region,East,2015-04-01,3054.91,,,,,,
+Region,East,2015-05-01,7250.1,,,,,,
+Region,East,2015-06-01,10759.16,,,,,,
+Region,East,2015-07-01,3568.15,,,,,,
+Region,East,2015-08-01,4582.45,,,,,,
+Region,East,2015-09-01,25292.79,,,,,,
+Region,East,2015-10-01,8945.12,,,,,,
+Region,East,2015-11-01,33950.77,,,,,,
+Region,East,2015-12-01,24697.68,,,,,,
+Region,East,2016-01-01,4670.99,,,,,,
+Region,East,2016-02-01,6463.13,,,,,,
+Region,East,2016-03-01,6011.74,,,,,,
+Region,East,2016-04-01,7778.8,,,,,,
+Region,East,2016-05-01,7481.42,,,,,,
+Region,East,2016-06-01,7442.99,,,,,,
+Region,East,2016-07-01,11872.66,,,,,,
+Region,East,2016-08-01,9463.77,,,,,,
+Region,East,2016-09-01,29440.99,,,,,,
+Region,East,2016-10-01,6302.03,,,,,,
+Region,East,2016-11-01,34724.76,,,,,,
+Region,East,2016-12-01,24678.77,,,,,,
+Region,East,2017-01-01,4860.09,,,,,,
+Region,East,2017-02-01,3149.82,,,,,,
+Region,East,2017-03-01,16764.86,,,,,,
+Region,East,2017-04-01,17839.97,,,,,,
+Region,East,2017-05-01,22589.28,,,,,,
+Region,East,2017-06-01,11737.41,,,,,,
+Region,East,2017-07-01,8524.2,,,,,,
+Region,East,2017-08-01,9264.96,,,,,,
+Region,East,2017-09-01,20262.49,,,,,,
+Region,East,2017-10-01,15065.46,,,,,,
+Region,East,2017-11-01,22982.09,,,,,,
+Region,East,2017-12-01,27645.2,,,,,,
+Region,East,2018-01-01,5383.28,,,,,,
+Region,East,2018-02-01,4968.52,,,,,,
+Region,East,2018-03-01,7699.96,,,,,,
+Region,East,2018-04-01,10230.91,,,,,,
+Region,East,2018-05-01,6119.37,,,,,,
+Region,East,2018-06-01,15161.22,,,,,,
+Region,East,2018-07-01,12321.82,,,,,,
+Region,East,2018-08-01,20758.47,,,,,,
+Region,East,2018-09-01,32416.1,,,,,,
+Region,East,2018-10-01,32305.2,,,,,,
+Region,East,2018-11-01,45633.64,,,,,,
+Region,East,2018-12-01,20084.42,,,,,,
+Region,East,2019-01-01,,9662.82,3714.7,15261.97,0.0,20080.3,Holt-Winters additive (damped)
+Region,East,2019-02-01,,9335.15,3387.03,14498.83,0.0,19752.63,Holt-Winters additive (damped)
+Region,East,2019-03-01,,14438.98,8490.86,19602.66,4109.14,24856.46,Holt-Winters additive (damped)
+Region,East,2019-04-01,,15933.2,9985.08,21096.88,5603.36,26350.68,Holt-Winters additive (damped)
+Region,East,2019-05-01,,15689.46,9741.34,20853.14,5359.63,26106.94,Holt-Winters additive (damped)
+Region,East,2019-06-01,,15103.4,9155.28,20702.56,4773.57,25520.88,Holt-Winters additive (damped)
+Region,East,2019-07-01,,14108.5,8160.38,19272.18,3771.55,24525.98,Holt-Winters additive (damped)
+Region,East,2019-08-01,,13884.5,7936.38,19483.66,3554.67,24301.98,Holt-Winters additive (damped)
+Region,East,2019-09-01,,31144.74,25993.14,36743.89,20814.9,48726.45,Holt-Winters additive (damped)
+Region,East,2019-10-01,,16256.19,10308.07,21419.87,5926.35,26673.67,Holt-Winters additive (damped)
+Region,East,2019-11-01,,36741.19,30793.07,42340.35,26126.7,47158.67,Holt-Winters additive (damped)
+Region,East,2019-12-01,,31931.66,25983.54,37095.34,21601.82,42349.14,Holt-Winters additive (damped)
+Region,South,2015-01-01,9322.09,,,,,,
+Region,South,2015-02-01,2028.99,,,,,,
+Region,South,2015-03-01,32911.12,,,,,,
+Region,South,2015-04-01,12184.61,,,,,,
+Region,South,2015-05-01,5779.24,,,,,,
+Region,South,2015-06-01,4560.25,,,,,,
+Region,South,2015-07-01,1829.12,,,,,,
+Region,South,2015-08-01,7056.61,,,,,,
+Region,South,2015-09-01,7175.34,,,,,,
+Region,South,2015-10-01,4813.75,,,,,,
+Region,South,2015-11-01,7428.75,,,,,,
+Region,South,2015-12-01,8755.97,,,,,,
+Region,South,2016-01-01,4965.83,,,,,,
+Region,South,2016-02-01,1156.51,,,,,,
+Region,South,2016-03-01,10322.09,,,,,,
+Region,South,2016-04-01,5718.33,,,,,,
+Region,South,2016-05-01,1983.7,,,,,,
+Region,South,2016-06-01,8552.17,,,,,,
+Region,South,2016-07-01,2197.27,,,,,,
+Region,South,2016-08-01,5584.75,,,,,,
+Region,South,2016-09-01,13677.49,,,,,,
+Region,South,2016-10-01,4085.73,,,,,,
+Region,South,2016-11-01,7795.82,,,,,,
+Region,South,2016-12-01,5320.28,,,,,,
+Region,South,2017-01-01,4082.43,,,,,,
+Region,South,2017-02-01,15613.1,,,,,,
+Region,South,2017-03-01,4238.17,,,,,,
+Region,South,2017-04-01,2965.71,,,,,,
+Region,South,2017-05-01,11960.23,,,,,,
+Region,South,2017-06-01,3455.88,,,,,,
+Region,South,2017-07-01,6562.42,,,,,,
+Region,South,2017-08-01,3050.01,,,,,,
+Region,South,2017-09-01,12023.45,,,,,,
+Region,South,2017-10-01,3165.23,,,,,,
+Region,South,2017-11-01,15596.56,,,,,,
+Region,South,2017-12-01,10897.02,,,,,,
+Region,South,2018-01-01,4815.59,,,,,,
+Region,South,2018-02-01,2182.87,,,,,,
+Region,South,2018-03-01,6643.72,,,,,,
+Region,South,2018-04-01,9447.75,,,,,,
+Region,South,2018-05-01,10943.74,,,,,,
+Region,South,2018-06-01,8933.92,,,,,,
+Region,South,2018-07-01,3302.1,,,,,,
+Region,South,2018-08-01,10371.53,,,,,,
+Region,South,2018-09-01,10200.52,,,,,,
+Region,South,2018-10-01,12136.95,,,,,,
+Region,South,2018-11-01,28717.42,,,,,,
+Region,South,2018-12-01,15209.74,,,,,,
+Region,South,2019-01-01,,9209.92,5228.92,15183.14,2471.56,22275.17,Holt-Winters additive (damped)
+Region,South,2019-02-01,,8800.39,4199.8,15411.41,2112.73,23025.53,Holt-Winters additive (damped)
+Region,South,2019-03-01,,17889.12,13461.92,25383.41,10551.38,33580.86,Holt-Winters additive (damped)
+Region,South,2019-04-01,,11748.25,7188.89,20048.92,4186.36,27166.5,Holt-Winters additive (damped)
+Region,South,2019-05-01,,11804.44,7255.21,20900.73,3879.21,27697.79,Holt-Winters additive (damped)
+Region,South,2019-06-01,,10619.26,6008.96,21558.28,2233.66,28655.61,Holt-Winters additive (damped)
+Region,South,2019-07-01,,7762.83,2856.11,20184.36,0.0,26877.31,Holt-Winters additive (damped)
+Region,South,2019-08-01,,10927.17,5539.08,24867.76,1856.69,32435.79,Holt-Winters additive (damped)
+Region,South,2019-09-01,,15043.64,9701.69,30301.66,4966.68,37173.76,Holt-Winters additive (damped)
+Region,South,2019-10-01,,10445.8,4634.44,27051.22,283.88,35332.92,Holt-Winters additive (damped)
+Region,South,2019-11-01,,19437.21,13616.61,37895.56,8926.75,44744.04,Holt-Winters additive (damped)
+Region,South,2019-12-01,,14317.84,8464.54,34102.77,3381.9,42794.52,Holt-Winters additive (damped)
+Region,West,2015-01-01,2938.72,,,,,,
+Region,West,2015-02-01,1057.96,,,,,,
+Region,West,2015-03-01,11008.9,,,,,,
+Region,West,2015-04-01,9343.49,,,,,,
+Region,West,2015-05-01,6570.44,,,,,,
+Region,West,2015-06-01,9629.42,,,,,,
+Region,West,2015-07-01,21808.55,,,,,,
+Region,West,2015-08-01,13248.23,,,,,,
+Region,West,2015-09-01,14900.54,,,,,,
+Region,West,2015-10-01,8728.76,,,,,,
+Region,West,2015-11-01,23191.62,,,,,,
+Region,West,2015-12-01,25456.41,,,,,,
+Region,West,2016-01-01,6026.74,,,,,,
+Region,West,2016-02-01,1804.18,,,,,,
+Region,West,2016-03-01,15662.15,,,,,,
+Region,West,2016-04-01,9056.02,,,,,,
+Region,West,2016-05-01,12042.66,,,,,,
+Region,West,2016-06-01,5088.95,,,,,,
+Region,West,2016-07-01,7089.83,,,,,,
+Region,West,2016-08-01,12548.36,,,,,,
+Region,West,2016-09-01,13898.92,,,,,,
+Region,West,2016-10-01,14016.68,,,,,,
+Region,West,2016-11-01,14548.9,,,,,,
+Region,West,2016-12-01,28182.87,,,,,,
+Region,West,2017-01-01,3657.82,,,,,,
+Region,West,2017-02-01,3100.16,,,,,,
+Region,West,2017-03-01,17559.03,,,,,,
+Region,West,2017-04-01,10482.01,,,,,,
+Region,West,2017-05-01,10694.25,,,,,,
+Region,West,2017-06-01,18598.1,,,,,,
+Region,West,2017-07-01,15280.88,,,,,,
+Region,West,2017-08-01,11817.85,,,,,,
+Region,West,2017-09-01,23620.88,,,,,,
+Region,West,2017-10-01,15624.69,,,,,,
+Region,West,2017-11-01,23923.0,,,,,,
+Region,West,2017-12-01,33121.5,,,,,,
+Region,West,2018-01-01,12081.84,,,,,,
+Region,West,2018-02-01,9814.92,,,,,,
+Region,West,2018-03-01,29024.1,,,,,,
+Region,West,2018-04-01,13459.75,,,,,,
+Region,West,2018-05-01,15609.15,,,,,,
+Region,West,2018-06-01,15919.82,,,,,,
+Region,West,2018-07-01,20767.54,,,,,,
+Region,West,2018-08-01,25737.89,,,,,,
+Region,West,2018-09-01,27907.04,,,,,,
+Region,West,2018-10-01,21212.44,,,,,,
+Region,West,2018-11-01,28941.79,,,,,,
+Region,West,2018-12-01,29652.1,,,,,,
+Region,West,2019-01-01,,13641.96,9414.78,18549.97,7883.15,21519.1,Holt-Winters additive (damped)
+Region,West,2019-02-01,,11173.1,6944.81,16462.87,4903.01,19606.58,Holt-Winters additive (damped)
+Region,West,2019-03-01,,25228.84,20787.18,30829.61,18341.19,33875.1,Holt-Winters additive (damped)
+Region,West,2019-04-01,,17424.08,12853.92,24390.52,9750.47,27710.29,Holt-Winters additive (damped)
+Region,West,2019-05-01,,17785.6,12385.02,25572.49,9080.08,29234.45,Holt-Winters additive (damped)
+Region,West,2019-06-01,,18696.39,12521.46,27738.64,8411.71,32644.02,Holt-Winters additive (damped)
+Region,West,2019-07-01,,22392.39,15864.64,32481.1,10959.83,38334.8,Holt-Winters additive (damped)
+Region,West,2019-08-01,,21917.33,14790.02,33436.1,9133.14,39299.54,Holt-Winters additive (damped)
+Region,West,2019-09-01,,25930.51,17930.38,39479.76,11884.76,45441.07,Holt-Winters additive (damped)
+Region,West,2019-10-01,,20518.76,11557.17,35302.14,5086.53,41576.27,Holt-Winters additive (damped)
+Region,West,2019-11-01,,28073.06,18945.44,44423.6,12386.41,51557.5,Holt-Winters additive (damped)
+Region,West,2019-12-01,,34207.01,24525.23,51629.99,17139.31,59436.82,Holt-Winters additive (damped)
+Segment,Consumer,2015-01-01,6927.82,,,,,,
+Segment,Consumer,2015-02-01,3167.85,,,,,,
+Segment,Consumer,2015-03-01,11869.3,,,,,,
+Segment,Consumer,2015-04-01,9108.61,,,,,,
+Segment,Consumer,2015-05-01,12819.16,,,,,,
+Segment,Consumer,2015-06-01,25923.75,,,,,,
+Segment,Consumer,2015-07-01,20197.74,,,,,,
+Segment,Consumer,2015-08-01,16215.26,,,,,,
+Segment,Consumer,2015-09-01,59690.65,,,,,,
+Segment,Consumer,2015-10-01,16246.7,,,,,,
+Segment,Consumer,2015-11-01,46571.98,,,,,,
+Segment,Consumer,2015-12-01,37357.99,,,,,,
+Segment,Consumer,2016-01-01,14274.98,,,,,,
+Segment,Consumer,2016-02-01,9269.02,,,,,,
+Segment,Consumer,2016-03-01,17418.89,,,,,,
+Segment,Consumer,2016-04-01,22626.41,,,,,,
+Segment,Consumer,2016-05-01,20879.18,,,,,,
+Segment,Consumer,2016-06-01,12824.5,,,,,,
+Segment,Consumer,2016-07-01,19948.81,,,,,,
+Segment,Consumer,2016-08-01,20589.84,,,,,,
+Segment,Consumer,2016-09-01,38860.27,,,,,,
+Segment,Consumer,2016-10-01,17128.87,,,,,,
+Segment,Consumer,2016-11-01,33146.83,,,,,,
+Segment,Consumer,2016-12-01,39568.33,,,,,,
+Segment,Consumer,2017-01-01,6026.65,,,,,,
+Segment,Consumer,2017-02-01,15800.23,,,,,,
+Segment,Consumer,2017-03-01,24844.99,,,,,,
+Segment,Consumer,2017-04-01,14075.25,,,,,,
+Segment,Consumer,2017-05-01,32174.64,,,,,,
+Segment,Consumer,2017-06-01,23888.81,,,,,,
+Segment,Consumer,2017-07-01,22631.85,,,,,,
+Segment,Consumer,2017-08-01,13885.56,,,,,,
+Segment,Consumer,2017-09-01,42647.79,,,,,,
+Segment,Consumer,2017-10-01,10143.28,,,,,,
+Segment,Consumer,2017-11-01,41449.86,,,,,,
+Segment,Consumer,2017-12-01,49294.99,,,,,,
+Segment,Consumer,2018-01-01,23211.84,,,,,,
+Segment,Consumer,2018-02-01,5589.08,,,,,,
+Segment,Consumer,2018-03-01,35041.52,,,,,,
+Segment,Consumer,2018-04-01,9034.92,,,,,,
+Segment,Consumer,2018-05-01,21059.74,,,,,,
+Segment,Consumer,2018-06-01,20273.12,,,,,,
+Segment,Consumer,2018-07-01,18991.37,,,,,,
+Segment,Consumer,2018-08-01,31629.14,,,,,,
+Segment,Consumer,2018-09-01,43857.2,,,,,,
+Segment,Consumer,2018-10-01,23194.24,,,,,,
+Segment,Consumer,2018-11-01,49790.06,,,,,,
+Segment,Consumer,2018-12-01,50232.46,,,,,,
+Segment,Consumer,2019-01-01,,12828.5,5828.46,22373.17,4020.04,25148.06,Holt-Winters multiplicative
+Segment,Consumer,2019-02-01,,7184.11,226.44,17629.56,0.0,22935.23,Holt-Winters multiplicative
+Segment,Consumer,2019-03-01,,23382.6,16607.29,33646.36,14412.7,35820.57,Holt-Winters multiplicative
+Segment,Consumer,2019-04-01,,14142.41,7395.58,24111.23,5262.89,26762.11,Holt-Winters multiplicative
+Segment,Consumer,2019-05-01,,22747.38,15935.16,33019.9,14000.69,35835.04,Holt-Winters multiplicative
+Segment,Consumer,2019-06-01,,21382.01,14641.83,31615.25,12308.95,33874.22,Holt-Winters multiplicative
+Segment,Consumer,2019-07-01,,21217.22,14292.85,31174.76,12172.94,33983.87,Holt-Winters multiplicative
+Segment,Consumer,2019-08-01,,21464.18,14563.12,31831.03,12312.35,34382.38,Holt-Winters multiplicative
+Segment,Consumer,2019-09-01,,48479.09,41819.34,58728.1,39423.74,62353.28,Holt-Winters multiplicative
+Segment,Consumer,2019-10-01,,17254.76,10417.07,27088.82,8247.37,30233.54,Holt-Winters multiplicative
+Segment,Consumer,2019-11-01,,44990.13,38141.05,55146.71,35915.15,59162.8,Holt-Winters multiplicative
+Segment,Consumer,2019-12-01,,46477.3,39667.41,56503.69,37209.78,60738.43,Holt-Winters multiplicative
+Segment,Corporate,2015-01-01,1701.53,,,,,,
+Segment,Corporate,2015-02-01,1183.67,,,,,,
+Segment,Corporate,2015-03-01,11106.8,,,,,,
+Segment,Corporate,2015-04-01,14131.73,,,,,,
+Segment,Corporate,2015-05-01,9142.0,,,,,,
+Segment,Corporate,2015-06-01,3970.91,,,,,,
+Segment,Corporate,2015-07-01,10032.99,,,,,,
+Segment,Corporate,2015-08-01,7451.77,,,,,,
+Segment,Corporate,2015-09-01,15507.74,,,,,,
+Segment,Corporate,2015-10-01,12637.68,,,,,,
+Segment,Corporate,2015-11-01,20994.49,,,,,,
+Segment,Corporate,2015-12-01,20573.56,,,,,,
+Segment,Corporate,2016-01-01,3382.46,,,,,,
+Segment,Corporate,2016-02-01,2565.26,,,,,,
+Segment,Corporate,2016-03-01,16332.02,,,,,,
+Segment,Corporate,2016-04-01,4121.04,,,,,,
+Segment,Corporate,2016-05-01,5454.94,,,,,,
+Segment,Corporate,2016-06-01,9404.09,,,,,,
+Segment,Corporate,2016-07-01,7191.7,,,,,,
+Segment,Corporate,2016-08-01,11455.76,,,,,,
+Segment,Corporate,2016-09-01,16604.56,,,,,,
+Segment,Corporate,2016-10-01,8646.37,,,,,,
+Segment,Corporate,2016-11-01,27299.64,,,,,,
+Segment,Corporate,2016-12-01,16299.46,,,,,,
+Segment,Corporate,2017-01-01,9485.12,,,,,,
+Segment,Corporate,2017-02-01,2866.88,,,,,,
+Segment,Corporate,2017-03-01,14226.47,,,,,,
+Segment,Corporate,2017-04-01,16177.38,,,,,,
+Segment,Corporate,2017-05-01,18452.26,,,,,,
+Segment,Corporate,2017-06-01,7788.49,,,,,,
+Segment,Corporate,2017-07-01,13168.92,,,,,,
+Segment,Corporate,2017-08-01,12943.47,,,,,,
+Segment,Corporate,2017-09-01,17802.81,,,,,,
+Segment,Corporate,2017-10-01,32130.54,,,,,,
+Segment,Corporate,2017-11-01,26493.18,,,,,,
+Segment,Corporate,2017-12-01,35570.83,,,,,,
+Segment,Corporate,2018-01-01,12221.23,,,,,,
+Segment,Corporate,2018-02-01,7959.26,,,,,,
+Segment,Corporate,2018-03-01,16574.62,,,,,,
+Segment,Corporate,2018-04-01,14803.01,,,,,,
+Segment,Corporate,2018-05-01,14239.83,,,,,,
+Segment,Corporate,2018-06-01,19695.04,,,,,,
+Segment,Corporate,2018-07-01,16525.6,,,,,,
+Segment,Corporate,2018-08-01,25678.44,,,,,,
+Segment,Corporate,2018-09-01,24105.1,,,,,,
+Segment,Corporate,2018-10-01,24877.17,,,,,,
+Segment,Corporate,2018-11-01,44644.08,,,,,,
+Segment,Corporate,2018-12-01,20524.43,,,,,,
+Segment,Corporate,2019-01-01,,16948.82,13208.81,23601.61,9830.52,27306.36,Holt-Winters additive (damped)
+Segment,Corporate,2019-02-01,,13699.01,9698.17,20661.96,5704.48,24430.04,Holt-Winters additive (damped)
+Segment,Corporate,2019-03-01,,24807.95,20541.0,32046.42,15898.35,36673.85,Holt-Winters additive (damped)
+Segment,Corporate,2019-04-01,,22104.94,17205.2,30104.51,13314.88,34286.05,Holt-Winters additive (damped)
+Segment,Corporate,2019-05-01,,22160.16,16597.17,31321.38,11410.89,35897.03,Holt-Winters additive (damped)
+Segment,Corporate,2019-06-01,,21050.03,15214.73,31278.26,9933.72,36263.04,Holt-Winters additive (damped)
+Segment,Corporate,2019-07-01,,22571.4,15915.57,35017.59,10257.83,40163.98,Holt-Winters additive (damped)
+Segment,Corporate,2019-08-01,,24665.89,17231.74,38745.05,10900.32,45147.8,Holt-Winters additive (damped)
+Segment,Corporate,2019-09-01,,29570.4,21534.41,46059.01,13717.84,53009.63,Holt-Winters additive (damped)
+Segment,Corporate,2019-10-01,,30859.82,21689.25,49363.75,13369.3,57397.69,Holt-Winters additive (damped)
+Segment,Corporate,2019-11-01,,40301.91,29868.5,60868.01,20822.95,69836.17,Holt-Winters additive (damped)
+Segment,Corporate,2019-12-01,,35688.8,24843.32,59375.08,13449.54,69114.85,Holt-Winters additive (damped)
+Segment,Home Office,2015-01-01,5607.55,,,,,,
+Segment,Home Office,2015-02-01,168.37,,,,,,
+Segment,Home Office,2015-03-01,32714.91,,,,,,
+Segment,Home Office,2015-04-01,5055.0,,,,,,
+Segment,Home Office,2015-05-01,1687.12,,,,,,
+Segment,Home Office,2015-06-01,4700.47,,,,,,
+Segment,Home Office,2015-07-01,3715.66,,,,,,
+Segment,Home Office,2015-08-01,4242.43,,,,,,
+Segment,Home Office,2015-09-01,6578.96,,,,,,
+Segment,Home Office,2015-10-01,2569.02,,,,,,
+Segment,Home Office,2015-11-01,11062.24,,,,,,
+Segment,Home Office,2015-12-01,11614.08,,,,,,
+Segment,Home Office,2016-01-01,516.63,,,,,,
+Segment,Home Office,2016-02-01,117.14,,,,,,
+Segment,Home Office,2016-03-01,4975.34,,,,,,
+Segment,Home Office,2016-04-01,7447.76,,,,,,
+Segment,Home Office,2016-05-01,3797.57,,,,,,
+Segment,Home Office,2016-06-01,2568.7,,,,,,
+Segment,Home Office,2016-07-01,1624.81,,,,,,
+Segment,Home Office,2016-08-01,4852.74,,,,,,
+Segment,Home Office,2016-09-01,9131.08,,,,,,
+Segment,Home Office,2016-10-01,5629.69,,,,,,
+Segment,Home Office,2016-11-01,15526.09,,,,,,
+Segment,Home Office,2016-12-01,19051.73,,,,,,
+Segment,Home Office,2017-01-01,3030.72,,,,,,
+Segment,Home Office,2017-02-01,4311.7,,,,,,
+Segment,Home Office,2017-03-01,12644.41,,,,,,
+Segment,Home Office,2017-04-01,8497.42,,,,,,
+Segment,Home Office,2017-05-01,6360.84,,,,,,
+Segment,Home Office,2017-06-01,8667.23,,,,,,
+Segment,Home Office,2017-07-01,3461.2,,,,,,
+Segment,Home Office,2017-08-01,4286.34,,,,,,
+Segment,Home Office,2017-09-01,12959.42,,,,,,
+Segment,Home Office,2017-10-01,17413.92,,,,,,
+Segment,Home Office,2017-11-01,11468.92,,,,,,
+Segment,Home Office,2017-12-01,12133.23,,,,,,
+Segment,Home Office,2018-01-01,8538.3,,,,,,
+Segment,Home Office,2018-02-01,6752.8,,,,,,
+Segment,Home Office,2018-03-01,7256.21,,,,,,
+Segment,Home Office,2018-04-01,12683.6,,,,,,
+Segment,Home Office,2018-05-01,8961.54,,,,,,
+Segment,Home Office,2018-06-01,13013.57,,,,,,
+Segment,Home Office,2018-07-01,9747.44,,,,,,
+Segment,Home Office,2018-08-01,5813.3,,,,,,
+Segment,Home Office,2018-09-01,19904.35,,,,,,
+Segment,Home Office,2018-10-01,29705.52,,,,,,
+Segment,Home Office,2018-11-01,24013.68,,,,,,
+Segment,Home Office,2018-12-01,13072.43,,,,,,
+Segment,Home Office,2019-01-01,,8538.3,3964.26,16091.66,0.0,20861.54,Seasonal naive
+Segment,Home Office,2019-02-01,,6752.8,2178.76,14306.16,0.0,19076.04,Seasonal naive
+Segment,Home Office,2019-03-01,,7256.21,2682.17,14809.57,0.0,19579.45,Seasonal naive
+Segment,Home Office,2019-04-01,,12683.6,8109.56,20236.96,3162.46,25006.84,Seasonal naive
+Segment,Home Office,2019-05-01,,8961.54,4387.5,16514.9,0.0,21284.78,Seasonal naive
+Segment,Home Office,2019-06-01,,13013.57,8439.53,20566.93,3492.43,25336.81,Seasonal naive
+Segment,Home Office,2019-07-01,,9747.44,5173.4,17300.8,226.31,22070.69,Seasonal naive
+Segment,Home Office,2019-08-01,,5813.3,1239.26,13366.66,0.0,18136.54,Seasonal naive
+Segment,Home Office,2019-09-01,,19904.35,15330.3,27457.71,10383.21,32227.59,Seasonal naive
+Segment,Home Office,2019-10-01,,29705.52,25131.47,37258.87,20184.38,42028.76,Seasonal naive
+Segment,Home Office,2019-11-01,,24013.68,19439.64,31567.04,14492.55,36336.93,Seasonal naive
+Segment,Home Office,2019-12-01,,13072.43,8498.39,20625.79,3551.3,25395.67,Seasonal naive

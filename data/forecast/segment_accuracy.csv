@@ -1,0 +1,41 @@
+level,series,model,folds,CV_MAE,CV_RMSE,CV_MAPE,CV_sMAPE,CV_MASE
+Category,Furniture,Seasonal naive,7,3343.7638,4436.4085,21.9243,23.912,0.9874
+Category,Furniture,Holt-Winters additive (damped),7,3628.2969,4159.0987,26.3353,25.7616,1.0754
+Category,Furniture,Holt-Winters multiplicative,7,3561.1603,4036.8681,26.6889,30.0875,1.0544
+Category,Furniture,"SARIMA(1,1,1)(0,1,1,12)",7,5352.6287,6059.7108,50.3604,33.5125,1.5484
+Category,Office Supplies,Seasonal naive,7,6187.5019,8110.2855,31.3203,40.1933,1.5508
+Category,Office Supplies,Holt-Winters additive (damped),7,5181.742,6944.4146,28.6615,36.5384,1.3236
+Category,Office Supplies,Holt-Winters multiplicative,7,5188.8792,6976.8988,28.9151,34.7097,1.3342
+Category,Office Supplies,"SARIMA(1,1,1)(0,1,1,12)",7,5863.986,7321.8705,36.7086,33.9974,1.4691
+Category,Technology,Seasonal naive,7,8248.8425,10089.2984,43.9911,48.3385,1.2042
+Category,Technology,Holt-Winters additive (damped),7,7909.5704,9387.451,39.9663,44.5717,1.1521
+Category,Technology,Holt-Winters multiplicative,7,7974.8935,9491.3509,38.4564,42.903,1.1601
+Category,Technology,"SARIMA(1,1,1)(0,1,1,12)",7,7595.1911,9024.6571,54.1761,37.5508,1.1137
+Region,Central,Seasonal naive,7,4836.4036,6505.562,42.0689,46.2897,0.9218
+Region,Central,Holt-Winters additive (damped),7,5200.3345,6840.2017,47.2858,43.9597,0.9838
+Region,Central,Holt-Winters multiplicative,7,5286.1523,6843.9519,47.3766,47.7101,0.9986
+Region,Central,"SARIMA(1,1,1)(0,1,1,12)",7,5510.6738,6673.4522,76.6673,46.2286,1.0329
+Region,East,Seasonal naive,7,7755.7093,9228.0083,56.0643,51.4925,1.7563
+Region,East,Holt-Winters additive (damped),7,6054.5253,7772.0627,43.3861,40.6141,1.3946
+Region,East,Holt-Winters multiplicative,7,8131.684,10141.3861,49.482,51.8748,1.8499
+Region,East,"SARIMA(1,1,1)(0,1,1,12)",7,8006.3397,9188.7344,63.8433,62.2899,1.7971
+Region,South,Seasonal naive,7,5073.4394,6199.0102,86.3488,70.0459,1.0371
+Region,South,Holt-Winters additive (damped),7,4462.2134,5497.0551,61.1971,64.151,0.9111
+Region,South,Holt-Winters multiplicative,7,4522.5961,5576.326,64.4122,57.2882,0.9241
+Region,South,"SARIMA(1,1,1)(0,1,1,12)",7,5893.196,6744.1627,106.6165,70.8103,1.2001
+Region,West,Seasonal naive,7,5787.3467,6985.9795,33.0711,42.5367,1.3137
+Region,West,Holt-Winters additive (damped),7,4129.5674,5234.0481,24.1718,28.9995,0.9425
+Region,West,Holt-Winters multiplicative,7,4672.7865,5910.9342,26.8934,30.7998,1.0479
+Region,West,"SARIMA(1,1,1)(0,1,1,12)",7,4568.9139,5281.3767,44.4367,27.4463,1.0394
+Segment,Consumer,Seasonal naive,7,8158.3528,9165.6417,45.313,42.2,1.0236
+Segment,Consumer,Holt-Winters additive (damped),7,8140.2332,9292.0995,39.4722,38.3888,1.0195
+Segment,Consumer,Holt-Winters multiplicative,7,6770.2667,8298.957,32.0106,33.56,0.8495
+Segment,Consumer,"SARIMA(1,1,1)(0,1,1,12)",7,9885.4379,11022.4695,67.881,43.5355,1.2371
+Segment,Corporate,Seasonal naive,7,7306.5995,9450.3537,36.7586,48.3839,1.5277
+Segment,Corporate,Holt-Winters additive (damped),7,5558.0319,7172.6953,30.4633,33.3572,1.1517
+Segment,Corporate,Holt-Winters multiplicative,7,5880.2724,7640.8544,32.209,39.7817,1.2343
+Segment,Corporate,"SARIMA(1,1,1)(0,1,1,12)",7,6073.6163,7707.12,40.9287,33.4748,1.2494
+Segment,Home Office,Seasonal naive,7,4667.0166,5392.5545,45.0344,57.961,1.0075
+Segment,Home Office,Holt-Winters additive (damped),7,4910.9062,6056.9421,43.233,55.8158,1.0576
+Segment,Home Office,Holt-Winters multiplicative,7,5647.7969,7000.8718,54.4452,56.3611,1.2202
+Segment,Home Office,"SARIMA(1,1,1)(0,1,1,12)",7,5033.3819,6117.5989,62.1304,43.2604,1.0677

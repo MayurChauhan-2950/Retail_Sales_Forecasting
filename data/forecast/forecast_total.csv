@@ -1,0 +1,61 @@
+level,series,month,actual,forecast,lower_80,upper_80,lower_95,upper_95,model
+Total,All sales,2015-01-01,14236.9,,,,,,
+Total,All sales,2015-02-01,4519.89,,,,,,
+Total,All sales,2015-03-01,55691.01,,,,,,
+Total,All sales,2015-04-01,28295.34,,,,,,
+Total,All sales,2015-05-01,23648.29,,,,,,
+Total,All sales,2015-06-01,34595.13,,,,,,
+Total,All sales,2015-07-01,33946.39,,,,,,
+Total,All sales,2015-08-01,27909.47,,,,,,
+Total,All sales,2015-09-01,81777.35,,,,,,
+Total,All sales,2015-10-01,31453.39,,,,,,
+Total,All sales,2015-11-01,78628.72,,,,,,
+Total,All sales,2015-12-01,69545.62,,,,,,
+Total,All sales,2016-01-01,18174.08,,,,,,
+Total,All sales,2016-02-01,11951.41,,,,,,
+Total,All sales,2016-03-01,38726.25,,,,,,
+Total,All sales,2016-04-01,34195.21,,,,,,
+Total,All sales,2016-05-01,30131.69,,,,,,
+Total,All sales,2016-06-01,24797.29,,,,,,
+Total,All sales,2016-07-01,28765.32,,,,,,
+Total,All sales,2016-08-01,36898.33,,,,,,
+Total,All sales,2016-09-01,64595.92,,,,,,
+Total,All sales,2016-10-01,31404.92,,,,,,
+Total,All sales,2016-11-01,75972.56,,,,,,
+Total,All sales,2016-12-01,74919.52,,,,,,
+Total,All sales,2017-01-01,18542.49,,,,,,
+Total,All sales,2017-02-01,22978.82,,,,,,
+Total,All sales,2017-03-01,51715.88,,,,,,
+Total,All sales,2017-04-01,38750.04,,,,,,
+Total,All sales,2017-05-01,56987.73,,,,,,
+Total,All sales,2017-06-01,40344.53,,,,,,
+Total,All sales,2017-07-01,39261.96,,,,,,
+Total,All sales,2017-08-01,31115.37,,,,,,
+Total,All sales,2017-09-01,73410.02,,,,,,
+Total,All sales,2017-10-01,59687.74,,,,,,
+Total,All sales,2017-11-01,79411.97,,,,,,
+Total,All sales,2017-12-01,96999.04,,,,,,
+Total,All sales,2018-01-01,43971.37,,,,,,
+Total,All sales,2018-02-01,20301.13,,,,,,
+Total,All sales,2018-03-01,58872.35,,,,,,
+Total,All sales,2018-04-01,36521.54,,,,,,
+Total,All sales,2018-05-01,44261.11,,,,,,
+Total,All sales,2018-06-01,52981.73,,,,,,
+Total,All sales,2018-07-01,45264.42,,,,,,
+Total,All sales,2018-08-01,63120.89,,,,,,
+Total,All sales,2018-09-01,87866.65,,,,,,
+Total,All sales,2018-10-01,77776.92,,,,,,
+Total,All sales,2018-11-01,118447.82,,,,,,
+Total,All sales,2018-12-01,83829.32,,,,,,
+Total,All sales,2019-01-01,,49386.76,41201.82,62582.76,36337.53,67151.0,Holt-Winters additive (damped)
+Total,All sales,2019-02-01,,41475.74,31746.29,55547.51,25491.98,59915.84,Holt-Winters additive (damped)
+Total,All sales,2019-03-01,,74998.04,63732.67,89886.31,57559.2,95657.88,Holt-Winters additive (damped)
+Total,All sales,2019-04-01,,61269.33,48539.21,77002.77,41166.37,84965.2,Holt-Winters additive (damped)
+Total,All sales,2019-05-01,,67933.81,53148.28,86102.83,44802.17,94742.9,Holt-Winters additive (damped)
+Total,All sales,2019-06-01,,65178.3,47281.39,86857.2,38448.47,97336.76,Holt-Winters additive (damped)
+Total,All sales,2019-07-01,,66495.77,45449.58,91407.23,35133.07,104583.27,Holt-Winters additive (damped)
+Total,All sales,2019-08-01,,66534.51,43085.22,95788.45,30445.2,109388.07,Holt-Winters additive (damped)
+Total,All sales,2019-09-01,,107466.28,80702.2,141591.97,65541.34,158153.44,Holt-Winters additive (damped)
+Total,All sales,2019-10-01,,77578.54,46859.82,116714.54,30832.88,133992.43,Holt-Winters additive (damped)
+Total,All sales,2019-11-01,,115687.27,81166.88,161128.63,62640.0,178961.04,Holt-Winters additive (damped)
+Total,All sales,2019-12-01,,116030.81,77777.91,165381.11,56622.02,189079.95,Holt-Winters additive (damped)

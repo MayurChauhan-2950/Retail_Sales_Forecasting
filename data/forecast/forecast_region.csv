@@ -1,0 +1,241 @@
+level,series,month,actual,forecast,lower_80,upper_80,lower_95,upper_95,model
+Region,Central,2015-01-01,1539.91,,,,,,
+Region,Central,2015-02-01,1233.17,,,,,,
+Region,Central,2015-03-01,5827.6,,,,,,
+Region,Central,2015-04-01,3712.34,,,,,,
+Region,Central,2015-05-01,4048.51,,,,,,
+Region,Central,2015-06-01,9646.3,,,,,,
+Region,Central,2015-07-01,6740.57,,,,,,
+Region,Central,2015-08-01,3022.18,,,,,,
+Region,Central,2015-09-01,34408.69,,,,,,
+Region,Central,2015-10-01,8965.76,,,,,,
+Region,Central,2015-11-01,14057.57,,,,,,
+Region,Central,2015-12-01,10635.57,,,,,,
+Region,Central,2016-01-01,2510.51,,,,,,
+Region,Central,2016-02-01,2527.59,,,,,,
+Region,Central,2016-03-01,6730.27,,,,,,
+Region,Central,2016-04-01,11642.06,,,,,,
+Region,Central,2016-05-01,8623.9,,,,,,
+Region,Central,2016-06-01,3713.19,,,,,,
+Region,Central,2016-07-01,7605.57,,,,,,
+Region,Central,2016-08-01,9301.45,,,,,,
+Region,Central,2016-09-01,7578.52,,,,,,
+Region,Central,2016-10-01,7000.49,,,,,,
+Region,Central,2016-11-01,18903.09,,,,,,
+Region,Central,2016-12-01,16737.6,,,,,,
+Region,Central,2017-01-01,5942.16,,,,,,
+Region,Central,2017-02-01,1115.73,,,,,,
+Region,Central,2017-03-01,13153.81,,,,,,
+Region,Central,2017-04-01,7462.35,,,,,,
+Region,Central,2017-05-01,11743.96,,,,,,
+Region,Central,2017-06-01,6553.15,,,,,,
+Region,Central,2017-07-01,8894.46,,,,,,
+Region,Central,2017-08-01,6982.55,,,,,,
+Region,Central,2017-09-01,17503.21,,,,,,
+Region,Central,2017-10-01,25832.35,,,,,,
+Region,Central,2017-11-01,16910.32,,,,,,
+Region,Central,2017-12-01,25335.32,,,,,,
+Region,Central,2018-01-01,21690.66,,,,,,
+Region,Central,2018-02-01,3334.82,,,,,,
+Region,Central,2018-03-01,15504.58,,,,,,
+Region,Central,2018-04-01,3383.12,,,,,,
+Region,Central,2018-05-01,11588.85,,,,,,
+Region,Central,2018-06-01,12966.76,,,,,,
+Region,Central,2018-07-01,8872.96,,,,,,
+Region,Central,2018-08-01,6252.99,,,,,,
+Region,Central,2018-09-01,17343.0,,,,,,
+Region,Central,2018-10-01,12122.34,,,,,,
+Region,Central,2018-11-01,15154.98,,,,,,
+Region,Central,2018-12-01,18883.07,,,,,,
+Region,Central,2019-01-01,,21690.66,16634.25,29954.37,6340.62,37824.58,Seasonal naive
+Region,Central,2019-02-01,,3334.82,0.0,11598.54,0.0,19468.74,Seasonal naive
+Region,Central,2019-03-01,,15504.58,10448.17,23768.3,154.54,31638.5,Seasonal naive
+Region,Central,2019-04-01,,3383.12,0.0,11646.84,0.0,19517.04,Seasonal naive
+Region,Central,2019-05-01,,11588.85,6532.45,19852.57,0.0,27722.77,Seasonal naive
+Region,Central,2019-06-01,,12966.76,7910.35,21230.48,0.0,29100.68,Seasonal naive
+Region,Central,2019-07-01,,8872.96,3816.55,17136.67,0.0,25006.88,Seasonal naive
+Region,Central,2019-08-01,,6252.99,1196.59,14516.71,0.0,22386.91,Seasonal naive
+Region,Central,2019-09-01,,17343.0,12286.59,25606.71,1992.96,33476.92,Seasonal naive
+Region,Central,2019-10-01,,12122.34,7065.93,20386.05,0.0,28256.26,Seasonal naive
+Region,Central,2019-11-01,,15154.98,10098.57,23418.7,0.0,31288.9,Seasonal naive
+Region,Central,2019-12-01,,18883.07,13826.66,27146.79,3533.04,35016.99,Seasonal naive
+Region,East,2015-01-01,436.17,,,,,,
+Region,East,2015-02-01,199.78,,,,,,
+Region,East,2015-03-01,5943.39,,,,,,
+Region,East,2015-04-01,3054.91,,,,,,
+Region,East,2015-05-01,7250.1,,,,,,
+Region,East,2015-06-01,10759.16,,,,,,
+Region,East,2015-07-01,3568.15,,,,,,
+Region,East,2015-08-01,4582.45,,,,,,
+Region,East,2015-09-01,25292.79,,,,,,
+Region,East,2015-10-01,8945.12,,,,,,
+Region,East,2015-11-01,33950.77,,,,,,
+Region,East,2015-12-01,24697.68,,,,,,
+Region,East,2016-01-01,4670.99,,,,,,
+Region,East,2016-02-01,6463.13,,,,,,
+Region,East,2016-03-01,6011.74,,,,,,
+Region,East,2016-04-01,7778.8,,,,,,
+Region,East,2016-05-01,7481.42,,,,,,
+Region,East,2016-06-01,7442.99,,,,,,
+Region,East,2016-07-01,11872.66,,,,,,
+Region,East,2016-08-01,9463.77,,,,,,
+Region,East,2016-09-01,29440.99,,,,,,
+Region,East,2016-10-01,6302.03,,,,,,
+Region,East,2016-11-01,34724.76,,,,,,
+Region,East,2016-12-01,24678.77,,,,,,
+Region,East,2017-01-01,4860.09,,,,,,
+Region,East,2017-02-01,3149.82,,,,,,
+Region,East,2017-03-01,16764.86,,,,,,
+Region,East,2017-04-01,17839.97,,,,,,
+Region,East,2017-05-01,22589.28,,,,,,
+Region,East,2017-06-01,11737.41,,,,,,
+Region,East,2017-07-01,8524.2,,,,,,
+Region,East,2017-08-01,9264.96,,,,,,
+Region,East,2017-09-01,20262.49,,,,,,
+Region,East,2017-10-01,15065.46,,,,,,
+Region,East,2017-11-01,22982.09,,,,,,
+Region,East,2017-12-01,27645.2,,,,,,
+Region,East,2018-01-01,5383.28,,,,,,
+Region,East,2018-02-01,4968.52,,,,,,
+Region,East,2018-03-01,7699.96,,,,,,
+Region,East,2018-04-01,10230.91,,,,,,
+Region,East,2018-05-01,6119.37,,,,,,
+Region,East,2018-06-01,15161.22,,,,,,
+Region,East,2018-07-01,12321.82,,,,,,
+Region,East,2018-08-01,20758.47,,,,,,
+Region,East,2018-09-01,32416.1,,,,,,
+Region,East,2018-10-01,32305.2,,,,,,
+Region,East,2018-11-01,45633.64,,,,,,
+Region,East,2018-12-01,20084.42,,,,,,
+Region,East,2019-01-01,,9662.82,3714.7,15261.97,0.0,20080.3,Holt-Winters additive (damped)
+Region,East,2019-02-01,,9335.15,3387.03,14498.83,0.0,19752.63,Holt-Winters additive (damped)
+Region,East,2019-03-01,,14438.98,8490.86,19602.66,4109.14,24856.46,Holt-Winters additive (damped)
+Region,East,2019-04-01,,15933.2,9985.08,21096.88,5603.36,26350.68,Holt-Winters additive (damped)
+Region,East,2019-05-01,,15689.46,9741.34,20853.14,5359.63,26106.94,Holt-Winters additive (damped)
+Region,East,2019-06-01,,15103.4,9155.28,20702.56,4773.57,25520.88,Holt-Winters additive (damped)
+Region,East,2019-07-01,,14108.5,8160.38,19272.18,3771.55,24525.98,Holt-Winters additive (damped)
+Region,East,2019-08-01,,13884.5,7936.38,19483.66,3554.67,24301.98,Holt-Winters additive (damped)
+Region,East,2019-09-01,,31144.74,25993.14,36743.89,20814.9,48726.45,Holt-Winters additive (damped)
+Region,East,2019-10-01,,16256.19,10308.07,21419.87,5926.35,26673.67,Holt-Winters additive (damped)
+Region,East,2019-11-01,,36741.19,30793.07,42340.35,26126.7,47158.67,Holt-Winters additive (damped)
+Region,East,2019-12-01,,31931.66,25983.54,37095.34,21601.82,42349.14,Holt-Winters additive (damped)
+Region,South,2015-01-01,9322.09,,,,,,
+Region,South,2015-02-01,2028.99,,,,,,
+Region,South,2015-03-01,32911.12,,,,,,
+Region,South,2015-04-01,12184.61,,,,,,
+Region,South,2015-05-01,5779.24,,,,,,
+Region,South,2015-06-01,4560.25,,,,,,
+Region,South,2015-07-01,1829.12,,,,,,
+Region,South,2015-08-01,7056.61,,,,,,
+Region,South,2015-09-01,7175.34,,,,,,
+Region,South,2015-10-01,4813.75,,,,,,
+Region,South,2015-11-01,7428.75,,,,,,
+Region,South,2015-12-01,8755.97,,,,,,
+Region,South,2016-01-01,4965.83,,,,,,
+Region,South,2016-02-01,1156.51,,,,,,
+Region,South,2016-03-01,10322.09,,,,,,
+Region,South,2016-04-01,5718.33,,,,,,
+Region,South,2016-05-01,1983.7,,,,,,
+Region,South,2016-06-01,8552.17,,,,,,
+Region,South,2016-07-01,2197.27,,,,,,
+Region,South,2016-08-01,5584.75,,,,,,
+Region,South,2016-09-01,13677.49,,,,,,
+Region,South,2016-10-01,4085.73,,,,,,
+Region,South,2016-11-01,7795.82,,,,,,
+Region,South,2016-12-01,5320.28,,,,,,
+Region,South,2017-01-01,4082.43,,,,,,
+Region,South,2017-02-01,15613.1,,,,,,
+Region,South,2017-03-01,4238.17,,,,,,
+Region,South,2017-04-01,2965.71,,,,,,
+Region,South,2017-05-01,11960.23,,,,,,
+Region,South,2017-06-01,3455.88,,,,,,
+Region,South,2017-07-01,6562.42,,,,,,
+Region,South,2017-08-01,3050.01,,,,,,
+Region,South,2017-09-01,12023.45,,,,,,
+Region,South,2017-10-01,3165.23,,,,,,
+Region,South,2017-11-01,15596.56,,,,,,
+Region,South,2017-12-01,10897.02,,,,,,
+Region,South,2018-01-01,4815.59,,,,,,
+Region,South,2018-02-01,2182.87,,,,,,
+Region,South,2018-03-01,6643.72,,,,,,
+Region,South,2018-04-01,9447.75,,,,,,
+Region,South,2018-05-01,10943.74,,,,,,
+Region,South,2018-06-01,8933.92,,,,,,
+Region,South,2018-07-01,3302.1,,,,,,
+Region,South,2018-08-01,10371.53,,,,,,
+Region,South,2018-09-01,10200.52,,,,,,
+Region,South,2018-10-01,12136.95,,,,,,
+Region,South,2018-11-01,28717.42,,,,,,
+Region,South,2018-12-01,15209.74,,,,,,
+Region,South,2019-01-01,,9209.92,5228.92,15183.14,2471.56,22275.17,Holt-Winters additive (damped)
+Region,South,2019-02-01,,8800.39,4199.8,15411.41,2112.73,23025.53,Holt-Winters additive (damped)
+Region,South,2019-03-01,,17889.12,13461.92,25383.41,10551.38,33580.86,Holt-Winters additive (damped)
+Region,South,2019-04-01,,11748.25,7188.89,20048.92,4186.36,27166.5,Holt-Winters additive (damped)
+Region,South,2019-05-01,,11804.44,7255.21,20900.73,3879.21,27697.79,Holt-Winters additive (damped)
+Region,South,2019-06-01,,10619.26,6008.96,21558.28,2233.66,28655.61,Holt-Winters additive (damped)
+Region,South,2019-07-01,,7762.83,2856.11,20184.36,0.0,26877.31,Holt-Winters additive (damped)
+Region,South,2019-08-01,,10927.17,5539.08,24867.76,1856.69,32435.79,Holt-Winters additive (damped)
+Region,South,2019-09-01,,15043.64,9701.69,30301.66,4966.68,37173.76,Holt-Winters additive (damped)
+Region,South,2019-10-01,,10445.8,4634.44,27051.22,283.88,35332.92,Holt-Winters additive (damped)
+Region,South,2019-11-01,,19437.21,13616.61,37895.56,8926.75,44744.04,Holt-Winters additive (damped)
+Region,South,2019-12-01,,14317.84,8464.54,34102.77,3381.9,42794.52,Holt-Winters additive (damped)
+Region,West,2015-01-01,2938.72,,,,,,
+Region,West,2015-02-01,1057.96,,,,,,
+Region,West,2015-03-01,11008.9,,,,,,
+Region,West,2015-04-01,9343.49,,,,,,
+Region,West,2015-05-01,6570.44,,,,,,
+Region,West,2015-06-01,9629.42,,,,,,
+Region,West,2015-07-01,21808.55,,,,,,
+Region,West,2015-08-01,13248.23,,,,,,
+Region,West,2015-09-01,14900.54,,,,,,
+Region,West,2015-10-01,8728.76,,,,,,
+Region,West,2015-11-01,23191.62,,,,,,
+Region,West,2015-12-01,25456.41,,,,,,
+Region,West,2016-01-01,6026.74,,,,,,
+Region,West,2016-02-01,1804.18,,,,,,
+Region,West,2016-03-01,15662.15,,,,,,
+Region,West,2016-04-01,9056.02,,,,,,
+Region,West,2016-05-01,12042.66,,,,,,
+Region,West,2016-06-01,5088.95,,,,,,
+Region,West,2016-07-01,7089.83,,,,,,
+Region,West,2016-08-01,12548.36,,,,,,
+Region,West,2016-09-01,13898.92,,,,,,
+Region,West,2016-10-01,14016.68,,,,,,
+Region,West,2016-11-01,14548.9,,,,,,
+Region,West,2016-12-01,28182.87,,,,,,
+Region,West,2017-01-01,3657.82,,,,,,
+Region,West,2017-02-01,3100.16,,,,,,
+Region,West,2017-03-01,17559.03,,,,,,
+Region,West,2017-04-01,10482.01,,,,,,
+Region,West,2017-05-01,10694.25,,,,,,
+Region,West,2017-06-01,18598.1,,,,,,
+Region,West,2017-07-01,15280.88,,,,,,
+Region,West,2017-08-01,11817.85,,,,,,
+Region,West,2017-09-01,23620.88,,,,,,
+Region,West,2017-10-01,15624.69,,,,,,
+Region,West,2017-11-01,23923.0,,,,,,
+Region,West,2017-12-01,33121.5,,,,,,
+Region,West,2018-01-01,12081.84,,,,,,
+Region,West,2018-02-01,9814.92,,,,,,
+Region,West,2018-03-01,29024.1,,,,,,
+Region,West,2018-04-01,13459.75,,,,,,
+Region,West,2018-05-01,15609.15,,,,,,
+Region,West,2018-06-01,15919.82,,,,,,
+Region,West,2018-07-01,20767.54,,,,,,
+Region,West,2018-08-01,25737.89,,,,,,
+Region,West,2018-09-01,27907.04,,,,,,
+Region,West,2018-10-01,21212.44,,,,,,
+Region,West,2018-11-01,28941.79,,,,,,
+Region,West,2018-12-01,29652.1,,,,,,
+Region,West,2019-01-01,,13641.96,9414.78,18549.97,7883.15,21519.1,Holt-Winters additive (damped)
+Region,West,2019-02-01,,11173.1,6944.81,16462.87,4903.01,19606.58,Holt-Winters additive (damped)
+Region,West,2019-03-01,,25228.84,20787.18,30829.61,18341.19,33875.1,Holt-Winters additive (damped)
+Region,West,2019-04-01,,17424.08,12853.92,24390.52,9750.47,27710.29,Holt-Winters additive (damped)
+Region,West,2019-05-01,,17785.6,12385.02,25572.49,9080.08,29234.45,Holt-Winters additive (damped)
+Region,West,2019-06-01,,18696.39,12521.46,27738.64,8411.71,32644.02,Holt-Winters additive (damped)
+Region,West,2019-07-01,,22392.39,15864.64,32481.1,10959.83,38334.8,Holt-Winters additive (damped)
+Region,West,2019-08-01,,21917.33,14790.02,33436.1,9133.14,39299.54,Holt-Winters additive (damped)
+Region,West,2019-09-01,,25930.51,17930.38,39479.76,11884.76,45441.07,Holt-Winters additive (damped)
+Region,West,2019-10-01,,20518.76,11557.17,35302.14,5086.53,41576.27,Holt-Winters additive (damped)
+Region,West,2019-11-01,,28073.06,18945.44,44423.6,12386.41,51557.5,Holt-Winters additive (damped)
+Region,West,2019-12-01,,34207.01,24525.23,51629.99,17139.31,59436.82,Holt-Winters additive (damped)

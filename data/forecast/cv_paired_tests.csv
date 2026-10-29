@@ -1,0 +1,21 @@
+reference,model,mean_MAE_diff(model-ref),folds_ref_better,folds,wilcoxon_p,paired_t_p
+Holt-Winters additive (damped),"ARIMA(1,1,1)",11619.6571,7,7,0.0156,0.004
+Holt-Winters additive (damped),ETS (AICc-selected),741.5058,4,7,0.5781,0.4327
+Holt-Winters additive (damped),Holt-Winters additive (undamped),994.9892,5,7,0.1094,0.0851
+Holt-Winters additive (damped),Holt-Winters mult. seasonal + damped trend,2713.397,6,7,0.0312,0.0965
+Holt-Winters additive (damped),Holt-Winters multiplicative,827.5734,6,7,0.0781,0.1008
+Holt-Winters additive (damped),Naive,17400.4156,7,7,0.0156,0.0195
+Holt-Winters additive (damped),SARIMA (AIC search),3597.5493,4,7,0.375,0.2434
+Holt-Winters additive (damped),"SARIMA(1,1,1)(0,1,1,12)",3531.6565,4,7,0.375,0.2516
+Holt-Winters additive (damped),SES,9862.8035,6,7,0.0312,0.0203
+Holt-Winters additive (damped),Seasonal naive,2757.3773,7,7,0.0156,0.043
+Seasonal naive,"ARIMA(1,1,1)",8862.2798,5,7,0.0781,0.0159
+Seasonal naive,ETS (AICc-selected),-2015.8715,2,7,0.1562,0.1626
+Seasonal naive,Holt-Winters additive (damped),-2757.3773,0,7,0.0156,0.043
+Seasonal naive,Holt-Winters additive (undamped),-1762.3881,2,7,0.1562,0.1668
+Seasonal naive,Holt-Winters mult. seasonal + damped trend,-43.9802,2,7,0.6875,0.9825
+Seasonal naive,Holt-Winters multiplicative,-1929.8039,0,7,0.0156,0.0422
+Seasonal naive,Naive,14643.0383,7,7,0.0156,0.0418
+Seasonal naive,SARIMA (AIC search),840.172,2,7,0.9375,0.7962
+Seasonal naive,"SARIMA(1,1,1)(0,1,1,12)",774.2792,2,7,0.9375,0.8136
+Seasonal naive,SES,7105.4263,4,7,0.2188,0.0466

@@ -1,0 +1,11 @@
+stage,rows,note
+raw file rows,10800,data/raw/superstore.csv
+  of which stray empty rows (no Order ID/Sales),806,removed in step 02
+  of which real order lines,9994,
+staging rows,10800,as-is parquet copy (step 03 extract)
+clean rows,9994,data/clean/superstore_clean.csv
+fact_sales rows,9994,grain = order line
+dim_customer rows,793,= distinct Customer ID in clean
+dim_product rows,1862,= distinct Product ID in clean
+dim_geography rows,632,= distinct Country/Region/State/City/Postal Code
+dim_date rows,1826,calendar days incl. ship dates

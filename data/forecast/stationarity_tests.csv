@@ -1,0 +1,5 @@
+series,n,ADF_stat,ADF_p,KPSS_stat,KPSS_p(>=0.1 means 0.1),ADF_says,KPSS_says
+level,48,-4.4938,0.0002,0.643,0.0187,stationary,non-stationary
+first difference (d=1),47,-9.0577,0.0,0.2726,0.1,stationary,stationary
+"seasonal difference (D=1, lag 12)",36,-1.4818,0.5425,0.4672,0.0491,unit root,non-stationary
+d=1 and D=1,35,-4.4813,0.0002,0.4785,0.0465,stationary,non-stationary
