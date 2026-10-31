@@ -1,17 +1,22 @@
 # Power BI build pack
 
-## STATUS: the .pbix dashboard is NOT built yet
+## STATUS: the dashboard is built (2 pages); pages 3 and 4 are not
 
-Power BI Desktop was not installed on the machine where this project was prepared.
-There is no `.pbix`, no PDF export and no dashboard screenshot in this repository.
-This folder is a **build pack**: everything needed to build the dashboard later in
-about 2 to 3 hours. None of the DAX or Power Query code here has been executed in
-Power BI Desktop; it was only reviewed by reading. Treat the first run as a test.
+The Power BI project is in `pbip/` (open `pbip/retail_sales_forecast.pbip` in Power BI Desktop, then click Refresh).
+It has 9 data tables, relationships, 84 DAX measures and two report pages:
 
-Every number quoted in these files was computed from the project's CSV files
-(`data/curated`, `data/forecast`) by `tools/build_dax_docs.py`, or copied from
-`reports/model_accuracy.md`. Those numbers are "expected check values" to compare
-against once you build the report, not results of a dashboard.
+- **Overview:** KPI cards (sales, profit, customers, orders), monthly sales line, sales by category, Year and Region slicers.
+- **Forecasting Arena:** model slicer, best model, 2019 forecast total and growth, 2018 hold-out actual vs forecast, 2019 forecast with 95% interval, accuracy table.
+
+Real screenshots: `screenshots/page1_overview.png` and `screenshots/page2_forecasting_arena.png`.
+
+What was checked in Power BI Desktop: the project loads, the data refreshes, and the visible numbers match the pandas results
+(total sales 2,297,200.86, profit 286,397.02, 793 customers, 5,009 orders, Holt-Winters 2019 forecast about 910K, +24.1% vs 2018,
+hold-out MAE 10,896.63, RMSE 14,117.72, MAPE 18.51). Only the measures used on the two pages were exercised; the other measures
+in `dax/measures.dax` have not been run. The planned pages 3 and 4 (customers/RFM, products and discounts) are not built.
+
+Every expected value in these files was computed from the project's CSV files (`data/curated`, `data/forecast`) by
+`tools/build_dax_docs.py`, or copied from `reports/model_accuracy.md`.
 
 ## Contents
 
@@ -28,7 +33,7 @@ against once you build the report, not results of a dashboard.
 | `tools/build_dax_docs.py` | Regenerates the DAX files and check values from the CSVs (needs pandas) |
 
 ## Before you start
-1. Install Power BI Desktop (Windows).
+1. Power BI Desktop (Windows) is needed. Open `pbip/retail_sales_forecast.pbip`; see `pbip/OPEN_ME.md`.
 2. Edit the path in `power_query/00_DataFolder_parameter.pq` if the project is not at
    `C:\Users\devch\Downloads\DSC\Projects\IP_Retail_Sales_Analytics\data`.
 3. Follow `BUILD_CHECKLIST.md`. Tick items only after you have really done and checked them.

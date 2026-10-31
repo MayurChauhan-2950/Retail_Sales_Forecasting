@@ -12,6 +12,59 @@ Note: some older text files in the project folder (README.md, powerbi\README.md,
 
 ---
 
+## Tomorrow: what to open and in what order (viva checklist)
+
+Read this the night before. Project folder (call it ROOT): C:\Users\devch\Downloads\DSC\Projects\IP_Retail_Sales_Analytics\
+
+### A. Before leaving home
+
+- [ ] Charge the laptop. Take the charger.
+- [ ] Copy the whole ROOT folder to a pen drive as well.
+- [ ] Open these, so they are ready (full paths):
+  - [ ] ROOT\presentation\Retail_Sales_Forecasting_Short.pptx (the 7-slide deck). Backup: ROOT\presentation\Retail_Sales_Forecasting_Short.pdf
+  - [ ] ROOT\powerbi\pbip\retail_sales_forecast.pbip in Power BI Desktop. Click Refresh. Clear all slicers (Year, Region). On page 2, Forecasting Arena, select only Holt-Winters (additive) in the model slicer. Start on the Overview page.
+  - [ ] VS Code with the folder ROOT\scripts open. Keep these files in tabs: 02_clean_transform.py, 03_etl_star_schema.py, 04_timeseries_forecast.py, 07_cv_evaluation.py
+  - [ ] File Explorer window 1 at ROOT\reports\figures
+  - [ ] File Explorer window 2 at ROOT\data\curated (and a tab for ROOT\data\forecast)
+- [ ] Check the deck shows: Mayur Chauhan, Enrollment No. 23002171310018, date 01-11-2026 (no "[to be added]").
+- [ ] Read section 14 (what to say on each slide) and the cheat card in part D below.
+
+### B. Running order (about 10 minutes)
+
+1. PPT, slides 1 to 7 (about 8 minutes). What to say on each slide is in section 14. Slide 3 and 4 and 5 show the diagrams (explained in section 12).
+2. Open the code (only if asked, or if there is time). Show 4 scripts and 1 key line each. The lines are explained in section 13.
+   - 02_clean_transform.py: `mask = df[biz].isna().all(axis=1)` then `k = mask.sum(); df = df[~mask].copy()`. Say: "This finds and removes the 806 stray empty rows."
+   - 03_etl_star_schema.py: `dim_customer.insert(0, "customer_key", dim_customer.index + 1)`. Say: "This makes the surrogate key of a dimension table. The same idea builds the star schema."
+   - 04_timeseries_forecast.py: `train, test = y.iloc[:-H], y.iloc[-H:]`. Say: "Train on 2015 to 2017, test on 2018, in time order."
+   - 07_cv_evaluation.py: `origins = list(range(MIN_TRAIN, len(y) - H + 1, STEP))`. Say: "This makes the 7 rolling-origin folds: minimum 24 months, horizon 6, step 3."
+3. Open Power BI (optional, about 2 minutes):
+   - [ ] Overview page: point at the cards (2.30M dollars sales, 286K dollars profit, 793 customers, 5,009 orders). Click the Year slicer, then the Region slicer. Show that the cards and charts change. Clear them again.
+   - [ ] Go to Forecasting Arena. Click each model in the slicer one by one. Point at the accuracy table (MAE, RMSE, MAPE %). For Holt-Winters (additive): MAE 10,896.63, RMSE 14,117.72, MAPE 18.51. Point at the 2019 forecast chart (910K dollars, +24.1 percent versus 2018) and its 95 percent bands.
+   - Remember: only Holt-Winters has 2019 values. ARIMA and SARIMA show hold-out values only.
+4. If the teacher asks for charts, open ROOT\reports\figures: cv_mae_by_model.png (model comparison), fan_chart_total.png (2019 forecast with bands), ba_pareto_abc.png (Pareto), ba_discount_bands.png (discount versus profit), ts_decomposition.png (trend and season).
+
+### C. If something fails
+
+- [ ] Power BI will not open or is slow: use the screenshots in ROOT\powerbi\screenshots (page1_overview.png and page2_forecasting_arena.png) and slide 7 of the deck. Say: "The dashboard was built and its totals were checked against pandas."
+- [ ] The PPT will not open: open ROOT\presentation\Retail_Sales_Forecasting_Short.pdf. If that fails too, use the pen drive copy.
+- [ ] Python or VS Code does not work: you do not need to run anything. Show the result files in ROOT\data\forecast (model_accuracy.csv, cv_summary.csv, sales_forecast.csv) and the pictures in ROOT\reports\figures. All results are already saved.
+- [ ] You forget a number: say "Let me check the report" and open ROOT\reports\RESULTS_SUMMARY.md. Never guess.
+
+### D. Cheat card: say this if asked
+
+1. Data source: public Sample Superstore retail data (my copy is from a GitHub copy named in the README; also on Kaggle, search "Sample Superstore"). 9,994 order lines, 2015 to 2018, after removing 806 empty stray rows. It is sample data, not a real company's records.
+2. What I did: clean the data (quality score 99.46 percent), build a star schema (fact_sales plus four dimensions), forecast monthly sales with three methods, show the results in Power BI.
+3. Why Holt-Winters wins: it tracks level, trend and yearly season with few parameters, so it works on short data. Hold-out 2018: MAE 10,897, MAPE 18.5 percent. In cross-validation it beat seasonal naive in 7 of 7 folds.
+4. Why SARIMA struggles: only 48 months. The seasonal difference uses up 12 points, so too few points are left for its parameters. Its hold-out MAPE is 34.0 percent. Against Holt-Winters the gap is not significant (p = 0.375).
+5. MAE is the average miss in dollars. RMSE punishes big misses more. MAPE is the average miss as a percent of the actual. Lower is better for all.
+6. Rolling-origin cross-validation: 7 folds, growing training window (minimum 24 months), 6-month horizon, step 3 months.
+7. What the dashboard does: loads my CSV files, lets the user filter by year, region and model, and shows KPIs, monthly sales, the accuracy table, the 2018 hold-out chart and the 2019 forecast with 95 percent bands.
+8. Main business findings: margin 29.5 percent with no discount and negative above 20 percent discount (lines above 20 percent lose 135,376 dollars). 22.2 percent of products give 80 percent of sales. This is association, not proof of cause.
+9. 2019 forecast: about 910 thousand dollars (733 thousand in 2018), peaks in November and December. It is a guide, not a promise. December 95 percent band: 56,622 to 189,080.
+10. Honest limits: only 48 months of data; overlapping CV folds; the dashboard has only two pages (Overview and Forecasting Arena); the 2019 forecast exists only for the best model; only the measures used on the two pages were verified in Power BI, against pandas totals.
+
+---
+
 ## 1. The project in one paragraph (the story)
 
 A shop owner has thousands of sales records in one messy file. He cannot easily see what sells, where, and when, and he cannot tell what sales to expect next year. In this project I took a public retail data set (Sample Superstore, 9,994 order lines from 2015 to 2018). I checked its quality and cleaned it. I loaded it into a star schema, which is a tidy set of tables that is easy to analyse. I drew charts and found business facts, for example that heavy discounts lose money. Then I turned the sales into a monthly series of 48 numbers and forecast the next 12 months with three methods: Holt-Winters, ARIMA and SARIMA. I compared them fairly on the same test data using error measures (MAE, RMSE, MAPE) and a stricter test called rolling-origin cross-validation. The simple, damped additive Holt-Winters method won, and SARIMA did not beat even a simple "repeat last year" baseline. At the end I loaded the results into a Power BI dashboard with two pages. The project is honest about its limits: only 48 months of data, so the forecast is a guide and not a promise.
@@ -664,7 +717,7 @@ Note: the older text files README.md, powerbi\README.md, powerbi\BUILD_CHECKLIST
 
 File: presentation\Retail_Sales_Forecasting_Short.pptx. This is the final deck. Speak slowly. About 30 to 45 seconds per slide. The slide order is: 1 Title, 2 Problem and data, 3 Pipeline (with the pipeline diagram), 4 Star schema (with the star schema diagram), 5 Forecasting comparison (with the validation flowchart), 6 Findings (with 3 figures: discount versus profit, Pareto products versus sales, 2019 sales forecast), 7 Power BI dashboard and conclusion (with images).
 
-Before you start, fix the deck: the title slide and the footer still show "[to be added]" for enrollment number, guide and date.
+Student details for the title slide and footers: Enrollment No. 23002171310018, date 01-11-2026. If any slide of the deck still shows "[to be added]", replace it with these.
 
 **Slide 1 - Title.**
 "Good morning. I am Mayur Chauhan, Semester 7, L.J. Institute of Engineering and Technology. My individual project is Retail Sales Forecasting: a comparison of ARIMA, SARIMA and Holt-Winters using an interactive Power BI dashboard."
@@ -1157,11 +1210,11 @@ Real dashboard screenshots exist now. Page 1, Overview, unfiltered, shows 2.30M 
 
 ![Dashboard page 2: Forecasting Arena (powerbi/screenshots/page2_forecasting_arena.png)](powerbi/screenshots/page2_forecasting_arena.png)
 
-Before the viva, replace "[to be added]" on slide 1 (enrollment number, guide, date) and in the footer of every slide.
+Student details to show on slide 1 and in the footer of every slide: Mayur Chauhan, Enrollment No. 23002171310018, date 01-11-2026. If the deck still shows "[to be added]", replace it.
 
 ### Slide 1 - Title (timing: 30 seconds)
 
-What is visible: "DATA SCIENCE (DSC) | INDIVIDUAL PROJECT", the title "Retail Sales Forecasting", the subtitle "A Comparison of ARIMA, SARIMA and Holt-Winters Using an Interactive Power BI Dashboard", and your name, semester 7, L.J. Institute of Engineering and Technology, with enrollment number, guide and date placeholders.
+What is visible: "DATA SCIENCE (DSC) | INDIVIDUAL PROJECT", the title "Retail Sales Forecasting", the subtitle "A Comparison of ARIMA, SARIMA and Holt-Winters Using an Interactive Power BI Dashboard", and your name, semester 7, L.J. Institute of Engineering and Technology, with the enrollment number (23002171310018) and the date (01-11-2026).
 
 Spoken script: "Good morning, sir or madam. I am Mayur Chauhan from Semester 7. My individual project is called Retail Sales Forecasting. I compare three forecasting methods, ARIMA, SARIMA and Holt-Winters, on monthly retail sales. I also built a Power BI dashboard to show the results. First I will show a short presentation. After that I will explain the project step by step."
 
@@ -1269,3 +1322,159 @@ Likely questions:
 - If the teacher asks for theory (ADF, ARIMA, MAPE), use section 5. For code, use section 13. For the diagrams, use section 12.
 - If a question is about something you did not build (pages 3 and 4, an RFM page, forecasts of ARIMA and SARIMA for 2019), say honestly that it is not built and that it is listed as a limit.
 - If the dashboard demo is asked for: open powerbi\pbip\retail_sales_forecast.pbip (or the .pbix), click a Year, then go to Forecasting Arena and click each model in the slicer. Keep the screenshots as a backup in case Power BI is slow.
+
+---
+
+## 15. Slide 5 and slide 6 terms: every word explained
+
+Everything here comes from the scripts (07, 08, 10, tsmodels.py) and the reports (model_accuracy.md, RESULTS_SUMMARY.md). Read this before the viva. Slide 5 is the forecasting table. Slide 6 has the Pareto chart.
+
+### 15.1 CV: cross-validation and rolling-origin CV
+
+Full form: CV means cross-validation. It means testing a model several times on different slices of the data, instead of once.
+
+Plain definition: In normal cross-validation the data are shuffled. A time series cannot be shuffled, because the future must never be used to predict the past. So we use rolling-origin CV. The "origin" is the point in time where the training data ends. We move the origin forward and test again.
+
+How it works in this project (script 07):
+- Expanding window: the training data always starts in January 2015 and grows as the origin moves forward.
+- Minimum training length: 24 months.
+- Horizon: 6 months. Each fold forecasts the next 6 months after the origin.
+- Step: 3 months. The origin moves 3 months each time.
+- Result: 7 folds. In the code, the origins are the training lengths 24, 27, 30, 33, 36, 39 and 42 months. The first fold tests from 2017-01.
+- The test windows overlap (6-month horizon, 3-month step), so the folds are not independent. P-values are only indicative.
+
+Tiny worked example: Fold 1 trains on Jan 2015 to Dec 2016 (24 months) and forecasts Jan to Jun 2017. Fold 2 trains on Jan 2015 to Mar 2017 (27 months) and forecasts Apr to Sep 2017. And so on until fold 7 trains on 42 months. Every model gets the same folds, so the comparison is fair.
+
+What to say to the teacher: "One test on one year can be lucky. Rolling-origin cross-validation repeats the test 7 times with a growing training window and a 6-month forecast horizon, always testing on data that comes after the training data. This gives an average error and also shows how stable each model is."
+
+### 15.2 MAE, RMSE, MAPE: formulas and when to prefer each
+
+Notation: for each forecast month, error = actual minus forecast. The code in tsmodels.py is: MAE = np.mean(np.abs(e)); RMSE = np.sqrt(np.mean(e ** 2)); MAPE = np.mean(np.abs(e) / a) * 100.
+- MAE (Mean Absolute Error) = the average of the absolute errors. It is in dollars. Prefer it when you want an error that is easy to explain and that treats every miss equally. It is the main measure used to choose the winner in cross-validation.
+- RMSE (Root Mean Squared Error) = square each error, take the average, then the square root. It is in dollars. Big misses count much more than small ones. Prefer it when large errors are especially costly. RMSE is always at least as large as MAE.
+- MAPE (Mean Absolute Percentage Error) = the average of the absolute error divided by the actual value, times 100. It is in percent. Prefer it to compare series of different size. Be careful: it explodes when the actual value is small (for example a very weak month such as February 2018, actual 20,301).
+
+Tiny worked example, real numbers (Holt-Winters on the first three months of 2018 only, from data\forecast\holdout_predictions.csv). This is only to show the arithmetic. The figures for all 12 months are MAE 10,896.63, RMSE 14,117.72 and MAPE 18.51 percent.
+
+| Month | Actual | Holt-Winters forecast | Error (actual minus forecast) | Absolute error | Absolute error / actual |
+|---|---|---|---|---|---|
+| Jan 2018 | 43,971.37 | 29,667.48 | 14,303.89 | 14,303.89 | 32.53 percent |
+| Feb 2018 | 20,301.13 | 26,181.58 | -5,880.45 | 5,880.45 | 28.97 percent |
+| Mar 2018 | 58,872.35 | 61,327.06 | -2,454.71 | 2,454.71 | 4.17 percent |
+
+- MAE of these 3 months = (14,303.89 + 5,880.45 + 2,454.71) / 3 = 22,639.05 / 3 = 7,546.35 dollars.
+- RMSE = square root of the mean of the squared errors = 9,040.77 dollars. It is larger than the MAE because of the big January miss.
+- MAPE = (32.53 + 28.97 + 4.17) / 3 = 21.89 percent.
+
+What lower is better means: all three measure the size of the miss. A smaller number means the forecast was closer to the real sales. Zero would be a perfect forecast. So the model with the lowest error is the best on that measure.
+
+What to say to the teacher: "MAE is the average miss in dollars. RMSE punishes big misses more. MAPE gives the miss as a percent of the actual. For all three, lower is better. I used MAE for the cross-validation ranking and I also report RMSE and MAPE."
+
+### 15.3 The columns of the slide 5 table
+
+- CV MAE: the MAE of each of the 7 folds, averaged (the "MAE_mean" column of data\forecast\cv_summary.csv). It measures the typical miss over many forecast windows. In dollars per month.
+- CV MAPE %: the MAPE of each fold, averaged. In percent.
+- 2018 MAPE %: the MAPE on the single held-out year 2018. The model is trained on Jan 2015 to Dec 2017 (36 months) and then forecasts the 12 months of 2018, which it has never seen. It is compared with the real 2018 sales. In percent.
+- Hold-out means data kept aside and used only for testing.
+
+Slide 5 table, row by row (numbers from the report):
+
+| Model on the slide | CV MAE | CV MAPE % | 2018 MAPE % | How to read it |
+|---|---|---|---|---|
+| Holt-Winters (damped) | 10,981 | 21.7 | 18.5 | Best on all three columns. It missed by about 11 thousand dollars a month on average, about 22 percent in cross-validation and 18.5 percent on 2018. |
+| Seasonal naive | 13,739 | 25.0 | 24.5 | The baseline: repeat the same month of last year. It is the bar to beat. Holt-Winters beat it in 7 of 7 folds (Wilcoxon p = 0.016). |
+| SARIMA(1,1,1)(0,1,1,12) | 14,513 | 36.6 | 34.0 | Worse than the simple baseline on average. Its error swings a lot between folds (MAE standard deviation 6,974 against 3,265 for seasonal naive). |
+| ARIMA(1,1,1) | 22,601 | 49.1 | 54.1 | Worst of the four. It has no seasonal part, so it cannot follow the yearly peaks. |
+
+Other facts for the row "Holt-Winters versus SARIMA": mean fold MAE gap 3,532, Holt-Winters better in 4 of 7 folds, Wilcoxon p = 0.375. So the gap is not statistically significant. The slide footer says this.
+
+What to say to the teacher: "CV MAE is the average error over 7 test windows. 2018 MAPE is the percent error on the one year I held out. Damped Holt-Winters has the lowest value in all three columns. SARIMA and ARIMA are worse than the seasonal naive baseline or much worse, so extra complexity did not help on only 48 months of data."
+
+### 15.4 How to read the bar chart reports/figures/cv_mae_by_model.png
+
+Title: "Rolling-origin CV: mean MAE by model". It has 11 horizontal bars, one for each model.
+- The length of a bar is the mean MAE across the 7 folds, in dollars. The axis label says: "Mean MAE across CV folds (USD, bars = +/-1 SD)". The axis runs from 0 to about 40,000.
+- The grey whisker on each bar (with small end caps) shows plus and minus one standard deviation of the fold MAEs. SD means standard deviation, the usual spread of the fold errors. A long whisker means the model's error changes a lot from fold to fold, so it is less reliable.
+- In the script the bars are sorted so that the best model (shortest bar) is at the top. Shorter is better.
+
+![Rolling-origin CV mean MAE by model (reports/figures/cv_mae_by_model.png)](reports/figures/cv_mae_by_model.png)
+
+Mean MAE and SD for each of the 11 models (from model_accuracy.md):
+
+| Model | Mean MAE | SD of MAE |
+|---|---|---|
+| Holt-Winters additive (damped) | 10,981.37 | 2,729.10 |
+| ETS (AICc-selected) | 11,722.87 | 3,916.95 |
+| Holt-Winters multiplicative | 11,808.94 | 2,792.99 |
+| Holt-Winters additive (undamped) | 11,976.36 | 2,853.80 |
+| Holt-Winters mult. seasonal + damped trend | 13,694.76 | 5,089.75 |
+| Seasonal naive | 13,738.74 | 3,264.84 |
+| SARIMA(1,1,1)(0,1,1,12) | 14,513.02 | 6,974.07 |
+| SARIMA (AIC search) | 14,578.92 | 7,155.76 |
+| SES | 20,844.17 | 9,611.48 |
+| ARIMA(1,1,1) | 22,601.02 | 7,685.79 |
+| Naive | 28,381.78 | 13,840.59 |
+
+Note: the whiskers of the top models overlap with each other. That is why the ranking among the top four or five is tentative. What is clear is that the top group is better than SES, ARIMA(1,1,1) and Naive.
+
+What to say to the teacher: "Each bar is the average error of one model over 7 folds. The grey line is the spread. Damped Holt-Winters has the shortest bar and a short line, so it is both accurate and stable. Plain naive and ARIMA have long bars and very long lines."
+
+### 15.5 Every model in the chart explained
+
+The definitions below are taken from scripts/tsmodels.py.
+- Naive: the forecast for every future month is the last observed value. Very simple. Mean MAE 28,382, the worst.
+- Seasonal naive: the forecast for each month is the value of the same month in the last 12 months of training (the code repeats the last 12 values). It is the baseline.
+- SES (Simple Exponential Smoothing): a weighted average of the past, where newer months weigh more. It has no trend and no season, so it is a flat line. Mean MAE 20,844.
+- Holt-Winters: exponential smoothing with a level, a trend and a seasonal pattern. The four versions in the chart are:
+  - Holt-Winters additive (damped): additive trend, damped, and additive season. This is the project's "Holt-Winters (additive)" and the winner.
+  - Holt-Winters additive (undamped): additive trend that is not damped, additive season.
+  - Holt-Winters multiplicative: no trend, multiplicative season (the season changes sales by a percent).
+  - Holt-Winters mult. seasonal + damped trend: damped additive trend with multiplicative season.
+- ETS (AICc-selected): ETS means Error, Trend, Seasonal. It is a "state space" form of exponential smoothing. State space means the model keeps hidden quantities (level, trend, season) that are updated each month, and it describes the errors in a formal way. In the script, ETS tries 4 configurations: (A,N,A), (A,N,M), (A,Ad,A), (A,Ad,M), where A is additive, N is none, M is multiplicative and Ad is additive damped. The one with the lowest AICc is chosen.
+- ARIMA(1,1,1): one autoregressive term, one difference, one moving-average term, with no seasonal part. Mean MAE 22,601.
+- SARIMA(1,1,1)(0,1,1,12): ARIMA with a seasonal part (one seasonal difference, one seasonal MA term, season of 12 months). Mean MAE 14,513.
+- SARIMA (AIC search): the script tries 16 candidates (p, q, P, Q each 0 or 1, with d = 1 and D = 1) inside each fold and keeps the one with the lowest AIC. Mean MAE 14,579, no better than the fixed SARIMA.
+
+Damped versus undamped trend: an undamped trend keeps growing at the same slope for the whole forecast, so it can run away over a long horizon. A damped trend flattens out: the growth gets smaller step by step. Damping is safer when we are not sure that growth will go on forever. Here the damped version was a little better than the undamped one (mean MAE 10,981 versus 11,976).
+
+AIC and AICc: AIC (Akaike Information Criterion) is a score that measures how well a model fits the data, with a penalty for each extra parameter. Lower is better. It helps choose between models of different complexity. AICc is AIC with a correction for small samples. We have only 48 points, so AICc is the safer choice for ETS.
+
+Why seasonal naive is the baseline: it needs no estimation and uses no clever statistics. Anyone can do it: "same as last year". If an advanced model cannot beat it, the advanced model is not worth using. MASE (also reported) is exactly the error divided by the in-sample seasonal naive error, so a MASE below 1 means better than seasonal naive. Mean MASE (lower is better): Holt-Winters damped 1.24, seasonal naive 1.53. MASE is scaled by the in-sample seasonal naive error of the training window, so seasonal naive itself is not exactly 1 on test data.
+
+What to say to the teacher: "The chart compares eleven models. The simplest ones, naive and SES, are at the bottom. The Holt-Winters family is at the top. I included seasonal naive as the baseline, and only Holt-Winters beat it clearly. A damped trend flattens the growth in the forecast, and ETS and the SARIMA search choose their settings by AICc and AIC."
+
+### 15.6 Pareto (80/20 rule) and ABC classes (slide 6, ba_pareto_abc.png)
+
+What it is: the Pareto principle says that a small share of items gives most of the value. It is often called the 80/20 rule: about 20 percent of the items give about 80 percent of the result. It is a rule of thumb, not a law. The exact share is found from the data.
+
+How script 10 computes it: rank products (or customers) by sales, from largest to smallest. Take the running total (cumsum), divide by the grand total and multiply by 100. This is the "cumulative percent of sales". The code that assigns the classes is:
+`g["abc_class"] = np.where(g.cum_sales_pct.shift(fill_value=0) < 80, "A", np.where(g.cum_sales_pct.shift(fill_value=0) < 95, "B", "C"))`
+In words: an item is class A while the running total before it is below 80 percent of sales. It is class B while the running total before it is below 95 percent. Everything after that is class C. So A is the top items that make the first 80 percent of sales, B the next 15 percent, and C the last 5 percent.
+
+What the figure shows: two curves, "Products" and "Customers", with the share of items on the x axis (ranked by sales) and the cumulative percent of sales on the y axis. Dashed lines mark 80 percent and 95 percent. A vertical line marks where class A ends. The titles say how many percent of the items give 80 percent of sales.
+
+Results (data\analytics\abc_summary.csv and RESULTS_SUMMARY):
+
+| Entity | Class | Count | Share of items | Share of sales | Share of profit |
+|---|---|---|---|---|---|
+| Products | A | 414 | 22.2 percent | 80.0 percent | 70.6 percent |
+| Products | B | 489 | 26.3 percent | 15.0 percent | 19.6 percent |
+| Products | C | 959 | 51.5 percent | 5.0 percent | 9.8 percent |
+| Customers | A | 396 | 49.9 percent | 80.1 percent | 84.1 percent |
+| Customers | B | 209 | 26.4 percent | 15.0 percent | 11.6 percent |
+| Customers | C | 188 | 23.7 percent | 5.0 percent | 4.3 percent |
+
+So 22.2 percent of products (414 of 1,862) give 80 percent of sales. Customers are less concentrated: 49.9 percent of customers (396 of 793) give 80.1 percent of sales. Products are close to a 20/80 rule. Customers are closer to 50/80.
+
+![Pareto and ABC chart (reports/figures/ba_pareto_abc.png)](reports/figures/ba_pareto_abc.png)
+
+Why it matters for retail: it shows where to focus. Class A products need steady stock and careful forecasting. Class C products (51.5 percent of products but only 5.0 percent of sales) tie up shelf space and money, so they are candidates to review. It also shows the risk of depending on a few products.
+
+Honest limits: the Pareto result describes this sample data set only. It looks at sales, not at profit, so a class A product by sales can still lose money (for example, discounting above 20 percent loses money). The shares of profit above show that class A products give 70.6 percent of profit, which is a little less than 80 percent of sales.
+
+What to say to the teacher: "The Pareto chart ranks products by sales and adds them up. 414 of my 1,862 products, 22.2 percent, give 80 percent of sales. Customers are less concentrated: it takes 49.9 percent of them to reach 80.1 percent. The script labels the top 80 percent as class A, the next 15 percent as class B and the last 5 percent as class C. This tells a retailer which products to protect and which to review."
+
+### 15.7 Two more slide 6 terms
+
+- Discount versus profit chart: items are grouped into discount bands and the profit margin is shown per band. Margin = profit divided by sales. Margin is 29.5 percent with no discount (4,798 lines), 11.6 percent at 10 to 20 percent discount, and negative from 20 percent: -10.1 percent (20 to 30), -19.4 percent (30 to 40), -35.7 percent (40 to 50), -119.2 percent above 50 percent (856 lines, all loss-making). Lines with discount above 20 percent lose 135,376 dollars (1,393 lines). Spearman correlation of discount and profit per line is -0.54. Spearman correlation uses ranks and goes from -1 to +1. A negative value means higher discount goes with lower profit. This is association, not proof of cause, because product mix is a confounder (a hidden factor that affects both).
+- 2019 sales forecast chart: the damped Holt-Winters forecast for Jan to Dec 2019 with 80 and 95 percent bands from a residual bootstrap (2,000 simulated paths). It runs from 41,476 in February to 115,687 in November and 116,031 in December. The December 95 percent band is 56,622 to 189,080. The yearly total is about 910,035 dollars, against 733,215 dollars in 2018.

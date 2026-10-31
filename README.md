@@ -1,6 +1,6 @@
 # Retail Sales Forecasting: A Comparison of ARIMA, SARIMA and Holt-Winters Using an Interactive Power BI Dashboard
 
-DSC individual project (Mayur Chauhan, L.J. Institute of Engineering and Technology). Everything except the Power BI dashboard is complete and tested. The Power BI part is a blank placeholder (`powerbi/README_TODO.md`).
+DSC individual project (Mayur Chauhan, L.J. Institute of Engineering and Technology). The Python pipeline, reports and presentation are complete. The Power BI project is built and opens in Power BI Desktop with two report pages (Overview and Forecasting Arena); the headline totals were checked against the pandas results. Planned pages 3 and 4 (customers/RFM and a deeper products page) are not built. Start with `IP_COMPLETE_EXPLAINER.pdf`.
 
 ## Data source: REAL, with one caveat
 `data/raw/superstore.csv` is a **real copy of the public "Sample - Superstore" dataset**, downloaded from
@@ -18,8 +18,9 @@ data/forecast/   forecast CSVs to import into Power BI
 scripts/         01..11 + run_all.py + common.py, style.py, tsmodels.py
 reports/         generated markdown reports + figures/ (PNG)
 docs/            project_report_outline.md
-presentation/    slides (.pptx)
-powerbi/         README_TODO.md (blank placeholder)
+presentation/    Retail_Sales_Forecasting_Short.pptx (7 slides) + PDF, diagrams/ (PlantUML sources and images)
+powerbi/         pbip/ (Power BI project), screenshots/, power_query/, dax/, theme/, model/, layouts/
+IP_COMPLETE_EXPLAINER.pdf  one file with everything explained (theory, code, data, slides, viva)
 ```
 
 ## How to run (Windows, Python 3.11)

@@ -96,7 +96,7 @@ def slide(title, notes):
     bar = s.shapes.add_shape(MSO_SHAPE.RECTANGLE, 0, 0, prs.slide_width, Inches(1.05))
     bar.fill.solid(); bar.fill.fore_color.rgb = NAVY; bar.line.fill.background()
     tb(s, 0.5, 0.15, 12.3, 0.8, title, pt=28, color=WHITE, bold=True, tag="title " + title[:20])
-    tb(s, 0.5, 7.05, 9, 0.35, "Mayur Chauhan  |  Enrollment No.: [to be added]  |  DSC Individual Project", pt=10, color=GREY, tag="foot")
+    tb(s, 0.5, 7.05, 9, 0.35, "Mayur Chauhan  |  Enrollment No.: 23002171310018  |  DSC Individual Project", pt=10, color=GREY, tag="foot")
     tb(s, 12.0, 7.05, 0.8, 0.35, str(n[0]), pt=10, color=GREY, align=PP_ALIGN.RIGHT, tag="num")
     s.notes_slide.notes_text_frame.text = notes
     return s
@@ -149,7 +149,7 @@ from pptx.oxml import parse_xml
 from pptx.oxml.ns import qn, nsdecls
 
 FONT = "Segoe UI"
-HEAD = "Georgia"
+HEAD = "Bahnschrift"
 GOLD = RGBColor(0xF2, 0xA3, 0x3A)
 BG = RGBColor(0xF4, 0xF7, 0xFA)
 RULE = RGBColor(0xD5, 0xDC, 0xE5)
@@ -234,7 +234,7 @@ def slide(title, notes):
     r = p.add_run(); r.text = "%02d / %02d" % (n[0], TOTAL); r.font.size = Pt(14); r.font.bold = True; r.font.name = FONT; r.font.color.rgb = NAVY
     # footer: rule, text, progress bar
     rect(s, 0.5, 7.0, 12.3, 0.01, RULE, shape=MSO_SHAPE.RECTANGLE)
-    tb(s, 0.5, 7.03, 9, 0.35, "Mayur Chauhan  |  Enrollment No.: [to be added]  |  DSC Individual Project", pt=10, color=GREY, tag="foot")
+    tb(s, 0.5, 7.03, 9, 0.35, "Mayur Chauhan  |  Enrollment No.: 23002171310018  |  DSC Individual Project", pt=10, color=GREY, tag="foot")
     tb(s, 10.8, 7.03, 2.0, 0.35, "Page %d of %d" % (n[0], TOTAL), pt=10, color=GREY, align=PP_ALIGN.RIGHT, tag="num")
     rect(s, 0, 7.42, 13.333, 0.08, RULE, shape=MSO_SHAPE.RECTANGLE)
     rect(s, 0, 7.42, 13.333 * n[0] / TOTAL, 0.08, TEAL, shape=MSO_SHAPE.RECTANGLE)
@@ -256,7 +256,7 @@ def title_slide():
     for r_ in s.shapes[-1].text_frame.paragraphs[0].runs:
         r_.font.name = HEAD
     tb(s, 0.8, 2.75, 9.4, 1.6, "A Comparison of ARIMA, SARIMA and Holt-Winters Using an Interactive Power BI Dashboard", pt=22, color=RGBColor(0xDD, 0xEF, 0xF1), tag="t1b")
-    tb(s, 0.8, 4.9, 9.0, 1.6, ["Mayur Chauhan  |  Enrollment No.: [to be added]", "Semester 7  |  L.J. Institute of Engineering and Technology", "Guide: [to be added]  |  Date: [to be added]"], pt=16, color=WHITE, tag="t2")
+    tb(s, 0.8, 4.9, 9.0, 1.6, ["Mayur Chauhan  |  Enrollment No.: 23002171310018", "Semester 7  |  L.J. Institute of Engineering and Technology", "Date: 01-11-2026"], pt=16, color=WHITE, tag="t2")
     s.notes_slide.notes_text_frame.text = "Introduce the project: forecast monthly retail sales, compare three methods, present the result in Power BI."
     return s
 
@@ -266,7 +266,7 @@ title_slide()
 
 # 2 Problem and data
 s = slide("Problem and data", "Managers need to know what sells and what will sell next. Data: the public Sample Superstore retail dataset, downloaded from the leonism/sample-superstore GitHub repository, 2015 to 2018. 10,800 raw rows, of which 806 stray empty rows were removed. Everything on this slide comes from the cleaning and quality reports.")
-tb(s, 0.5, 1.3, 12.3, 1.9, ["Problem: managers cannot easily see which products, regions and customers drive sales and profit, or what to expect next.", "Data: public Sample Superstore retail orders (GitHub copy), kept unchanged in data/raw. 806 empty rows removed, leaving 9,994 order lines.", "Goal: clean the data, model it as a star schema, forecast monthly sales with three methods, and compare them in an interactive dashboard."], pt=15, bullets=True, tag="p2")
+tb(s, 0.5, 1.4, 12.3, 1.9, ["Problem: hard to see what sells, where, and what comes next.", "Data: public Sample Superstore orders, 9,994 lines (806 empty rows removed).", "Goal: clean, model, forecast with 3 methods, compare in Power BI."], pt=18, bullets=True, tag="p2")
 for i, (a, b) in enumerate([("9,994", "order lines, 2015 to 2018"), ("99.46%", "data quality score"), ("$2.30M", "total sales"), ("12.5%", "overall profit margin")]):
     card(s, 0.5 + i * 3.1, 3.5, 2.9, 1.9, [a, b], pt=22, bold=True, tag="kpi%d" % i)
 takeaway(s, "Real data, cleaned and checked before any model is fitted")
@@ -285,18 +285,19 @@ tb(s, 0.5, 4.4, 7.7, 1.9, ["Fact table: one row per order line, with sales, quan
 takeaway(s, "Standard star schema: fast to query and the shape Power BI expects")
 
 # 5 Forecasting
-s = slide("Forecasting: how the models were compared", "Each model is fitted on past months and tested on the next 6 months, seven times, using an expanding training window. Lower error is better. Holt-Winters has the lowest error, SARIMA did not beat the seasonal-naive baseline, ARIMA is worst. Caveats: only 48 months, folds overlap, Holt-Winters vs SARIMA is not statistically significant (p 0.375). Numbers from reports/RESULTS_SUMMARY.md.")
-dia(s, "forecast_validation", 0.5, 1.3, 5.2, 5.0, "Validation flowchart (forecast_validation.puml)")
-table(s, 5.9, 1.3, 6.9, [["Model", "CV MAE", "CV MAPE %", "2018 MAPE %"], ["Holt-Winters (damped)", "10,981", "21.7", "18.5"], ["Seasonal naive", "13,739", "25.0", "24.5"], ["SARIMA(1,1,1)(0,1,1,12)", "14,513", "36.6", "34.0"], ["ARIMA(1,1,1)", "22,601", "49.1", "54.1"]], [2.8, 1.2, 1.5, 1.4], pt=12, rh=0.4, hl=[1])
-pic(s, "cv_mae_by_model.png", 5.9, 3.4, 6.9, 2.9)
+s = slide("Forecasting: how the models were compared", "Each model is fitted on past months and tested on the next 6 months, seven times, using an expanding training window. Lower error is better. Holt-Winters has the lowest error, SARIMA did not beat the seasonal-naive baseline, ARIMA is worst. Terms: CV is cross-validation; MAE is the average error in dollars; MAPE is the average error in percent; 2018 MAPE is the error on the held-out year 2018; damped means the trend flattens; ETS is automatic exponential smoothing; the chart bars show mean MAE and the whiskers show plus or minus one standard deviation across folds. Caveats: only 48 months, folds overlap, Holt-Winters vs SARIMA is not statistically significant (p 0.375). Numbers from reports/RESULTS_SUMMARY.md.")
+dia(s, "forecast_validation", 0.5, 1.3, 3.4, 5.0, "Validation flowchart (forecast_validation.puml)")
+table(s, 4.1, 1.3, 8.7, [["Model", "CV MAE ($)", "CV MAPE %", "2018 MAPE %"], ["Holt-Winters (damped)", "10,981", "21.7", "18.5"], ["Seasonal naive", "13,739", "25.0", "24.5"], ["SARIMA(1,1,1)(0,1,1,12)", "14,513", "36.6", "34.0"], ["ARIMA(1,1,1)", "22,601", "49.1", "54.1"]], [3.6, 1.6, 1.7, 1.8], pt=12, rh=0.38, hl=[1])
+tb(s, 4.1, 3.3, 4.2, 3.0, ["CV = cross-validation: tested on 7 later windows of 6 months.", "MAE = average error in dollars.", "MAPE = average error in % of sales.", "2018 MAPE = % error on the held-out 2018.", "Damped = the trend flattens out.", "ETS = automatic exponential smoothing.", "Lower is better."], pt=11, bullets=True, tag="p5def")
+pic(s, "cv_mae_by_model.png", 8.4, 3.3, 4.4, 3.0)
 takeaway(s, "Holt-Winters has the lowest error, but its gap to SARIMA is not statistically significant (p = 0.375)")
 
 # 6 Findings with figures
 s = slide("Findings", "Left: margin falls as discount rises and lines above 20 percent discount lose money in total. Middle: 22.2 percent of products give 80 percent of sales. Right: the 2019 forecast from the best model. Numbers from RESULTS_SUMMARY.md.")
-for i, (f, c) in enumerate([("ba_discount_bands.png", "Discount vs profit"), ("ba_pareto_abc.png", "Pareto: products vs sales"), ("ts_final_forecast.png", "2019 sales forecast")]):
+for i, (f, c) in enumerate([("ba_discount_bands.png", "Discount vs profit"), ("ba_pareto_abc.png", "Pareto 80/20: few products, most sales"), ("ts_final_forecast.png", "2019 sales forecast")]):
     pic(s, f, 0.5 + i * 4.15, 1.3, 4.0, 3.3)
     caption(s, 0.5 + i * 4.15, 4.62, 4.0, c)
-tb(s, 0.5, 5.1, 12.3, 1.3, ["Margin is 29.5% with no discount and 11.6% at 10 to 20% discount; lines above 20% discount lose 135,376 in total.", "22.2% of products (414 of 1,862) give 80% of sales.", "Holt-Winters forecasts about $910K for 2019."], pt=14, bullets=True, tag="p6")
+tb(s, 0.5, 5.1, 12.3, 1.3, ["Margin is 29.5% with no discount and 11.6% at 10 to 20% discount; lines above 20% discount lose 135,376 in total.", "Pareto 80/20 rule: 22.2% of products (414 of 1,862) give 80% of sales.", "Holt-Winters forecasts about $910K for 2019."], pt=14, bullets=True, tag="p6")
 takeaway(s, "Discounting is the main profit risk; Holt-Winters is the best forecaster here")
 
 # 7 Power BI and conclusion
