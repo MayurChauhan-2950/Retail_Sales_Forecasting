@@ -1,0 +1,22 @@
+@startuml
+skinparam shadowing false
+skinparam defaultFontName Calibri
+skinparam defaultFontSize 16
+skinparam sequenceArrowColor #1B7F8C
+skinparam participantBackgroundColor #EEF2F6
+skinparam participantBorderColor #1F2A44
+actor Viewer
+participant "Slicers\n(Year, Region, Model)" as Slicer
+participant "DAX measures\n(Total Sales, Holdout Forecast...)" as DAX
+participant "Power BI model\n(star schema + fact_forecast)" as Model
+database "CSV files\n(data/curated, data/forecast)" as CSV
+CSV -> Model : Refresh (Power Query)
+Viewer -> Slicer : click a year, region or model
+Slicer -> Model : filter dimension tables
+Model -> DAX : filtered fact rows
+DAX --> Viewer : cards, line charts, accuracy table update
+note right of Model
+  dim_model filters fact_forecast,
+  so one click switches the forecast model
+end note
+@enduml

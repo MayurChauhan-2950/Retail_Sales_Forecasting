@@ -1,0 +1,27 @@
+@startuml
+skinparam shadowing false
+skinparam defaultFontName Calibri
+skinparam defaultFontSize 18
+skinparam ActivityBackgroundColor #EEF2F6
+skinparam ActivityBorderColor #1F2A44
+skinparam ArrowColor #1B7F8C
+skinparam ActivityDiamondBackgroundColor #FFF3D6
+start
+:Monthly sales series\n48 months, 2015 to 2018;
+:Check stationarity and seasonality\nADF, KPSS, STL decomposition;
+:Choose candidate models\nHolt-Winters, ARIMA, SARIMA, seasonal naive;
+repeat :Next fold\n(expanding training window, 6-month horizon);
+  :Fit each model on the training months;
+  :Forecast the next 6 months;
+  :Record MAE, RMSE, MAPE;
+repeat while (more folds?) is (yes) not (no, 7 folds done)
+:Average the errors per model;
+if (Lowest error?) then (Holt-Winters)
+  :Check residuals\nLjung-Box, normality;
+  :Forecast 2019 with 80% and 95% bands;
+else (other model)
+  :Review model choice;
+endif
+:Save forecast CSV files for Power BI;
+stop
+@enduml
