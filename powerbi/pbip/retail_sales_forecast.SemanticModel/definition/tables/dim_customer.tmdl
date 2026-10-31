@@ -1,0 +1,42 @@
+table dim_customer
+	lineageTag: 6d623acc-ee26-49d5-9f6b-745ab32b496a
+
+	column customer_key
+		dataType: int64
+		isHidden
+		lineageTag: af81aab5-c5ee-41d0-8c91-ef7ec82d2afa
+		summarizeBy: none
+		sourceColumn: customer_key
+
+	column CustomerID
+		dataType: string
+		lineageTag: 90b6f227-bb3f-4a06-96af-3fe21de56bb9
+		summarizeBy: none
+		sourceColumn: CustomerID
+
+	column CustomerName
+		dataType: string
+		lineageTag: 44248118-c8a8-4fdf-8632-28b81a55f13d
+		summarizeBy: none
+		sourceColumn: CustomerName
+
+	column Segment
+		dataType: string
+		lineageTag: a9ba519e-df9f-403e-9fc2-2739d4385069
+		summarizeBy: none
+		sourceColumn: Segment
+
+	partition dim_customer = m
+		mode: import
+		source =
+				let
+					Source   = Csv.Document(File.Contents(Text.TrimEnd(DataFolder, "\") & "\curated\dim_customer.csv"),
+								[Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+					Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+					Typed    = Table.TransformColumnTypes(Promoted, {
+								{"customer_key", Int64.Type}, {"Customer ID", type text},
+								{"Customer Name", type text}, {"Segment", type text}}, "en-US"),
+					Renamed  = Table.RenameColumns(Typed, {{"Customer ID", "CustomerID"}, {"Customer Name", "CustomerName"}}, MissingField.Ignore)
+				in
+					Renamed
+

@@ -1,0 +1,161 @@
+table dim_date
+	lineageTag: 3f50b96c-e446-494c-bf92-f5973c9f0773
+	dataCategory: Time
+
+	column date_key
+		dataType: int64
+		isHidden
+		lineageTag: ab7f781d-53f4-4d7b-a3d6-62436313ff39
+		summarizeBy: none
+		sourceColumn: date_key
+
+	column Date
+		dataType: dateTime
+		isKey
+		formatString: Long Date
+		lineageTag: 12a85c98-7631-4308-b616-deccd75a0614
+		summarizeBy: none
+		sourceColumn: Date
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Year
+		dataType: int64
+		formatString: 0
+		lineageTag: 4de894b1-9d00-48a0-ab2a-e56f93f432b8
+		summarizeBy: none
+		sourceColumn: Year
+
+	column Quarter
+		dataType: int64
+		formatString: 0
+		lineageTag: f4e6c34e-0efa-4de5-b4d4-5ef4c73b98f7
+		summarizeBy: none
+		sourceColumn: Quarter
+
+	column MonthNumber
+		dataType: int64
+		formatString: 0
+		lineageTag: 0c836df8-dd97-4f35-bd93-4ab8cb52ad5d
+		summarizeBy: none
+		sourceColumn: MonthNumber
+
+	column MonthName
+		dataType: string
+		lineageTag: 667bfd38-3a0e-4a26-a712-33e4a7b30bb7
+		summarizeBy: none
+		sourceColumn: MonthName
+		sortByColumn: MonthNumber
+
+	column YearMonth
+		dataType: string
+		lineageTag: a585b8e6-e898-424e-9a9b-cb45b0d33d24
+		summarizeBy: none
+		sourceColumn: YearMonth
+		sortByColumn: YearMonthSort
+
+	column WeekOfYear
+		dataType: int64
+		formatString: 0
+		lineageTag: 9c0af0c0-56f0-4d28-a1d6-cf7c629b2d22
+		summarizeBy: none
+		sourceColumn: WeekOfYear
+
+	column Day
+		dataType: int64
+		formatString: 0
+		lineageTag: af20e9b9-10d9-482e-9129-0b9e96aa2ae8
+		summarizeBy: none
+		sourceColumn: Day
+
+	column DayOfWeek
+		dataType: string
+		lineageTag: 42b80890-a657-4202-82dd-681d3e3f1758
+		summarizeBy: none
+		sourceColumn: DayOfWeek
+		sortByColumn: DayOfWeekNumber
+
+	column IsWeekend
+		dataType: int64
+		formatString: 0
+		lineageTag: b9aaf8b8-7891-4948-80fb-40b86e232361
+		summarizeBy: none
+		sourceColumn: IsWeekend
+
+	column MonthStart
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: f521d6bd-0e3c-41e2-ac34-1222b770887a
+		summarizeBy: none
+		sourceColumn: MonthStart
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column QuarterLabel
+		dataType: string
+		lineageTag: d9d7a1c2-3b85-419d-a35c-5a66feb2b5a3
+		summarizeBy: none
+		sourceColumn: QuarterLabel
+
+	column YearQuarter
+		dataType: string
+		lineageTag: 56782d14-f7d5-42ed-9850-97eb4b790ef2
+		summarizeBy: none
+		sourceColumn: YearQuarter
+
+	column MonthShort
+		dataType: string
+		lineageTag: 2140d88f-8917-4dda-951f-283ca0b978f7
+		summarizeBy: none
+		sourceColumn: MonthShort
+		sortByColumn: MonthNumber
+
+	column DayOfWeekNumber
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: a688f7f4-5c9b-4229-a7d1-5ae9b604e20c
+		summarizeBy: none
+		sourceColumn: DayOfWeekNumber
+
+	column YearMonthSort
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 18e9baf6-26ca-4fe5-9d97-e3b63428882f
+		summarizeBy: none
+		sourceColumn: YearMonthSort
+
+	column MonthYearLabel
+		dataType: string
+		lineageTag: 76058689-c1c3-4e60-85ea-697396bf2dba
+		summarizeBy: none
+		sourceColumn: MonthYearLabel
+		sortByColumn: YearMonthSort
+
+	partition dim_date = m
+		mode: import
+		source =
+				let
+					Source   = Csv.Document(File.Contents(Text.TrimEnd(DataFolder, "\") & "\curated\dim_date.csv"),
+								[Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+					Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+					Typed    = Table.TransformColumnTypes(Promoted, {
+								{"date_key", Int64.Type}, {"date", type date}, {"year", Int64.Type}, {"quarter", Int64.Type},
+								{"month", Int64.Type}, {"month_name", type text}, {"year_month", type text},
+								{"week_of_year", Int64.Type}, {"day", Int64.Type}, {"day_of_week", type text},
+								{"is_weekend", Int64.Type}}, "en-US"),
+					Renamed  = Table.RenameColumns(Typed, {
+								{"date", "Date"}, {"year", "Year"}, {"quarter", "Quarter"}, {"month", "MonthNumber"},
+								{"month_name", "MonthName"}, {"year_month", "YearMonth"}, {"week_of_year", "WeekOfYear"},
+								{"day", "Day"}, {"day_of_week", "DayOfWeek"}, {"is_weekend", "IsWeekend"}}, MissingField.Ignore),
+					AddMonthStart = Table.AddColumn(Renamed, "MonthStart", each Date.StartOfMonth([Date]), type date),
+					AddQLabel     = Table.AddColumn(AddMonthStart, "QuarterLabel", each "Q" & Text.From([Quarter]), type text),
+					AddYQ         = Table.AddColumn(AddQLabel, "YearQuarter", each Text.From([Year]) & " Q" & Text.From([Quarter]), type text),
+					AddMonthShort = Table.AddColumn(AddYQ, "MonthShort", each Text.Start([MonthName], 3), type text),
+					AddDowNum     = Table.AddColumn(AddMonthShort, "DayOfWeekNumber", each Date.DayOfWeek([Date], Day.Monday) + 1, Int64.Type),
+					AddYMSort     = Table.AddColumn(AddDowNum, "YearMonthSort", each [Year] * 100 + [MonthNumber], Int64.Type),
+					AddLabel      = Table.AddColumn(AddYMSort, "MonthYearLabel", each [MonthShort] & " " & Text.From([Year]), type text)
+				in
+					AddLabel
+

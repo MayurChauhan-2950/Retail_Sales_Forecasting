@@ -1,0 +1,41 @@
+table model_accuracy
+	lineageTag: e52a278d-1dca-498d-b577-c0a3b4f4ee85
+
+	column model
+		dataType: string
+		lineageTag: 2244d8e4-e587-4ad2-995e-ad1923fcee1c
+		summarizeBy: none
+		sourceColumn: model
+
+	column MAE
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 9de83b0d-cb65-4ec4-8b9f-020cf3988784
+		summarizeBy: none
+		sourceColumn: MAE
+
+	column RMSE
+		dataType: double
+		formatString: #,0.00
+		lineageTag: cb8a6694-c9e1-40cc-9759-dcf5caf2a45a
+		summarizeBy: none
+		sourceColumn: RMSE
+
+	column MAPE_pct
+		dataType: double
+		formatString: 0.00
+		lineageTag: a72e8841-570f-46b8-b53e-44a74e2ac31e
+		summarizeBy: none
+		sourceColumn: MAPE_pct
+
+	column rank_rmse
+		dataType: int64
+		formatString: 0
+		lineageTag: 0aee6af2-8889-4300-9efb-62a339013fa2
+		summarizeBy: none
+		sourceColumn: rank_rmse
+
+	partition model_accuracy = m
+		mode: import
+		source = Model_Accuracy_Source
+

@@ -1,0 +1,96 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "0c99ade060088a22a3ae",
+  "position": {
+    "x": 20,
+    "y": 440,
+    "z": 6,
+    "height": 240,
+    "width": 1240,
+    "tabOrder": 6
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "model_accuracy"
+                    }
+                  },
+                  "Property": "model"
+                }
+              },
+              "queryRef": "model_accuracy.model",
+              "nativeQueryRef": "model"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "model_accuracy"
+                    }
+                  },
+                  "Property": "MAE"
+                }
+              },
+              "queryRef": "model_accuracy.MAE",
+              "nativeQueryRef": "MAE"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "model_accuracy"
+                    }
+                  },
+                  "Property": "RMSE"
+                }
+              },
+              "queryRef": "model_accuracy.RMSE",
+              "nativeQueryRef": "RMSE"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "model_accuracy"
+                    }
+                  },
+                  "Property": "MAPE_pct"
+                }
+              },
+              "queryRef": "model_accuracy.MAPE_pct",
+              "nativeQueryRef": "MAPE_pct"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "model_accuracy"
+                  }
+                },
+                "Property": "model"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ]
+      }
+    }
+  }
+}

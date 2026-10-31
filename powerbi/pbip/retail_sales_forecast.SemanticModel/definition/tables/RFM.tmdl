@@ -1,0 +1,72 @@
+table RFM
+	lineageTag: f346cddb-e1d1-42d3-8e83-0bec466be132
+
+	column Recency
+		formatString: 0
+		lineageTag: 70d56685-2718-486d-abe9-d816f0ee5da3
+		summarizeBy: none
+		sourceColumn: [Recency]
+
+	column Frequency
+		formatString: 0
+		lineageTag: c80bfeaa-639c-4932-865e-a8740ab7c2ce
+		summarizeBy: none
+		sourceColumn: [Frequency]
+
+	column Monetary
+		formatString: #,0.00
+		lineageTag: 6b45ac3e-91b7-4fba-b13b-2d990e3cd0d2
+		summarizeBy: none
+		sourceColumn: [Monetary]
+
+	column RFMSegment
+		lineageTag: 28143d65-9061-459b-8311-f5455e084d92
+		summarizeBy: none
+		sourceColumn: [RFMSegment]
+		sortByColumn: SegmentSort
+
+	column SegmentSort
+		isHidden
+		lineageTag: 5ec19e5c-e4e5-4dd7-8ee0-5396ebccac9f
+		summarizeBy: none
+		sourceColumn: [SegmentSort]
+
+	column customer_key
+		lineageTag: 095ad053-7f97-4b9c-85c5-e158419f6b56
+		isNameInferred
+		sourceColumn: dim_customer[customer_key]
+
+	partition RFM = calculated
+		mode: import
+		source =
+				VAR RefDate = MAX(fact_sales[order_date]) + 1
+				VAR Base =
+					ADDCOLUMNS(
+						VALUES(dim_customer[customer_key]),
+						"Recency", DATEDIFF(CALCULATE(MAX(fact_sales[order_date])), RefDate, DAY),
+						"Frequency", CALCULATE(DISTINCTCOUNT(fact_sales[order_id])),
+						"Monetary", CALCULATE(SUM(fact_sales[sales]))
+					)
+				RETURN
+					ADDCOLUMNS(
+						Base,
+						"RFMSegment",
+							SWITCH(
+								TRUE(),
+								[Recency] <= 90 && [Frequency] >= 6, "Champions",
+								[Recency] <= 180 && [Frequency] >= 4, "Loyal",
+								[Recency] <= 90, "Recent",
+								[Recency] > 365, "At risk / Lost",
+								"Needs attention"
+							),
+						"SegmentSort",
+							SWITCH(
+								TRUE(),
+								[Recency] <= 90 && [Frequency] >= 6, 1,
+								[Recency] <= 180 && [Frequency] >= 4, 2,
+								[Recency] <= 90, 3,
+								[Recency] > 365, 5,
+								4
+							)
+					)
+

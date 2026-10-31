@@ -1,0 +1,108 @@
+table fact_forecast
+	lineageTag: a54a4cba-1265-474e-9cbc-586cac540424
+
+	column month
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: f22d0b14-cc41-4f6e-b590-e3f0b820c4a1
+		summarizeBy: none
+		sourceColumn: month
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column model
+		dataType: string
+		lineageTag: 8929a1a9-b34a-44e2-98b2-790ffb78b819
+		summarizeBy: none
+		sourceColumn: model
+
+	column kind
+		dataType: string
+		lineageTag: 5634b67a-04aa-4ffb-8569-ca8e3eea7a71
+		summarizeBy: none
+		sourceColumn: kind
+
+	column actual
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 6d0ae0e7-95bb-4c62-87d0-0db72b350f95
+		summarizeBy: sum
+		sourceColumn: actual
+
+	column forecast
+		dataType: double
+		formatString: #,0.00
+		lineageTag: aee7d3a5-e936-4844-a529-9dc5bf15c095
+		summarizeBy: sum
+		sourceColumn: forecast
+
+	column lower_80
+		dataType: double
+		formatString: #,0.00
+		lineageTag: ce4087a0-cb82-4651-a224-fa1402f95d8e
+		summarizeBy: sum
+		sourceColumn: lower_80
+
+	column upper_80
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 789894dd-675a-442f-8650-194d4f7a774a
+		summarizeBy: sum
+		sourceColumn: upper_80
+
+	column lower_95
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 9b581775-3826-4f59-a228-61bc01e12374
+		summarizeBy: sum
+		sourceColumn: lower_95
+
+	column upper_95
+		dataType: double
+		formatString: #,0.00
+		lineageTag: e21db7fd-9985-4ee2-8de4-eb51d3254da6
+		summarizeBy: sum
+		sourceColumn: upper_95
+
+	column abs_error
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 78d6f92e-f58d-4114-bff8-d4ec9a31603b
+		summarizeBy: sum
+		sourceColumn: abs_error
+
+	partition fact_forecast = m
+		mode: import
+		source =
+				let
+					Folder = Text.TrimEnd(DataFolder, "\") & "\forecast\",
+					Load = (name as text) as table =>
+						Table.PromoteHeaders(Csv.Document(File.Contents(Folder & name),
+							[Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]), [PromoteAllScalars = true]),
+				
+					// ---- (a) hold-out: wide -> long (one row per month per model) ----
+					Hold      = Load("holdout_predictions.csv"),
+					HoldLong  = Table.UnpivotOtherColumns(Hold, {"month", "actual"}, "model", "forecast"),
+					HoldKind  = Table.AddColumn(HoldLong, "kind", each "Holdout", type text),
+				
+					// ---- (b) future forecast ----
+					Fut       = Load("sales_forecast.csv"),
+					FutKind   = Table.AddColumn(Fut, "kind", each "Future", type text),
+				
+					// ---- union (Table.Combine fills columns that exist on only one side with null) ----
+					Combined  = Table.Combine({HoldKind, FutKind}),
+					Wanted    = {"month", "model", "kind", "actual", "forecast", "lower_80", "upper_80", "lower_95", "upper_95"},
+					Missing   = List.Select(Wanted, each not List.Contains(Table.ColumnNames(Combined), _)),
+					AddMissing= List.Accumulate(Missing, Combined, (t, c) => Table.AddColumn(t, c, each null)),
+					Selected  = Table.SelectColumns(AddMissing, Wanted),
+					Typed     = Table.TransformColumnTypes(Selected, {
+								{"month", type date}, {"model", type text}, {"kind", type text},
+								{"actual", type number}, {"forecast", type number},
+								{"lower_80", type number}, {"upper_80", type number},
+								{"lower_95", type number}, {"upper_95", type number}}, "en-US"),
+					// absolute error only where an actual exists (hold-out rows)
+					AddErr    = Table.AddColumn(Typed, "abs_error",
+								each if [actual] = null or [forecast] = null then null else Number.Abs([forecast] - [actual]), type number)
+				in
+					AddErr
+

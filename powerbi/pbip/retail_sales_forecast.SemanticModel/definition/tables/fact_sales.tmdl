@@ -1,0 +1,184 @@
+table fact_sales
+	lineageTag: 854cbc93-716b-4cd6-a5d3-567ec74755a4
+
+	column row_id
+		dataType: int64
+		isHidden
+		lineageTag: 1a693106-09ca-4784-8ba9-8b1cfa971a73
+		summarizeBy: sum
+		sourceColumn: row_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_id
+		dataType: string
+		lineageTag: 03038706-3a6c-4493-a321-6b75072ecc27
+		summarizeBy: none
+		sourceColumn: order_id
+
+	column order_date_key
+		dataType: int64
+		isHidden
+		lineageTag: c44cfd2e-895f-4c62-9936-742ac5578160
+		summarizeBy: none
+		sourceColumn: order_date_key
+
+	column ship_date_key
+		dataType: int64
+		isHidden
+		lineageTag: ecc05a85-4955-4003-a10c-f68ace496183
+		summarizeBy: sum
+		sourceColumn: ship_date_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_key
+		dataType: int64
+		isHidden
+		lineageTag: 0090d6dc-7b4e-4ef8-824d-9faa2800d7bc
+		summarizeBy: none
+		sourceColumn: customer_key
+
+	column product_key
+		dataType: int64
+		isHidden
+		lineageTag: d59f5d13-42c9-466d-a48a-7e22be5a8a51
+		summarizeBy: none
+		sourceColumn: product_key
+
+	column geography_key
+		dataType: int64
+		isHidden
+		lineageTag: 2c2b26ec-b9fe-4a35-9de5-6ce876ae9911
+		summarizeBy: none
+		sourceColumn: geography_key
+
+	column ship_mode
+		dataType: string
+		lineageTag: 9bdeafd3-4f4d-4015-a496-c08b45a71eb5
+		summarizeBy: none
+		sourceColumn: ship_mode
+
+	column sales
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 8542b676-1c65-4eed-a159-d3207344f378
+		summarizeBy: sum
+		sourceColumn: sales
+
+	column quantity
+		dataType: int64
+		formatString: 0
+		lineageTag: 3bdfd503-c6ac-482f-913f-db7e3e5f3de1
+		summarizeBy: sum
+		sourceColumn: quantity
+
+	column discount
+		dataType: double
+		formatString: 0%
+		lineageTag: ce2a2c7e-e68b-41df-94b8-5edd091470aa
+		summarizeBy: sum
+		sourceColumn: discount
+
+		annotation SummarizationSetBy = Automatic
+
+	column profit
+		dataType: double
+		formatString: #,0.00
+		lineageTag: b22ec9ca-636c-4f5b-aabd-e7ca9d7f0dee
+		summarizeBy: sum
+		sourceColumn: profit
+
+	column order_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: e035bef5-c2a0-4040-9a5e-5b9c836dad69
+		summarizeBy: none
+		sourceColumn: order_date
+
+		variation Variation
+			isDefault
+			relationship: 7394b585-992f-4a92-9292-4cca19dc7564
+			defaultHierarchy: LocalDateTable_25802d14-c152-42a3-991c-0d5e30571629.'Date Hierarchy'
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column ship_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 77f96537-43dc-41a3-afbf-9c4cdf781d47
+		summarizeBy: none
+		sourceColumn: ship_date
+
+		variation Variation
+			isDefault
+			relationship: 2dab0882-82ff-41ce-bdcf-aec63a64a4fc
+			defaultHierarchy: LocalDateTable_f2bfd2af-86de-4dbe-83fc-1390f3fd5c19.'Date Hierarchy'
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column days_to_ship
+		dataType: int64
+		formatString: 0
+		lineageTag: ab4c76e2-0f19-410d-bc5b-b276e8da8a42
+		summarizeBy: sum
+		sourceColumn: days_to_ship
+
+		annotation SummarizationSetBy = Automatic
+
+	column discount_band
+		dataType: string
+		lineageTag: 058ed2ff-5e85-48e2-b188-68203d391ffd
+		summarizeBy: none
+		sourceColumn: discount_band
+		sortByColumn: discount_band_sort
+
+	column discount_band_sort
+		dataType: int64
+		isHidden
+		lineageTag: 33767ff7-93cc-4fb8-b9a8-305b050fa93f
+		summarizeBy: sum
+		sourceColumn: discount_band_sort
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_loss_line
+		dataType: int64
+		formatString: 0
+		lineageTag: 1d94f1cd-d4e3-46d8-9695-24c93aa05d40
+		summarizeBy: sum
+		sourceColumn: is_loss_line
+
+	partition fact_sales = m
+		mode: import
+		source =
+				let
+					Source   = Csv.Document(File.Contents(Text.TrimEnd(DataFolder, "\") & "\curated\fact_sales.csv"),
+								[Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+					Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+					Typed    = Table.TransformColumnTypes(Promoted, {
+								{"row_id", Int64.Type}, {"order_id", type text},
+								{"order_date_key", Int64.Type}, {"ship_date_key", Int64.Type},
+								{"customer_key", Int64.Type}, {"product_key", Int64.Type}, {"geography_key", Int64.Type},
+								{"ship_mode", type text},
+								{"sales", type number}, {"quantity", Int64.Type},
+								{"discount", type number}, {"profit", type number}}, "en-US"),
+					// yyyymmdd integer -> real date (used for the RFM table and shipping days; relationships use the keys)
+					KeyToDate = (k as number) as date =>
+								#date(Number.IntegerDivide(k, 10000), Number.Mod(Number.IntegerDivide(k, 100), 100), Number.Mod(k, 100)),
+					AddOrderDate = Table.AddColumn(Typed, "order_date", each KeyToDate([order_date_key]), type date),
+					AddShipDate  = Table.AddColumn(AddOrderDate, "ship_date", each KeyToDate([ship_date_key]), type date),
+					AddDays      = Table.AddColumn(AddShipDate, "days_to_ship", each Duration.Days([ship_date] - [order_date]), Int64.Type),
+					// discount band (labels start with a number so they sort correctly; sort column below)
+					AddBand = Table.AddColumn(AddDays, "discount_band", each
+								if [discount] = 0 then "0 No discount"
+								else if [discount] <= 0.2 then "1 Low (up to 20%)"
+								else if [discount] <= 0.4 then "2 Medium (20-40%)"
+								else "3 High (over 40%)", type text),
+					AddBandSort = Table.AddColumn(AddBand, "discount_band_sort", each
+								if [discount] = 0 then 0 else if [discount] <= 0.2 then 1 else if [discount] <= 0.4 then 2 else 3, Int64.Type),
+					// loss-making order line flag (lets you count loss lines)
+					AddLoss = Table.AddColumn(AddBandSort, "is_loss_line", each if [profit] < 0 then 1 else 0, Int64.Type)
+				in
+					AddLoss
+

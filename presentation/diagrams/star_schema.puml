@@ -1,0 +1,49 @@
+@startuml
+!pragma layout smetana
+skinparam shadowing false
+skinparam defaultFontName Calibri
+skinparam defaultFontSize 16
+skinparam classBackgroundColor #EEF2F6
+skinparam classBorderColor #1F2A44
+skinparam ArrowColor #1B7F8C
+hide empty members
+class fact_sales {
+  row_id
+  order_date_key
+  customer_key
+  product_key
+  geography_key
+  sales, quantity
+  discount, profit
+}
+class dim_date {
+  date_key
+  Date, Year, Month
+}
+class dim_customer {
+  customer_key
+  Segment
+}
+class dim_product {
+  product_key
+  Category, SubCategory
+}
+class dim_geography {
+  geography_key
+  Region, State, City
+}
+class fact_forecast {
+  month, model
+  actual, forecast
+  lower_95, upper_95
+}
+class dim_model {
+  model
+}
+fact_sales }o--|| dim_date
+fact_sales }o--|| dim_customer
+fact_sales }o--|| dim_product
+fact_sales }o--|| dim_geography
+fact_forecast }o--|| dim_date
+fact_forecast }o--|| dim_model
+@enduml

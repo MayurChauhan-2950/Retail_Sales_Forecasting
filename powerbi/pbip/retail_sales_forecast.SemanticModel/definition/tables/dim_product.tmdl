@@ -1,0 +1,49 @@
+table dim_product
+	lineageTag: c29d288b-f79b-4553-b699-e3605d913205
+
+	column product_key
+		dataType: int64
+		isHidden
+		lineageTag: 6c8738b3-f79f-4ef5-a5eb-5a9a1c1fc948
+		summarizeBy: none
+		sourceColumn: product_key
+
+	column ProductID
+		dataType: string
+		lineageTag: 2ea609a9-0288-404f-8837-c246d41896fd
+		summarizeBy: none
+		sourceColumn: ProductID
+
+	column ProductName
+		dataType: string
+		lineageTag: 26959366-460f-410e-932d-328127221de4
+		summarizeBy: none
+		sourceColumn: ProductName
+
+	column Category
+		dataType: string
+		lineageTag: d020752e-d6b5-4b22-a9f4-a38f8494cfa2
+		summarizeBy: none
+		sourceColumn: Category
+
+	column SubCategory
+		dataType: string
+		lineageTag: 3bb6294f-bb67-46ab-9ddd-0aacc80043bf
+		summarizeBy: none
+		sourceColumn: SubCategory
+
+	partition dim_product = m
+		mode: import
+		source =
+				let
+					Source   = Csv.Document(File.Contents(Text.TrimEnd(DataFolder, "\") & "\curated\dim_product.csv"),
+								[Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+					Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+					Typed    = Table.TransformColumnTypes(Promoted, {
+								{"product_key", Int64.Type}, {"Product ID", type text}, {"Product Name", type text},
+								{"Category", type text}, {"Sub-Category", type text}}, "en-US"),
+					Renamed  = Table.RenameColumns(Typed, {
+								{"Product ID", "ProductID"}, {"Product Name", "ProductName"}, {"Sub-Category", "SubCategory"}}, MissingField.Ignore)
+				in
+					Renamed
+

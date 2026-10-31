@@ -2,3 +2,6 @@ __pycache__/
 *.pyc
 .venv/
 ~$*
+.pbi/
+*.abf
+powerbi/retail_sales_forecast.pbix

@@ -1,0 +1,506 @@
+table _Measures
+	lineageTag: 08916cad-de76-4ba1-95d2-8eec791c89e2
+
+	/// Sum of line sales.
+	measure 'Total Sales' = SUM(fact_sales[sales])
+		formatString: $#,##0
+		displayFolder: 01 Core KPIs
+		lineageTag: cda1bfad-3c43-491b-a906-4be4609a19ef
+
+	/// Sum of line profit (negative lines included).
+	measure 'Total Profit' = SUM(fact_sales[profit])
+		formatString: $#,##0
+		displayFolder: 01 Core KPIs
+		lineageTag: f6a3468f-576b-44f4-b928-46ddcafd552f
+
+	/// Profit divided by sales; ratio of sums, not average of ratios.
+	measure 'Profit Margin %' = DIVIDE([Total Profit], [Total Sales])
+		formatString: 0.0%
+		displayFolder: 01 Core KPIs
+		lineageTag: 0dca31d2-a97c-4412-abca-e062e27ecf49
+
+	/// Distinct orders (an order has several lines).
+	measure Orders = DISTINCTCOUNT(fact_sales[order_id])
+		formatString: #,##0
+		displayFolder: 01 Core KPIs
+		lineageTag: f69e60e4-2b49-4325-b105-ad0e5ed33fed
+
+	/// Distinct customers who bought.
+	measure Customers = DISTINCTCOUNT(fact_sales[customer_key])
+		formatString: #,##0
+		displayFolder: 01 Core KPIs
+		lineageTag: 757673b4-ea52-43f1-8f56-31d4419171e3
+
+	/// Sales per order.
+	measure 'Avg Order Value' = DIVIDE([Total Sales], [Orders])
+		formatString: $#,##0.00
+		displayFolder: 01 Core KPIs
+		lineageTag: e292d2fa-949b-4850-b2d0-049a5c0bdcc3
+
+	/// Units sold.
+	measure Quantity = SUM(fact_sales[quantity])
+		formatString: #,##0
+		displayFolder: 01 Core KPIs
+		lineageTag: 2a034e06-3a94-4a1b-b66d-0a73062b31ed
+
+	/// Rows of the fact table (one per product on an order).
+	measure 'Order Lines' = COUNTROWS(fact_sales)
+		formatString: #,##0
+		displayFolder: 01 Core KPIs
+		lineageTag: c54f58e4-1495-45a6-8663-031284db4c1c
+
+	/// Simple average of the line discount rate.
+	measure 'Avg Discount %' = AVERAGE(fact_sales[discount])
+		formatString: 0.0%
+		displayFolder: 01 Core KPIs
+		lineageTag: b57ff2ef-aeff-4794-9b68-d2de8e87bea0
+
+	/// Average revenue per customer.
+	measure 'Sales per Customer' = DIVIDE([Total Sales], [Customers])
+		formatString: $#,##0.00
+		displayFolder: 01 Core KPIs
+		lineageTag: 60987bf2-6842-46a7-b214-f839da8bed55
+
+	/// Mean of ship date minus order date (column built in Power Query).
+	measure 'Avg Days to Ship' = AVERAGE(fact_sales[days_to_ship])
+		formatString: 0.0
+		displayFolder: 01 Core KPIs
+		lineageTag: 969b10c1-2a08-4cd0-beb9-66978590919f
+
+	/// Sales in the same period one year earlier (blank when there is no current sales, so 2019 forecast months stay clean).
+	measure 'Sales LY' = IF(ISBLANK([Total Sales]), BLANK(), CALCULATE([Total Sales], SAMEPERIODLASTYEAR(dim_date[Date])))
+		formatString: $#,##0
+		displayFolder: 02 Time Intelligence
+		lineageTag: 7323596e-39db-49e2-8e62-89bb2493982d
+
+	/// Profit one year earlier.
+	measure 'Profit LY' = IF(ISBLANK([Total Profit]), BLANK(), CALCULATE([Total Profit], SAMEPERIODLASTYEAR(dim_date[Date])))
+		formatString: $#,##0
+		displayFolder: 02 Time Intelligence
+		lineageTag: c2e6a2b7-6f5a-411a-aa7c-1385d6ac6402
+
+	/// Absolute change versus last year.
+	measure 'Sales YoY Change' = IF(ISBLANK([Sales LY]), BLANK(), [Total Sales] - [Sales LY])
+		formatString: $#,##0;-$#,##0
+		displayFolder: 02 Time Intelligence
+		lineageTag: 8821edef-e61e-4187-8e83-86838b095f17
+
+	/// Percentage growth versus the same period last year.
+	measure 'YoY %' = IF(ISBLANK([Sales LY]), BLANK(), DIVIDE([Total Sales] - [Sales LY], [Sales LY]))
+		formatString: +0.0%;-0.0%;0.0%
+		displayFolder: 02 Time Intelligence
+		lineageTag: 4351cafd-4337-4088-9d9b-6438d7f6d20a
+
+	/// Profit growth versus last year.
+	measure 'Profit YoY %' = IF(ISBLANK([Profit LY]), BLANK(), DIVIDE([Total Profit] - [Profit LY], [Profit LY]))
+		formatString: +0.0%;-0.0%;0.0%
+		displayFolder: 02 Time Intelligence
+		lineageTag: 8abc3252-5f55-4a00-aaf9-16779792331d
+
+	/// Sales in the previous month.
+	measure 'Sales PM' = CALCULATE([Total Sales], DATEADD(dim_date[Date], -1, MONTH))
+		formatString: $#,##0
+		displayFolder: 02 Time Intelligence
+		lineageTag: 02a94c38-337e-4af8-afcd-d8ff9499edfa
+
+	/// Month-over-month growth.
+	measure 'MoM %' = IF(ISBLANK([Sales PM]), BLANK(), DIVIDE([Total Sales] - [Sales PM], [Sales PM]))
+		formatString: +0.0%;-0.0%;0.0%
+		displayFolder: 02 Time Intelligence
+		lineageTag: 43a72d17-6477-4794-b5fc-977284f0dcb2
+
+	/// Year-to-date sales (resets each 1 January).
+	measure 'Sales YTD' = TOTALYTD([Total Sales], dim_date[Date])
+		formatString: $#,##0
+		displayFolder: 02 Time Intelligence
+		lineageTag: 70fa4454-fab7-43a6-8f47-007b5436ae69
+
+	/// Year-to-date profit.
+	measure 'Profit YTD' = TOTALYTD([Total Profit], dim_date[Date])
+		formatString: $#,##0
+		displayFolder: 02 Time Intelligence
+		lineageTag: 7bce1f93-543b-457d-b255-69826a635448
+
+	/// Sum of the latest 3 months ending at the last date in context.
+	measure 'Rolling 3M Sales' = IF(ISBLANK([Total Sales]), BLANK(), CALCULATE([Total Sales], DATESINPERIOD(dim_date[Date], MAX(dim_date[Date]), -3, MONTH)))
+		formatString: $#,##0
+		displayFolder: 02 Time Intelligence
+		lineageTag: 3f62f483-f06b-4657-8ee1-98e8a41da3db
+
+	/// 3-month moving average (assumes 3 complete months).
+	measure 'Rolling 3M Avg Sales' = DIVIDE([Rolling 3M Sales], 3)
+		formatString: $#,##0
+		displayFolder: 02 Time Intelligence
+		lineageTag: 672b14a9-5113-43c4-8625-86bff2dd479d
+
+	/// Row share of everything currently selected (respects slicers).
+	measure 'Sales Share %' = DIVIDE([Total Sales], CALCULATE([Total Sales], ALLSELECTED()))
+		formatString: 0.0%
+		displayFolder: 03 Ranking and Share
+		lineageTag: c508d6de-101c-4c1e-984c-1193640f92ac
+
+	/// Sub-category share inside its visible category group.
+	measure 'Sales Share % of Category' = DIVIDE([Total Sales], CALCULATE([Total Sales], ALLSELECTED(dim_product[SubCategory])))
+		formatString: 0.0%
+		displayFolder: 03 Ranking and Share
+		lineageTag: 08a8e002-febf-45fa-a32f-916f6ca8df5f
+
+	/// Rank 1 = most profitable sub-category in the current selection.
+	measure 'Profit Rank (SubCategory)' = IF(ISBLANK([Total Profit]), BLANK(), RANKX(ALLSELECTED(dim_product[SubCategory]), [Total Profit], , DESC, DENSE))
+		formatString: 0
+		displayFolder: 03 Ranking and Share
+		lineageTag: fd79a528-a075-4dbd-b96e-07694ac64889
+
+	/// Rank of a product by sales in the current selection.
+	measure 'Sales Rank (Product)' = IF(ISBLANK([Total Sales]), BLANK(), RANKX(ALLSELECTED(dim_product[ProductName]), [Total Sales], , DESC, SKIP))
+		formatString: 0
+		displayFolder: 03 Ranking and Share
+		lineageTag: 0a03b225-cf7a-497c-ad99-4e1c8fed306e
+
+	/// Reads the Top-N slicer (calculated table 'Top N'); defaults to 10.
+	measure 'Top N Value' = SELECTEDVALUE('Top N'[Value], 10)
+		formatString: 0
+		displayFolder: 03 Ranking and Share
+		lineageTag: 1a1a5c4e-2bda-4faa-b841-085a86bb15fa
+
+	/// 1 if product is in the Top N; put on the visual filter pane as 'is 1'.
+	measure 'Top N Flag' = IF(ISBLANK([Sales Rank (Product)]), 0, IF([Sales Rank (Product)] <= [Top N Value], 1, 0))
+		formatString: 0
+		displayFolder: 03 Ranking and Share
+		lineageTag: 448dbf22-69c6-4d7d-9857-fa378dfc8f3c
+
+	/// Sales on lines with 0% discount.
+	measure 'Sales No Discount' = CALCULATE([Total Sales], fact_sales[discount_band_sort] = 0)
+		formatString: $#,##0
+		displayFolder: 04 Discount and Profit
+		lineageTag: d712fa03-cea7-43b5-983d-3d1fae51e3e2
+
+	/// Sales on lines with any discount.
+	measure 'Sales Discounted' = CALCULATE([Total Sales], fact_sales[discount_band_sort] > 0)
+		formatString: $#,##0
+		displayFolder: 04 Discount and Profit
+		lineageTag: 54515688-7c1b-416a-afbe-4f61c4754ce2
+
+	/// Share of sales sold with a discount.
+	measure 'Discounted Sales Share %' = DIVIDE([Sales Discounted], [Total Sales])
+		formatString: 0.0%
+		displayFolder: 04 Discount and Profit
+		lineageTag: b88a7341-f148-4551-ab6d-c9a1fc57b6fc
+
+	/// Profit where discount is over 0% up to 20%.
+	measure 'Profit Low Discount' = CALCULATE([Total Profit], fact_sales[discount_band_sort] = 1)
+		formatString: $#,##0
+		displayFolder: 04 Discount and Profit
+		lineageTag: a88c2217-b688-488f-8b53-bd2037d6a2ac
+
+	/// Profit where discount is over 20% up to 40%.
+	measure 'Profit Medium Discount' = CALCULATE([Total Profit], fact_sales[discount_band_sort] = 2)
+		formatString: $#,##0
+		displayFolder: 04 Discount and Profit
+		lineageTag: 3b0bc8ad-7612-4408-9e43-b605483b1121
+
+	/// Profit where discount is over 40% (loss-making).
+	measure 'Profit High Discount' = CALCULATE([Total Profit], fact_sales[discount_band_sort] = 3)
+		formatString: $#,##0
+		displayFolder: 04 Discount and Profit
+		lineageTag: e5443fca-6427-428f-8058-5015d28bf664
+
+	/// Count of order lines with negative profit.
+	measure 'Loss Lines' = SUM(fact_sales[is_loss_line])
+		formatString: #,##0
+		displayFolder: 04 Discount and Profit
+		lineageTag: 131c0f83-a205-49dd-ba3d-7e84cdfe42e8
+
+	/// Share of lines that lose money.
+	measure 'Loss Lines %' = DIVIDE([Loss Lines], [Order Lines])
+		formatString: 0.0%
+		displayFolder: 04 Discount and Profit
+		lineageTag: 1e6f33e4-6225-4df0-ba2c-51c88234558a
+
+	/// Sum of all negative profit.
+	measure 'Loss Amount' = CALCULATE([Total Profit], fact_sales[profit] < 0)
+		formatString: $#,##0;-$#,##0
+		displayFolder: 04 Discount and Profit
+		lineageTag: 781fe428-ffea-4df1-8c48-9da9dc729320
+
+	/// Discount rate weighted by sales value.
+	measure 'Weighted Avg Discount %' = DIVIDE(SUMX(fact_sales, fact_sales[discount] * fact_sales[sales]), [Total Sales])
+		formatString: 0.0%
+		displayFolder: 04 Discount and Profit
+		lineageTag: 4f626a5f-f05a-4403-9086-1918a2e50f52
+
+	/// Monthly actual sales from the forecast file (same data as fact_sales, rounded per month).
+	measure 'Actual Sales (Series)' = SUM(monthly_actual[actual_sales])
+		formatString: $#,##0
+		displayFolder: 05 Forecast Arena
+		lineageTag: 12579ec9-9c52-4ed2-aeab-0a8a2009c328
+
+	/// Reconciliation: should be ~0 (cents of rounding).
+	measure 'Actual vs Fact Difference' = [Actual Sales (Series)] - [Total Sales]
+		formatString: #,##0.00
+		displayFolder: 05 Forecast Arena
+		lineageTag: bb76c1b2-311e-4e32-bcdf-e47b5d8c5d03
+
+	/// Name of the model with the lowest 2018 hold-out RMSE (ignores slicers).
+	measure 'Best Model (RMSE)' =
+			VAR Best = TOPN(1, ALL(model_accuracy), model_accuracy[RMSE], ASC)
+			RETURN MAXX(Best, model_accuracy[model])
+		displayFolder: 05 Forecast Arena
+		lineageTag: d881ce63-20ed-4864-a167-68c47c500ee2
+
+	/// Same, ranked by MAPE.
+	measure 'Best Model (MAPE)' =
+			VAR Best = TOPN(1, ALL(model_accuracy), model_accuracy[MAPE_pct], ASC)
+			RETURN MAXX(Best, model_accuracy[model])
+		displayFolder: 05 Forecast Arena
+		lineageTag: 9dcdf04b-a91a-4b61-9184-d79934c60d59
+
+	/// Model chosen in the slicer; falls back to the best model if none or several are selected.
+	measure 'Selected Model' = SELECTEDVALUE(dim_model[model], [Best Model (RMSE)])
+		displayFolder: 05 Forecast Arena
+		lineageTag: ed725c68-7e44-43e2-bcd1-822b36ea8720
+
+	/// Raw forecast; use with model in Legend to draw one line per model.
+	measure 'Forecast (All Models)' = SUM(fact_forecast[forecast])
+		formatString: $#,##0
+		displayFolder: 05 Forecast Arena
+		lineageTag: 4686a858-8d27-45ac-a8f4-dcc18360d3dd
+
+	/// Forecast of the single selected model across hold-out and future months.
+	measure 'Forecast (Selected Model)' = VAR _sel = [Selected Model] RETURN CALCULATE(SUM(fact_forecast[forecast]), fact_forecast[model] = _sel, REMOVEFILTERS(dim_model))
+		formatString: $#,##0
+		displayFolder: 05 Forecast Arena
+		lineageTag: ca7ba362-eb0c-413a-8c9d-21f4fb09b4f0
+
+	/// Actual sales in the 12 hold-out months.
+	measure 'Holdout Actual' = VAR _sel = [Selected Model] RETURN CALCULATE(SUM(fact_forecast[actual]), fact_forecast[kind] = "Holdout", fact_forecast[model] = _sel, REMOVEFILTERS(dim_model))
+		formatString: $#,##0
+		displayFolder: 05 Forecast Arena
+		lineageTag: e00a87b0-1cf1-471e-b67c-e20c1bfbffc2
+
+	/// Selected model's prediction for the hold-out months.
+	measure 'Holdout Forecast' = VAR _sel = [Selected Model] RETURN CALCULATE(SUM(fact_forecast[forecast]), fact_forecast[kind] = "Holdout", fact_forecast[model] = _sel, REMOVEFILTERS(dim_model))
+		formatString: $#,##0
+		displayFolder: 05 Forecast Arena
+		lineageTag: 0d6d7cb0-03fb-4a01-a222-463036a070e9
+
+	/// Forecast minus actual (positive = over-forecast).
+	measure 'Forecast Error' =
+			VAR a = [Holdout Actual]
+			VAR fc = [Holdout Forecast]
+			RETURN IF(NOT ISBLANK(a) && NOT ISBLANK(fc), fc - a)
+		formatString: +#,##0;-#,##0;0
+		displayFolder: 05 Forecast Arena
+		lineageTag: 5dfbcb73-b0cf-4621-b8e4-dc1e63b88e42
+
+	/// Absolute error.
+	measure 'Abs Forecast Error' = ABS([Forecast Error])
+		formatString: #,##0
+		displayFolder: 05 Forecast Arena
+		lineageTag: 526f84e0-92f7-4d4e-ad03-4f16af4a27ae
+
+	/// Absolute percentage error for one month.
+	measure 'APE %' = DIVIDE([Abs Forecast Error], [Holdout Actual])
+		formatString: 0.0%
+		displayFolder: 05 Forecast Arena
+		lineageTag: ee7d19fa-cc5c-4566-8cb0-4028923acd2f
+
+	/// MAPE recomputed from the monthly hold-out rows; put dim_model[model] on rows.
+	measure 'MAPE by Model (recomputed)' =
+			VAR t = FILTER(fact_forecast, fact_forecast[kind] = "Holdout" && NOT ISBLANK(fact_forecast[actual]))
+			RETURN AVERAGEX(t, DIVIDE(fact_forecast[abs_error], fact_forecast[actual]))
+		formatString: 0.0%
+		displayFolder: 05 Forecast Arena
+		lineageTag: d440289b-b09f-4d6d-9acf-0f38070131d0
+
+	/// Stored hold-out MAE per model (from model_accuracy.csv).
+	measure MAE = AVERAGE(model_accuracy[MAE])
+		formatString: #,##0
+		displayFolder: 05 Forecast Arena
+		lineageTag: 8fffa5ce-ea2a-423f-b916-2d9299cc4a51
+
+	/// Stored hold-out RMSE per model.
+	measure RMSE = AVERAGE(model_accuracy[RMSE])
+		formatString: #,##0
+		displayFolder: 05 Forecast Arena
+		lineageTag: ebeb8880-ff99-40a1-a315-a0f3c64cecf9
+
+	/// Stored hold-out MAPE per model as a percentage.
+	measure 'MAPE % (reported)' = DIVIDE(AVERAGE(model_accuracy[MAPE_pct]), 100)
+		formatString: 0.0%
+		displayFolder: 05 Forecast Arena
+		lineageTag: 5c873ca9-d6eb-416b-972c-f499db36cf7a
+
+	/// 1 = lowest RMSE.
+	measure 'Model Rank (RMSE)' = RANKX(ALL(model_accuracy[model]), [RMSE], , ASC, DENSE)
+		formatString: 0
+		displayFolder: 05 Forecast Arena
+		lineageTag: efc8f98c-a497-4072-86fe-69b2c1f28d85
+
+	/// 1 on the best model's row.
+	measure 'Is Best Model' = IF(SELECTEDVALUE(model_accuracy[model]) = [Best Model (RMSE)], 1, 0)
+		formatString: 0
+		displayFolder: 05 Forecast Arena
+		lineageTag: 724d4567-d155-4347-9189-54a3db2c9cf6
+
+	/// Lower end of the 95% interval (future months only).
+	measure 'Forecast Lower 95' = VAR _sel = [Selected Model] RETURN CALCULATE(SUM(fact_forecast[lower_95]), fact_forecast[model] = _sel, REMOVEFILTERS(dim_model))
+		formatString: $#,##0
+		displayFolder: 05 Forecast Arena
+		lineageTag: 33a1a327-3c9e-42ae-8ea1-3a5cb2a513d2
+
+	/// Upper end of the 95% interval.
+	measure 'Forecast Upper 95' = VAR _sel = [Selected Model] RETURN CALCULATE(SUM(fact_forecast[upper_95]), fact_forecast[model] = _sel, REMOVEFILTERS(dim_model))
+		formatString: $#,##0
+		displayFolder: 05 Forecast Arena
+		lineageTag: 4d3cbbaa-6f60-4bab-8177-8d14fa4f60e3
+
+	/// Upper minus lower; use as the visible part of a stacked-area band.
+	measure 'Forecast Interval Width' = IF(ISBLANK([Forecast Upper 95]), BLANK(), [Forecast Upper 95] - [Forecast Lower 95])
+		formatString: $#,##0
+		displayFolder: 05 Forecast Arena
+		lineageTag: bc5d7e93-6545-4b6d-8327-7c3a0982102b
+
+	/// Sum of the 12 projected months for the selected model.
+	measure 'Forecast Total 2019' = VAR _sel = [Selected Model] RETURN CALCULATE(SUM(fact_forecast[forecast]), fact_forecast[kind] = "Future", fact_forecast[model] = _sel, REMOVEFILTERS(dim_model), REMOVEFILTERS(dim_date))
+		formatString: $#,##0
+		displayFolder: 05 Forecast Arena
+		lineageTag: e311be9c-8401-481a-80b5-2336593242aa
+
+	/// Projected 2019 versus actual 2018.
+	measure 'Forecast Growth vs 2018' = DIVIDE([Forecast Total 2019], CALCULATE(SUM(monthly_actual[actual_sales]), REMOVEFILTERS(dim_date), dim_date[Year] = 2018)) - 1
+		formatString: +0.0%;-0.0%
+		displayFolder: 05 Forecast Arena
+		lineageTag: dc38d736-c5b2-40bb-abe9-92f2908229da
+
+	/// 1 if a 2019 projection is stored for the selected model.
+	measure 'Has Future Forecast' = VAR _sel = [Selected Model] RETURN IF(CALCULATE(COUNTROWS(fact_forecast), fact_forecast[kind] = "Future", fact_forecast[model] = _sel, REMOVEFILTERS(dim_model), REMOVEFILTERS(dim_date)) > 0, 1, 0)
+		formatString: 0
+		displayFolder: 05 Forecast Arena
+		lineageTag: bae25041-3488-4754-b33d-8b70e65d197e
+
+	/// Green when growing, red when shrinking.
+	measure 'YoY Colour' = IF([YoY %] >= 0, "#10B981", "#EF4444")
+		displayFolder: 06 KPI Colours
+		lineageTag: 11e8027c-e7cd-41a3-aaf6-ffa427f36e6d
+
+	/// Up/down triangle text.
+	measure 'YoY Arrow' = IF([YoY %] >= 0, UNICHAR(9650), UNICHAR(9660))
+		displayFolder: 06 KPI Colours
+		lineageTag: 1cf11890-bc29-4e1c-8a10-0abf6ed494bb
+
+	/// Margin traffic light: 15%+ green, 10-15% amber, below red.
+	measure 'Margin Colour' = SWITCH(TRUE(), [Profit Margin %] >= 0.15, "#10B981", [Profit Margin %] >= 0.1, "#F59E0B", "#EF4444")
+		displayFolder: 06 KPI Colours
+		lineageTag: 0a8c210a-2532-4a1c-b7da-9e8ed11a7790
+
+	/// Blue for profit, red for loss.
+	measure 'Profit Colour' = IF([Total Profit] >= 0, "#2563EB", "#EF4444")
+		displayFolder: 06 KPI Colours
+		lineageTag: 684874bd-4993-45ea-8e64-52ef2e429b89
+
+	/// MAPE traffic light: up to 20% green, up to 35% amber, else red.
+	measure 'MAPE Colour' = SWITCH(TRUE(), [MAPE % (reported)] <= 0.2, "#10B981", [MAPE % (reported)] <= 0.35, "#F59E0B", "#EF4444")
+		displayFolder: 06 KPI Colours
+		lineageTag: fcee9ee9-d686-4e88-937f-bf10ec7c7923
+
+	/// Light blue background on the best model's row.
+	measure 'Best Model Row Colour' = IF([Is Best Model] = 1, "#DBEAFE", "#FFFFFF")
+		displayFolder: 06 KPI Colours
+		lineageTag: 2384d757-a494-4511-8d8f-60442aaf2606
+
+	/// Over-forecast amber, under-forecast blue.
+	measure 'Error Colour' = IF([Forecast Error] > 0, "#F59E0B", "#2563EB")
+		displayFolder: 06 KPI Colours
+		lineageTag: 0705409a-9646-4ebc-81e7-cd0221cd9207
+
+	/// First and last month that has sales under the current filters.
+	measure 'Period Label' = IF(ISBLANK([Total Sales]), "no data", FORMAT(MIN(fact_sales[order_date]), "mmm yyyy") & " - " & FORMAT(MAX(fact_sales[order_date]), "mmm yyyy"))
+		displayFolder: 07 Titles and Labels
+		lineageTag: 816dd40e-0ebb-4995-bb73-e1f4820d4f28
+
+	/// Selected category or 'All categories'.
+	measure 'Category Label' = SELECTEDVALUE(dim_product[Category], "All categories")
+		displayFolder: 07 Titles and Labels
+		lineageTag: eae6e04b-73b8-43ea-a371-bbacc6619736
+
+	/// Selected region or 'All regions'.
+	measure 'Region Label' = SELECTEDVALUE(dim_geography[Region], "All regions")
+		displayFolder: 07 Titles and Labels
+		lineageTag: 6bce7ba1-0502-4776-9417-28004b5cd150
+
+	/// Trend chart title that follows the date filter.
+	measure 'Title - Sales Trend' = "Monthly sales and profit | " & [Period Label]
+		displayFolder: 07 Titles and Labels
+		lineageTag: 84f9b9cf-2983-4a73-a18d-0c3a3fb48ad4
+
+	/// Breakdown title that follows the region slicer.
+	measure 'Title - Category' = "Sales and margin by category | " & [Region Label]
+		displayFolder: 07 Titles and Labels
+		lineageTag: f29c5a60-3c07-4657-824a-bce784f3f6a0
+
+	/// Region chart title that follows the category slicer.
+	measure 'Title - Region' = "Sales by region | " & [Category Label]
+		displayFolder: 07 Titles and Labels
+		lineageTag: 8384546e-5a8a-496b-a742-2b2bb11d94ea
+
+	/// Discount chart title.
+	measure 'Title - Discount' = "Profit margin by discount band | " & [Category Label] & " | " & [Region Label]
+		displayFolder: 07 Titles and Labels
+		lineageTag: ea260c5c-827f-4804-804c-3d079f3ddc93
+
+	/// Forecast chart title with a safe note when no future values exist.
+	measure 'Title - Forecast' = "Actual vs forecast | model: " & [Selected Model] & IF([Has Future Forecast] = 1, "", " | no 2019 projection stored for this model")
+		displayFolder: 07 Titles and Labels
+		lineageTag: df7229c0-38c1-4008-9b22-4ad3f126a43c
+
+	/// One-sentence callout text.
+	measure 'Best Model Callout' = "Best model on the 2018 hold-out: " & [Best Model (RMSE)] & " (RMSE " & FORMAT(LOOKUPVALUE(model_accuracy[RMSE], model_accuracy[model], [Best Model (RMSE)]), "#,##0") & ", MAPE " & FORMAT(LOOKUPVALUE(model_accuracy[MAPE_pct], model_accuracy[model], [Best Model (RMSE)]), "0.0") & "%)"
+		displayFolder: 07 Titles and Labels
+		lineageTag: 59d6c18c-d171-4f47-a3bf-50995ebfa381
+
+	/// Never shows a blank title: warns when filters remove all data.
+	measure 'Title Safe - Sales' = IF(ISBLANK([Total Sales]), "No sales for the current selection - clear a filter", "Total sales " & FORMAT([Total Sales], "$#,##0") & " | " & [Period Label])
+		displayFolder: 07 Titles and Labels
+		lineageTag: 83d3eb79-cc5a-4a52-80e4-1848811760a6
+
+	/// Honest sample-vs-real footnote for every page.
+	measure 'Data Source Note' = "Source: public 'Sample - Superstore' dataset, " & FORMAT(COUNTROWS(fact_sales), "#,##0") & " order lines. Illustrative retail case, not a live company. Forecast values are model estimates, not actuals."
+		displayFolder: 07 Titles and Labels
+		lineageTag: 91153e38-863d-466c-be81-2dd1d40550a3
+
+	/// Customers in the current RFM segment selection.
+	measure 'RFM Customers' = DISTINCTCOUNT(RFM[customer_key])
+		formatString: #,##0
+		displayFolder: 08 Customer Segments (RFM)
+		lineageTag: 55986240-ea2a-4cc7-9832-7285bae7766e
+
+	/// Mean days since last order (reference date = last order date + 1).
+	measure 'Avg Recency (days)' = AVERAGE(RFM[Recency])
+		formatString: 0
+		displayFolder: 08 Customer Segments (RFM)
+		lineageTag: eb102554-2039-44e9-9849-4292029700bc
+
+	/// Mean distinct orders per customer.
+	measure 'Avg Frequency (orders)' = AVERAGE(RFM[Frequency])
+		formatString: 0.0
+		displayFolder: 08 Customer Segments (RFM)
+		lineageTag: 68d65521-82eb-49db-a19f-c249a2467dd0
+
+	/// Total sales of the customers in selection.
+	measure 'RFM Monetary' = SUM(RFM[Monetary])
+		formatString: $#,##0
+		displayFolder: 08 Customer Segments (RFM)
+		lineageTag: 4ea979b6-3118-4241-809a-4fbb9af25d5c
+
+	column Dummy
+		dataType: string
+		isHidden
+		lineageTag: 46bfc655-b874-4889-ad1d-d8160c49b6f1
+		summarizeBy: none
+		sourceColumn: Dummy
+
+	partition _Measures = m
+		mode: import
+		source = #table(type table [Dummy = text], {})
+

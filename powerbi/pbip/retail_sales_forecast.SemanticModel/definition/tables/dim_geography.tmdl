@@ -1,0 +1,66 @@
+table dim_geography
+	lineageTag: 36e65eb0-20ea-421a-8c96-fe6441bb6031
+
+	column geography_key
+		dataType: int64
+		isHidden
+		lineageTag: 0c4856d4-15f5-4d4c-bd53-e850f6b461a7
+		summarizeBy: none
+		sourceColumn: geography_key
+
+	column Country
+		dataType: string
+		lineageTag: ce8b8c9a-c054-4774-9aca-9086cc19bc9e
+		dataCategory: Country
+		summarizeBy: none
+		sourceColumn: Country
+
+	column Region
+		dataType: string
+		lineageTag: aab0a2a5-287d-4e47-83e2-26bc06b5cf34
+		summarizeBy: none
+		sourceColumn: Region
+
+	column State
+		dataType: string
+		lineageTag: b5bc8e4c-5fa5-4f0c-8877-bb46c4f66082
+		dataCategory: StateOrProvince
+		summarizeBy: none
+		sourceColumn: State
+
+	column City
+		dataType: string
+		lineageTag: 6eea3fe5-05bf-4b6c-a1b5-26ccb6331298
+		dataCategory: City
+		summarizeBy: none
+		sourceColumn: City
+
+	column PostalCode
+		dataType: string
+		lineageTag: 9c72420d-5ecb-456a-8776-4588307b3843
+		dataCategory: PostalCode
+		summarizeBy: none
+		sourceColumn: PostalCode
+
+	column Location
+		dataType: string
+		lineageTag: 00914e1d-cbb7-4ecb-8c3c-5e1544e55b8a
+		summarizeBy: none
+		sourceColumn: Location
+
+	partition dim_geography = m
+		mode: import
+		source =
+				let
+					Source   = Csv.Document(File.Contents(Text.TrimEnd(DataFolder, "\") & "\curated\dim_geography.csv"),
+								[Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+					Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+					Typed    = Table.TransformColumnTypes(Promoted, {
+								{"geography_key", Int64.Type}, {"Country", type text}, {"Region", type text},
+								{"State", type text}, {"City", type text}, {"Postal Code", type text}}, "en-US"),
+					Renamed  = Table.RenameColumns(Typed, {{"Postal Code", "PostalCode"}}, MissingField.Ignore),
+					// "City, State, Country" label for unambiguous map locations (many city names repeat across states)
+					AddLoc   = Table.AddColumn(Renamed, "Location", each [City] & ", " & [State] & ", " & [Country], type text)
+				in
+					AddLoc
+

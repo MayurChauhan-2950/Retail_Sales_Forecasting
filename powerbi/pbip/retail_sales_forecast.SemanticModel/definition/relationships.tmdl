@@ -1,0 +1,49 @@
+relationship 850dc400-4528-5a50-b91b-73a426ba8c8c
+	fromColumn: fact_sales.order_date_key
+	toColumn: dim_date.date_key
+
+relationship 8fc855c3-6938-56ae-ab11-8aa71a86b1a0
+	isActive: false
+	fromColumn: fact_sales.ship_date_key
+	toColumn: dim_date.date_key
+
+relationship 5e75bb95-4f2a-5cd9-981b-b5ba75d8d785
+	fromColumn: fact_sales.customer_key
+	toColumn: dim_customer.customer_key
+
+relationship 074a1d55-cb74-5253-806e-30d8e53e5b9d
+	fromColumn: fact_sales.product_key
+	toColumn: dim_product.product_key
+
+relationship a6feb17e-4108-5488-b848-55fca37d8873
+	fromColumn: fact_sales.geography_key
+	toColumn: dim_geography.geography_key
+
+relationship 8d83f32d-52d0-532c-bab9-8a926e773529
+	fromColumn: monthly_actual.month
+	toColumn: dim_date.Date
+
+relationship cc927e7f-39f5-5f9b-ba0d-9b176424acf8
+	fromColumn: fact_forecast.month
+	toColumn: dim_date.Date
+
+relationship ec9e4028-e738-5781-a663-4ca0f9376468
+	fromColumn: fact_forecast.model
+	toColumn: dim_model.model
+
+relationship 37652106-874a-5644-bb72-0235410112de
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: model_accuracy.model
+	toColumn: dim_model.model
+
+relationship 7394b585-992f-4a92-9292-4cca19dc7564
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fact_sales.order_date
+	toColumn: LocalDateTable_25802d14-c152-42a3-991c-0d5e30571629.Date
+
+relationship 2dab0882-82ff-41ce-bdcf-aec63a64a4fc
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fact_sales.ship_date
+	toColumn: LocalDateTable_f2bfd2af-86de-4dbe-83fc-1390f3fd5c19.Date
+

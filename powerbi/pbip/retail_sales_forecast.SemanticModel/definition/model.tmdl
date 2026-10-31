@@ -1,0 +1,31 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	discourageImplicitMeasures
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["fact_sales","dim_date","dim_product","dim_customer","dim_geography","monthly_actual","fact_forecast","model_accuracy","dim_model","_Measures","DataFolder","Model_Accuracy_Source"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table fact_sales
+ref table dim_date
+ref table dim_product
+ref table dim_customer
+ref table dim_geography
+ref table monthly_actual
+ref table fact_forecast
+ref table model_accuracy
+ref table dim_model
+ref table RFM
+ref table 'Top N'
+ref table _Measures
+ref table DateTableTemplate_58cd2e44-9e0c-4b5a-afc1-23b097080808
+ref table LocalDateTable_25802d14-c152-42a3-991c-0d5e30571629
+ref table LocalDateTable_f2bfd2af-86de-4dbe-83fc-1390f3fd5c19
+

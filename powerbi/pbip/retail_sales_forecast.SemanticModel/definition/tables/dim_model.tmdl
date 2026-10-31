@@ -1,0 +1,47 @@
+table dim_model
+	lineageTag: 73fdb5ed-66d3-4af0-a55a-cb9cc2bdab2d
+
+	column model
+		dataType: string
+		lineageTag: f9afa49d-3d21-467e-9ce1-f21a63166407
+		summarizeBy: none
+		sourceColumn: model
+		sortByColumn: model_sort
+
+	column model_sort
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 69306227-815f-4805-a464-728b20b5aad5
+		summarizeBy: none
+		sourceColumn: model_sort
+
+	column model_short
+		dataType: string
+		lineageTag: 914c071c-678e-4d11-9990-16cbb36f5cb9
+		summarizeBy: none
+		sourceColumn: model_short
+		sortByColumn: model_sort
+
+	column model_family
+		dataType: string
+		lineageTag: e913959f-3276-4ae8-bf6d-130c9a8e3c14
+		summarizeBy: none
+		sourceColumn: model_family
+
+	partition dim_model = m
+		mode: import
+		source =
+				let
+					Models   = Table.SelectColumns(Model_Accuracy_Source, {"model", "rank_rmse"}),
+					Renamed  = Table.RenameColumns(Models, {{"rank_rmse", "model_sort"}}),
+					AddShort = Table.AddColumn(Renamed, "model_short", each
+								if Text.StartsWith([model], "Holt") then "Holt-Winters"
+								else if Text.StartsWith([model], "SARIMA") then "SARIMA"
+								else "ARIMA", type text),
+					AddFam   = Table.AddColumn(AddShort, "model_family", each
+								if Text.StartsWith([model], "Holt") then "Exponential smoothing" else "Box-Jenkins", type text),
+					Sorted   = Table.Sort(AddFam, {{"model_sort", Order.Ascending}})
+				in
+					Sorted
+

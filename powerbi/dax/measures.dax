@@ -247,15 +247,15 @@ Forecast (All Models) = SUM(fact_forecast[forecast])
 
 // Forecast (Selected Model)  |  format: $#,##0  |  folder: 05 Forecast Arena
 // Forecast of the single selected model across hold-out and future months.
-Forecast (Selected Model) = CALCULATE(SUM(fact_forecast[forecast]), fact_forecast[model] = [Selected Model], REMOVEFILTERS(dim_model))
+Forecast (Selected Model) = VAR _sel = [Selected Model] RETURN CALCULATE(SUM(fact_forecast[forecast]), fact_forecast[model] = _sel, REMOVEFILTERS(dim_model))
 
 // Holdout Actual  |  format: $#,##0  |  folder: 05 Forecast Arena
 // Actual sales in the 12 hold-out months.
-Holdout Actual = CALCULATE(SUM(fact_forecast[actual]), fact_forecast[kind] = "Holdout", fact_forecast[model] = [Selected Model], REMOVEFILTERS(dim_model))
+Holdout Actual = VAR _sel = [Selected Model] RETURN CALCULATE(SUM(fact_forecast[actual]), fact_forecast[kind] = "Holdout", fact_forecast[model] = _sel, REMOVEFILTERS(dim_model))
 
 // Holdout Forecast  |  format: $#,##0  |  folder: 05 Forecast Arena
 // Selected model's prediction for the hold-out months.
-Holdout Forecast = CALCULATE(SUM(fact_forecast[forecast]), fact_forecast[kind] = "Holdout", fact_forecast[model] = [Selected Model], REMOVEFILTERS(dim_model))
+Holdout Forecast = VAR _sel = [Selected Model] RETURN CALCULATE(SUM(fact_forecast[forecast]), fact_forecast[kind] = "Holdout", fact_forecast[model] = _sel, REMOVEFILTERS(dim_model))
 
 // Forecast Error  |  format: +#,##0;-#,##0;0  |  folder: 05 Forecast Arena
 // Forecast minus actual (positive = over-forecast).
@@ -300,11 +300,11 @@ Is Best Model = IF(SELECTEDVALUE(model_accuracy[model]) = [Best Model (RMSE)], 1
 
 // Forecast Lower 95  |  format: $#,##0  |  folder: 05 Forecast Arena
 // Lower end of the 95% interval (future months only).
-Forecast Lower 95 = CALCULATE(SUM(fact_forecast[lower_95]), fact_forecast[model] = [Selected Model], REMOVEFILTERS(dim_model))
+Forecast Lower 95 = VAR _sel = [Selected Model] RETURN CALCULATE(SUM(fact_forecast[lower_95]), fact_forecast[model] = _sel, REMOVEFILTERS(dim_model))
 
 // Forecast Upper 95  |  format: $#,##0  |  folder: 05 Forecast Arena
 // Upper end of the 95% interval.
-Forecast Upper 95 = CALCULATE(SUM(fact_forecast[upper_95]), fact_forecast[model] = [Selected Model], REMOVEFILTERS(dim_model))
+Forecast Upper 95 = VAR _sel = [Selected Model] RETURN CALCULATE(SUM(fact_forecast[upper_95]), fact_forecast[model] = _sel, REMOVEFILTERS(dim_model))
 
 // Forecast Interval Width  |  format: $#,##0  |  folder: 05 Forecast Arena
 // Upper minus lower; use as the visible part of a stacked-area band.
@@ -312,7 +312,7 @@ Forecast Interval Width = IF(ISBLANK([Forecast Upper 95]), BLANK(), [Forecast Up
 
 // Forecast Total 2019  |  format: $#,##0  |  folder: 05 Forecast Arena
 // Sum of the 12 projected months for the selected model.
-Forecast Total 2019 = CALCULATE(SUM(fact_forecast[forecast]), fact_forecast[kind] = "Future", fact_forecast[model] = [Selected Model], REMOVEFILTERS(dim_model), REMOVEFILTERS(dim_date))
+Forecast Total 2019 = VAR _sel = [Selected Model] RETURN CALCULATE(SUM(fact_forecast[forecast]), fact_forecast[kind] = "Future", fact_forecast[model] = _sel, REMOVEFILTERS(dim_model), REMOVEFILTERS(dim_date))
 
 // Forecast Growth vs 2018  |  format: +0.0%;-0.0%  |  folder: 05 Forecast Arena
 // Projected 2019 versus actual 2018.
@@ -320,7 +320,7 @@ Forecast Growth vs 2018 = DIVIDE([Forecast Total 2019], CALCULATE(SUM(monthly_ac
 
 // Has Future Forecast  |  format: 0  |  folder: 05 Forecast Arena
 // 1 if a 2019 projection is stored for the selected model.
-Has Future Forecast = IF(CALCULATE(COUNTROWS(fact_forecast), fact_forecast[kind] = "Future", fact_forecast[model] = [Selected Model], REMOVEFILTERS(dim_model), REMOVEFILTERS(dim_date)) > 0, 1, 0)
+Has Future Forecast = VAR _sel = [Selected Model] RETURN IF(CALCULATE(COUNTROWS(fact_forecast), fact_forecast[kind] = "Future", fact_forecast[model] = _sel, REMOVEFILTERS(dim_model), REMOVEFILTERS(dim_date)) > 0, 1, 0)
 
 
 // ################ DISPLAY FOLDER: 06 KPI Colours ################

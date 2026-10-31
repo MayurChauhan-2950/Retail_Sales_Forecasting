@@ -1,0 +1,13 @@
+table 'Top N'
+	lineageTag: 7b29b5ac-363d-49e7-a5c1-e4252805834b
+
+	column Value
+		formatString: 0
+		lineageTag: be53d62b-ef06-4290-ab40-243df61043d0
+		summarizeBy: sum
+		sourceColumn: [Value]
+
+	partition 'Top N' = calculated
+		mode: import
+		source = GENERATESERIES(3, 20, 1)
+

@@ -1,0 +1,22 @@
+@startuml
+skinparam shadowing false
+skinparam defaultFontName Calibri
+skinparam defaultFontSize 18
+skinparam ActivityBackgroundColor #EEF2F6
+skinparam ActivityBorderColor #1F2A44
+skinparam ArrowColor #1B7F8C
+skinparam ActivityDiamondBackgroundColor #FFF3D6
+start
+:Raw data\nSample Superstore CSV\n(9,994 order lines);
+:Profile and clean\ndata quality score 99.46%;
+:Curated zone\nstar schema: fact_sales + 4 dimensions;
+fork
+  :EDA and business analytics\nPareto, RFM, discount vs profit;
+fork again
+  :Forecasting\nHolt-Winters, ARIMA, SARIMA\nrolling-origin cross-validation;
+end fork
+:Forecast CSV files\nhold-out 2018 + forecast 2019;
+:Power BI model\ntables, relationships, DAX measures;
+:Interactive dashboard\nOverview + Forecasting Arena;
+stop
+@enduml
